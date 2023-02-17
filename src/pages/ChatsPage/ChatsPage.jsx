@@ -1,6 +1,5 @@
-export function ChatPage() {
-
-    return <div>
-        <h1>Soy Chat</h1>
-    </div>
+export function ChatsPage() {
+    return (
+        <div className="bg-red-300">Hola world</div>
+    )
 }
