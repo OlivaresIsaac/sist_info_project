@@ -1,6 +1,8 @@
+import {Hero} from "../../components/Hero/Hero"
+
 export function LandingPage() {
 
     return <div>
-        <h1>Soy landing</h1>
+        <Hero/>
     </div>
 }
