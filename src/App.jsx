@@ -9,62 +9,66 @@ import {
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { Layout } from "./pages/Layout/Layout";
 // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 // import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <Routes>
-//         {/* creo que este es navbar */}
-//         {/* <Route element={<LandingPage />}> */}
-        
+export default function App() {
+  // <React.StrictMode>
+     return (
+      <BrowserRouter>
+      <Routes>
+        {/* creo que este es navbar */}
+        {/* <Route path={LANDING_URL} element={<Layout />}> */}
+      
+          <Route
+          path={LANDING_URL}
+             index element={
+              // <PublicRoute>
+                <LandingPage />
+              // </PublicRoute>
+            }
+          />
 
-//           <Route
-//             path={LANDING_URL}
-//             element={
-//               <PublicRoute>
-//                 <LandingPage />
-//               </PublicRoute>
-//             }
-//           />
-
-//           <Route
-//             path={LOGIN_URL}
-//             element={
-//               <PublicRoute>
-//                 <LoginPage />
-//               </PublicRoute>
-//             }
-//           />
+          <Route
+            path={LOGIN_URL}
+            element={
+              // <PublicRoute>
+                <LoginPage />
+              // </PublicRoute>
+            }
+          />
          
-//          {/* </Route> */}
-//       </Routes>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// );
+         {/* </Route> */}
+      </Routes>
+    </BrowserRouter>
+     )
+  // </React.StrictMode>
+};
+
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);
+
+// function App() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           Edit <code>src/App.js</code> and save to reload.
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React
+//         </a>
+//       </header>
+//     </div>
+//   );
+// }
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-
-export default App;
+// export default App;
