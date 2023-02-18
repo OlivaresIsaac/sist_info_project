@@ -48,7 +48,7 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
-    <div className="bg-red-300">Hola world</div>
+    <ChatsPage/>
   );
 }
 
