@@ -1,14 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import logo from './logo.svg';
 import './App.css';
-import {
-  LANDING_URL,
-  LOGIN_URL,
-} from "./constants/url";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { LANDING_URL, LOGIN_URL } from "./constants/url";
+import { Routes, Route, BrowserRouter, Router } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { ChatsPage } from "./pages/ChatsPage/ChatsPage";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { FeedbackPage } from "./pages/FeedbackPage/FeedbackPage";
+import { ConsultsPage } from "./pages/ConsultsPage/ConsultsPage";
+
+import Sidebar from './components/SideBar/Sidebar';
+
+
+
+
+
 // import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 // import { PublicRoute } from "./components/PublicRoute/PublicRoute";
 
@@ -47,22 +53,22 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="flex"> 
+        <Sidebar />
+        <div className="content">
+          <Routes>
+            <Route path="/" exact={true} element={<LandingPage />} />
+            <Route path="/chats" exact={true} element={<ChatsPage />} />
+            <Route path="/consults" exact={true} element={<ConsultsPage />} />
+            <Route path="/feedback" exact={true} element={<FeedbackPage />} />
+            <Route path="/login" exact={true} element={<LoginPage />} />
+            <Route path="/register" exact={true} element={<RegisterPage />} />
+          </Routes>
+        </div>
+      </div>   
+    </BrowserRouter>
+      
   );
 }
 
