@@ -1,7 +1,7 @@
 import './LandingPage.css'
-import psicologo from 'C:/Users/Andrés Castro/Documents/GitHub/sist_info_project/src/assets/psicologo.png'
-import team from 'C:/Users/Andrés Castro/Documents/GitHub/sist_info_project/src/assets/team.png'
-import backtopimg from 'C:/Users/Andrés Castro/Documents/GitHub/sist_info_project/src/assets/backtop.png'
+import psicologo from '../../assets/psicologo.png'
+import team from '../../assets/team.png'
+import backtopimg from '../../assets/backtop.png'
 
 
 export function LandingPage() {
@@ -40,4 +40,3 @@ export function LandingPage() {
     )
 }
 
-export default LandingPage

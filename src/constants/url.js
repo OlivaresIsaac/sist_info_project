@@ -1,2 +1,6 @@
 export const LANDING_URL = "/"
 export const LOGIN_URL = "/login"
+export const REGISTER_URL = "/register"
+export const CHATS_URL = "/chats"
+export const CONSULTS_URL = "/consults"
+export const FEEDBACK_URL = "/feedback"

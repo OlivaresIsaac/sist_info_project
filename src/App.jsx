@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import { LANDING_URL, LOGIN_URL } from "./constants/url";
+import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from "./constants/url";
 import { Routes, Route, BrowserRouter, Router } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
@@ -13,6 +13,7 @@ import { FeedbackPage } from "./pages/FeedbackPage/FeedbackPage";
 import { ConsultsPage } from "./pages/ConsultsPage/ConsultsPage";
 
 import Sidebar from './components/SideBar/Sidebar';
+import { Layout } from "./components/Layout/Layout";
 
 
 
@@ -76,23 +77,29 @@ import Sidebar from './components/SideBar/Sidebar';
 //   );
 // }
 
-
+// para hacer redirección usar etiqueta Link de react router
 function App() {
   return (
     <BrowserRouter>
-      <div className="flex"> 
-        <Sidebar />
-        <div className="content">
+
+        {/* <Sidebar /> */}
+     
           <Routes>
-            <Route path="/" exact={true} element={<LandingPage />} />
-            <Route path="/chats" exact={true} element={<ChatsPage />} />
-            <Route path="/consults" exact={true} element={<ConsultsPage />} />
-            <Route path="/feedback" exact={true} element={<FeedbackPage />} />
-            <Route path="/login" exact={true} element={<LoginPage />} />
-            <Route path="/register" exact={true} element={<RegisterPage />} />
+            <Route element={<Layout/>}>
+
+              <Route path={LANDING_URL} exact={true} element={<LandingPage />} />
+              <Route path={CHATS_URL} exact={true} element={<ChatsPage />} />
+              <Route path={CONSULTS_URL} exact={true} element={<ConsultsPage />} />
+              <Route path={FEEDBACK_URL} exact={true} element={<FeedbackPage />} />
+              <Route path={LOGIN_URL} exact={true} element={<LoginPage />} />
+              <Route path={REGISTER_URL} exact={true} element={<RegisterPage />} />
+              <Route path="*" exact={true} element={<h1> NOT FOUND</h1>} /> 
+
+            </Route>
+           
           </Routes>
-        </div>
-      </div>   
+  
+   
     </BrowserRouter>
       
   );

@@ -5,5 +5,3 @@ export function ChatsPage() {
     </div>
     )
 }
-
-export default ChatsPage

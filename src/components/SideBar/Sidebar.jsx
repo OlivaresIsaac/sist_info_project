@@ -1,6 +1,7 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Sidebar.css'
-import psydocs from 'C:/Users/Andrés Castro/Documents/GitHub/sist_info_project/src/assets/psydocs.png'
+import psydocs from '../../assets/psydocs.png'
+import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
 
 const Sidebar = () => {
     return (
@@ -10,25 +11,26 @@ const Sidebar = () => {
                     <img src={psydocs}/>
                 </li>
                 <li>
-                    <NavLink to="/" >Inicio</NavLink>
+                    <Link to={LANDING_URL} >Inicio</Link>
                 </li>
                 <li>
-                    <NavLink to="/chats" >Chats</NavLink>
+                    <Link to={CHATS_URL} >Chats</Link>
                 </li>
                 <li>
-                    <NavLink to="/consults" >Consultas</NavLink>
+                    <Link to={CONSULTS_URL}  >Consultas</Link>
                 </li>
                 <li>
-                    <NavLink to="/feedback" >Feedback</NavLink>
+                    <Link to={FEEDBACK_URL}  >Feedback</Link>
                 </li>
                 <li>
-                    <NavLink to="/login" >Login</NavLink>
+                    <Link to={LOGIN_URL}  >Login</Link>
                 </li>
                 <li className='last'>
-                    <NavLink to="/register" >Registrarse</NavLink>
+                    <Link to={REGISTER_URL}  >Registrarse</Link>
                 </li>
                 <li className='logout'>
-                    <NavLink to="" >Salir</NavLink>
+                {/* TODO logout url or functionality*/}
+                    <Link to={LANDING_URL}  >Salir</Link>
                 </li>
             </ul>
         </div>
