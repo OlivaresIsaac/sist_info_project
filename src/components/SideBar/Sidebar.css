@@ -10,7 +10,7 @@
 
 ul{
     list-style-type: none;
-    padding-top: 1rem; 
+    padding-top: 0.2rem; 
     margin: 0;
     border-bottom: 5px solid;
     border-color: white;
@@ -19,7 +19,7 @@ ul{
 li{
     border-top: 5px solid;
     border-color: white;
-    padding: 18px;
+    padding: 0.8rem;
     text-align: center;
     
 }
@@ -44,10 +44,14 @@ img{
 
 }
 
-.logout{
-    margin-top: 220px;
-}
+/* .logout{
+    margin-top: 2rem;
+} */
 
-.last{
+/* .last{
     border-bottom: 5px solid;
+} */
+
+.user-name{
+    text-align: center;
 }

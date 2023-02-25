@@ -77,7 +77,7 @@ import { Layout } from "./components/Layout/Layout";
 //   );
 // }
 
-// para hacer redirección usar etiqueta Link de react router
+
 function App() {
   return (
     <BrowserRouter>

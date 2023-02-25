@@ -2,14 +2,31 @@ import { Link, NavLink } from 'react-router-dom'
 import './Sidebar.css'
 import psydocs from '../../assets/psydocs.png'
 import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
+import { useUserContext } from '../../contexts/UserContext'
+import { logout } from '../../firebase/auth-service'
 
 const Sidebar = () => {
+    const {user} = useUserContext()
+    const handleLogout = async () => {
+        console.log("Saliendo...")
+        await logout()
+    }
+    console.log(user)
     return (
         <div className="sidebar">
             <ul>
                 <li className='image'>
                     <img src={psydocs}/>
                 </li>
+                {/* TODO formato bonito para usuario ya logeado */}
+                {!!user && (
+                    <p className='user-name'> {user.name}</p>
+                )}
+                {!user && (
+                    <p> </p>
+                )}
+                
+                
                 <li>
                     <Link to={LANDING_URL} >Inicio</Link>
                 </li>
@@ -30,7 +47,7 @@ const Sidebar = () => {
                 </li>
                 <li className='logout'>
                 {/* TODO logout url or functionality*/}
-                    <Link to={LANDING_URL}  >Salir</Link>
+                    <Link to={LANDING_URL}  onClick={handleLogout}>Salir</Link>
                 </li>
             </ul>
         </div>
