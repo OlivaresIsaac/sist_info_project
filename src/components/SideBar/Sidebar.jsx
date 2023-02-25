@@ -1,7 +1,7 @@
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './Sidebar.css'
 import psydocs from '../../assets/psydocs.png'
-import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
+import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, PROFILE_URL, REGISTER_URL } from '../../constants/url'
 import { useUserContext } from '../../contexts/UserContext'
 import { logout } from '../../firebase/auth-service'
 
@@ -12,6 +12,10 @@ const Sidebar = () => {
         await logout()
     }
     console.log(user)
+
+    //TODO Cambiar esta ruta por uid, ahorita sale displaname pero debe ser.uid
+    const profileRoute = (!!user) ? "/profile/"+user.displayName : LANDING_URL
+    console.log(profileRoute)
     return (
         <div className="sidebar">
             <ul>
@@ -20,7 +24,9 @@ const Sidebar = () => {
                 </li>
                 {/* TODO formato bonito para usuario ya logeado */}
                 {!!user && (
-                    <p className='user-name'> {user.displayName}</p>
+                    <li> 
+                    <Link to={profileRoute}> {user.displayName}</Link>
+                    </li>
                 )}
                 {!user && (
                     <p> </p>

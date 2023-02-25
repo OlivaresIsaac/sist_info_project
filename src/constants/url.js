@@ -7,4 +7,4 @@ export const FEEDBACK_URL = "/feedback"
 // TODO rutas dinámicas para ver perfil de usuario / doctor
 // importante el nombre userId que sale en esta ruta debe ser
 // igual en el nombre de la variable al usar userParams para leer el id de la ruta
-export const PROFILE_URL = "/profile/:userId"
+export const PROFILE_URL = "/profile/:uid"

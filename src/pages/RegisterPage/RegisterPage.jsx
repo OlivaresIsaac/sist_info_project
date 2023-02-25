@@ -21,11 +21,9 @@ export function RegisterPage() {
         })
     }
 
-    const handleLoginWithGoogle = async () => {
+    const handleRegisterWithGoogle = async () => {
         await signInWithGoogle()
      }
-
-
 
     const onSubmit = async (event) => {
         event.preventDefault()
@@ -45,7 +43,9 @@ export function RegisterPage() {
             <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange}/> 
             <input placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange}/> 
             <button type="submit"> Registrarse</button>
-            <button onClick={handleLoginWithGoogle}>Registrarse con Google</button>
+            {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
+            despues de logearse con google */}
+            <button onClick={handleRegisterWithGoogle}>Registrarse con Google</button>
         </form>
        
     </div>
