@@ -1,0 +1,108 @@
+.psicologo {
+    margin-left: 100px;
+    width: 570px;
+    height: 384px;
+    position: absolute;
+}
+
+.pysdocs{
+    margin: 5px;
+}
+
+.tittle{
+    text-align: center;
+    margin-left: 700px;
+    margin-bottom: 80px;
+}
+
+.mariobuscadoroplolyolopongobonito{
+    background-image: url("https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?");
+    height: 800px;
+}
+
+h1{
+    font-size: 100px;
+    background-color: #815c97;
+    width: 700px;
+    margin-top: 60px;
+    margin-left: 160px;
+    border-radius: 50px;
+}
+
+h2{
+    font-size: 70px;
+}
+
+h3{
+    font-size: 50px;
+}
+
+h4{
+    position: absolute;
+    margin-top: -390px;
+    margin-left: 700px;
+    font-size: 36px;
+    color: #572975;;
+}
+
+h5{
+    position: absolute;
+    text-align: right;
+    font-size: 36px;
+    font-weight: 600;
+    width: 1000px;
+    margin-left: 360px;
+    margin-top: -80px;
+}
+
+.backtop{
+    border: none;
+    cursor: pointer;
+    background: none;
+    position: absolute;
+    text-align: center;
+    font-size: 56px;
+    font-weight: 600;
+    width: 904px;
+    height: 155px;
+    border-radius: 50px;
+    margin-left: -904px;
+    margin-top: 50px;
+    color: #572975;
+}
+
+.teamText{
+    position: absolute;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    width: 1000px;
+    margin-left: 360px;
+    margin-top: -320px;
+}
+
+.saying{
+    position: absolute;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    width: 1000px;
+    margin-left: 360px;
+    margin-top: -140px;
+}
+
+.team{
+    position: relative;
+    width: 1123px;
+    height: 781px;
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
+.backtopimg{
+    width: 904px;
+    height: 155px;
+    margin-left: 420px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
