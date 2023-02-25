@@ -20,7 +20,7 @@ const Sidebar = () => {
                 </li>
                 {/* TODO formato bonito para usuario ya logeado */}
                 {!!user && (
-                    <p className='user-name'> {user.name}</p>
+                    <p className='user-name'> {user.displayName}</p>
                 )}
                 {!user && (
                     <p> </p>

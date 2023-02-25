@@ -1,0 +1,14 @@
+/* .column {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+} */
+
+.input {
+    margin-left: 10rem;
+    justify-self: center;
+    width: 10rem;
+  
+}
