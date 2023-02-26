@@ -9,7 +9,7 @@ export function Layout(){
         <main className="main_flex">
             <UserContextProvider> 
             <Sidebar />
-            <section className="body">
+            <section className="body main-body">
                 <Outlet />
             </section>
             </UserContextProvider>

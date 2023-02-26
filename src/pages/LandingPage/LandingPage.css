@@ -20,7 +20,7 @@
     height: 800px;
 }
 
-h1{
+.h1-title{
     font-size: 100px;
     background-color: #815c97;
     width: 700px;
@@ -29,15 +29,15 @@ h1{
     border-radius: 50px;
 }
 
-h2{
+.h2-title{
     font-size: 70px;
 }
 
-h3{
+.h3-title{
     font-size: 50px;
 }
 
-h4{
+.h4-title{
     position: absolute;
     margin-top: -390px;
     margin-left: 700px;
@@ -45,7 +45,7 @@ h4{
     color: #572975;;
 }
 
-h5{
+.h5-title{
     position: absolute;
     text-align: right;
     font-size: 36px;
