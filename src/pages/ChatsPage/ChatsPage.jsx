@@ -3,38 +3,39 @@ import {addDoc, collection, onSnapshot, query, serverTimestamp, where} from "fir
 import {auth, db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
 
+import { useUserContext } from "../../contexts/UserContext";
 
 export function ChatsPage() {
 
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const [chat, setChat] = useState([]);
+    const {user} = useUserContext();
+    
 
     useEffect(() => {
-        const queryMessages = query(messagesRef, where("room", "==", "pruebas"))
-        onSnapshot(queryMessages, (snapshot) => {
-            let messages = [];
-            snapshot.forEach((doc) => {
-                messages.push({...doc.data(), id: doc.id});
-            });
-        setMessages(messages);
 
-        });
+         
     }, []);
 
-    const messagesRef = collection(db, "messages");
+    const selectChat = async (e) => {
+        const chatsRef = collection(db, "chats");
+        console.log(chatsRef);
+    }
+
+    selectChat();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (newMessage === "") return;
+        // e.preventDefault();
+        // if (newMessage === "") return;
 
-        await addDoc(messagesRef, {
-            text: newMessage,
-            createdAt: serverTimestamp(),
-            
-            room: "pruebas"
-        });
+        // await addDoc(chatsRef, {
+        //     text: newMessage,
+        //     createdAt: serverTimestamp(),           
+        //     room: "pruebas"
+        // });
 
-        setNewMessage("");
+        // setNewMessage("");
     };
 
     return (

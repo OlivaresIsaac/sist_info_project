@@ -8,14 +8,14 @@ import { logout } from '../../firebase/auth-service'
 const Sidebar = () => {
     const {user} = useUserContext()
     const handleLogout = async () => {
-        console.log("Saliendo...")
+        //console.log("Saliendo...")
         await logout()
     }
-    console.log(user)
+    //console.log(user)
 
 
     const profileRoute = (!!user) ? "/profile/"+user.id : LANDING_URL
-    console.log(profileRoute)
+    //console.log(profileRoute)
     return (
         <div className="sidebar">
             <ul>
