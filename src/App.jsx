@@ -1,68 +1,46 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import logo from './logo.svg';
 import './App.css';
-import {
-  LANDING_URL,
-  LOGIN_URL,
-} from "./constants/url";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, PROFILE_URL, REGISTER_URL } from "./constants/url";
+import { Routes, Route, BrowserRouter, Router } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
+import { ChatsPage } from "./pages/ChatsPage/ChatsPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
-// import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
-// import { PublicRoute } from "./components/PublicRoute/PublicRoute";
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <Routes>
-//         {/* creo que este es navbar */}
-//         {/* <Route element={<LandingPage />}> */}
-        
-
-//           <Route
-//             path={LANDING_URL}
-//             element={
-//               <PublicRoute>
-//                 <LandingPage />
-//               </PublicRoute>
-//             }
-//           />
-
-//           <Route
-//             path={LOGIN_URL}
-//             element={
-//               <PublicRoute>
-//                 <LoginPage />
-//               </PublicRoute>
-//             }
-//           />
-         
-//          {/* </Route> */}
-//       </Routes>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// );
-
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { FeedbackPage } from "./pages/FeedbackPage/FeedbackPage";
+import { ConsultsPage } from "./pages/ConsultsPage/ConsultsPage";
+import { Layout } from "./components/Layout/Layout";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+
+        {/* <Sidebar /> */}
+     
+          <Routes>
+            <Route element={<Layout/>}>
+
+              <Route path={LANDING_URL} exact={true} element={<LandingPage />} />
+              <Route path={CHATS_URL} exact={true} element={<ChatsPage />} />
+              <Route path={CONSULTS_URL} exact={true} element={<ConsultsPage />} />
+              <Route path={FEEDBACK_URL} exact={true} element={<FeedbackPage />} />
+              <Route path={LOGIN_URL} exact={true} element={<LoginPage />} />
+              <Route path={REGISTER_URL} exact={true} element={<RegisterPage />} />
+              <Route path={PROFILE_URL} exact={true} element={
+              <PrivateRoute>
+               <ProfilePage/>
+              </PrivateRoute>
+              } />
+              <Route path="*" exact={true} element={<h1> NOT FOUND</h1>} /> 
+
+            </Route>
+           
+          </Routes>
+  
+   
+    </BrowserRouter>
+      
   );
 }
 
