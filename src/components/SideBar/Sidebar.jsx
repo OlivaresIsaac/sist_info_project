@@ -13,8 +13,8 @@ const Sidebar = () => {
     }
     console.log(user)
 
-    //TODO Cambiar esta ruta por uid, ahorita sale displaname pero debe ser.uid
-    const profileRoute = (!!user) ? "/profile/"+user.displayName : LANDING_URL
+
+    const profileRoute = (!!user) ? "/profile/"+user.id : LANDING_URL
     console.log(profileRoute)
     return (
         <div className="sidebar">

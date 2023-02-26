@@ -1,20 +1,20 @@
 import { signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, getAdditionalUserInfo } from "@firebase/auth"
+import { User } from "../models/user"
 import { auth, googleProvider } from "./config"
 import { createUserProfile } from "./users-service"
 
+//TODO Hacer form que pase los parámetros aqui a esta función para hacer el createUser
 export const signInWithGoogle = async () => {
     try {
         const result = await signInWithPopup(auth, googleProvider)
-
+        console.log(result)
         const { isNewUser } = getAdditionalUserInfo(result)
 
-        //TODO pasar data con todo lo necesario, ahora solo hay emall y displayname
+        //TODO pasar data con todo lo necesario, buscar la forma de pasar el boolean de isDoctor
         if(isNewUser){
-            await createUserProfile(result.user.uid, {
-                email: result.user.email,
-                displayName: result.user.displayName
+            const newUser = new User(result.user.uid, result.user.displayName, result.user.email, false)
 
-            })
+            await createUserProfile(result.user.uid, newUser.toObject())
         }
 
     } catch (error) {
@@ -22,16 +22,14 @@ export const signInWithGoogle = async () => {
     }
 }
 
-export const registerWithEmailAndPassword = async (email, password, extraData) => {
+export const registerWithEmailAndPassword = async (email, password, displayName) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(result)
-//TODO pasar data con todo lo necesario, ahora solo hay emall, revisar que objeto es extradata
-// ese es el que se guarda en firestore
-        await createUserProfile(result.user.uid, {
-            email,
-            ...extraData
-        })
+      
+//TODO pasar data con todo lo necesario,
+        const newUser = new User(result.user.uid, displayName, email, false)
+
+        await createUserProfile(result.user.uid, newUser.toObject())
     } catch (error) {
         console.log(error)
         // TODO anuncio de usuario invalido porque ya existe

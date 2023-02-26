@@ -28,9 +28,10 @@ export function RegisterPage() {
     const onSubmit = async (event) => {
         event.preventDefault()
         console.log({formData})
-        const {email, password, ...extraData} = formData
+        const {email, password, displayName} = formData
 
-        await registerWithEmailAndPassword(email, password, extraData);
+        //TODO pasar isDoctor del form
+        await registerWithEmailAndPassword(email, password, displayName);
         //TODO navigate after valid register
         navigate(LANDING_URL)
     }
