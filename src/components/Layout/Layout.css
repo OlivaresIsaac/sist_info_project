@@ -1,8 +1,7 @@
 /* TODO flex responsivo hamburguer */
 .main_flex {
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;    
 }
 
 .main-body {

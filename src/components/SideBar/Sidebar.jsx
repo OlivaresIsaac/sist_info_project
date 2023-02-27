@@ -31,7 +31,7 @@ const Sidebar = () => {
                 {!user && (
                     <p> </p>
                 )}
-                
+                 
                 
                 <li>
                     <Link to={LANDING_URL} >Inicio</Link>

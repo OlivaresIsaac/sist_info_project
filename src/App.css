@@ -18,10 +18,11 @@ body{
 
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .content{
-  margin-left: 140px;
+  margin-left: 10%;
   width: 100%;
 }
 
