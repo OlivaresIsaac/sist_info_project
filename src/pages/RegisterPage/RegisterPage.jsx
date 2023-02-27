@@ -38,17 +38,51 @@ export function RegisterPage() {
  
 
     return (<div>
-        <h1>Soy Register</h1>
+        <div className="contenedorRegistro">
+        <div className="izquierda"></div>
+        <div className="derecha">
         <form onSubmit={onSubmit}> 
-            <input placeholder="Ingrese su nombre"  className="input"  name="displayName" onChange={handleOnChange}/> 
+            <p className="tituloRegistro">Registro</p>
+            <div>
+                Seleccione un rol de usuario:   
+                <select className="seleccionador">
+                    <option>Paciente</option>
+                    <option>Doctor</option>
+                </select>
+            </div>
+            <div>
+            <input placeholder="Ingrese su nombre"  className="input"  name="displayName" onChange={handleOnChange}/>
+            </div> 
+            <div>
             <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange}/> 
+            </div> 
+            <div>
             <input placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange}/> 
+            </div>
+            <div>
+            <input placeholder="Ingrese su telefono"  name="tlf" onChange={handleOnChange}/> 
+            </div> 
+            <div>
+                Seleccione idioma conveniente:   
+                <select className="seleccionador">
+                    <option>Español</option>
+                    <option>English</option>
+                    <option>Português</option>
+                    <option>日本</option>
+                    <option>Latinus</option>
+                </select>
+            </div>
+            <div>
             <button type="submit"> Registrarse</button>
+            </div>
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
+            <div>
             <button onClick={handleRegisterWithGoogle}>Registrarse con Google</button>
+            </div>
         </form>
-       
+        </div>
+        </div>
     </div>
     )
 }
