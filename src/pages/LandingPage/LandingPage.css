@@ -97,3 +97,11 @@
     height: auto;
     background-repeat: no-repeat;
 }
+
+/* .intro-flex{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: red;
+    
+} */

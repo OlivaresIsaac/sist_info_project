@@ -8,11 +8,13 @@ export function LandingPage() {
 
     return (
         <section className='landing'>
+            <div>
             <img src={psicologo} className='psicologo'/>
             <div tittle className='tittle'>
                 <h1 className='h1-title'>PSYDOCS</h1>
                 <h2 className='h2-title'>Salud mental a tu alcance</h2>
                 <h3 className='h3-title'>¿Quiénes Somos?</h3>
+            </div>
             </div>
             <div className='mariobuscadoroplolyolopongobonito'>
                 <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" />
@@ -30,7 +32,7 @@ export function LandingPage() {
                     <h5 className='h5-title'>~ Sigmund Freud </h5>
             </div>
             <div className='backtopimg'>
-                    <button onclick="topFunction()" className='backtop'> BUSCA LA CONSULTA PERFECTA </button> 
+                    <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button> 
             </div>
         </section>
     )
