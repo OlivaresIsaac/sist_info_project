@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {addDoc, collection, onSnapshot, query, serverTimestamp, where} from "firebase/firestore";
+import {updateDoc, doc,  addDoc, arrayUnion, collection, onSnapshot, query, serverTimestamp, Timestamp, where} from "firebase/firestore";
 import {auth, db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
 
@@ -9,34 +9,52 @@ export function ChatsPage() {
 
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([]);
-    const [chat, setChat] = useState([]);
     const {user} = useUserContext();
-    
 
     useEffect(() => {
+        // const queryMessages = query(messagesRef, where("room", "==", "pruebas"))
+        // onSnapshot(queryMessages, (snapshot) => {
+        //     let messages = [];
+        //     snapshot.forEach((doc) => {
+        //         messages.push({...doc.data(), id: doc.id});
+        //     });
+        // setMessages(messages);
 
-         
+        //});
+        const recieve = onSnapshot(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"), (doc) => {
+            doc.exists() && setMessages(doc.data().messages);
+        });
+
+        return () => {
+            recieve();
+        };
     }, []);
 
-    const selectChat = async (e) => {
-        const chatsRef = collection(db, "chats");
-        console.log(chatsRef);
-    }
-
-    selectChat();
+    //const chatsRef = collection(db, "chats");
 
     const handleSubmit = async (e) => {
-        // e.preventDefault();
-        // if (newMessage === "") return;
+        e.preventDefault();
+        if (newMessage === "") return;
 
-        // await addDoc(chatsRef, {
+        console.log(messages);
+
+        await updateDoc(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"),{
+            messages: arrayUnion({
+                text: newMessage,
+                sender: user.displayName,
+                date: Timestamp.now()
+            })
+        });
+
+        // await addDoc(messagesRef, {
         //     text: newMessage,
         //     createdAt: serverTimestamp(),           
         //     room: "pruebas"
         // });
 
-        // setNewMessage("");
+        setNewMessage("");
     };
+
 
     return (
         <div className="min-h-screen grid grid-cols-1 xl:grid-cols-4 bg-[#FFFFFF] text-white-500">
@@ -210,13 +228,18 @@ export function ChatsPage() {
                         </div> */}
                     </div>
                     {/* mensajes reales */}
-                    {messages.map((message) => 
-                        <div className="mb-3 flex">
-                                <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
-                                    {message.text}
-                                </p>
-                        </div>
-                    )}
+                    
+                    {
+                        messages.map((m) => {
+
+                            <div className="mb-3 flex">
+                                    <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
+                                        {m.sender}
+                                    </p>
+                            </div>
+                        })
+                    }
+                    
 
                 </main>
                 {/*Enviar mensajes*/}
