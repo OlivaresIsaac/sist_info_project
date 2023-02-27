@@ -8,7 +8,7 @@ import { useUserContext } from "../../contexts/UserContext";
 export function ChatsPage() {
 
     const [newMessage, setNewMessage] = useState("");
-    const [messages, setMessages] = useState([]);
+    const [msg, setMessages] = useState([]);
     const {user} = useUserContext();
 
     useEffect(() => {
@@ -35,8 +35,6 @@ export function ChatsPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (newMessage === "") return;
-
-        console.log(messages);
 
         await updateDoc(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"),{
             messages: arrayUnion({
@@ -230,13 +228,14 @@ export function ChatsPage() {
                     {/* mensajes reales */}
                     
                     {
-                        messages.map((m) => {
-
+                        msg.map((m) => {
+                            return(
                             <div className="mb-3 flex">
                                     <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
-                                        {m.sender}
+                                        {m.text}
                                     </p>
                             </div>
+                            )
                         })
                     }
                     
