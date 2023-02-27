@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router"
 import { LANDING_URL } from "../../constants/url"
 import { REGISTER_URL } from "../../constants/url"
+import { Link } from 'react-router-dom'
 
 
 
@@ -62,7 +63,7 @@ export function LoginPage() {
                         <button onClick={handleLoginWithGoogle}>Iniciar con Google</button>
                     </div>
                     <div> 
-                        <button href="C:/Users/lddg0/Documents/sist_info_project/src/register/url">Resgistrate aqui</button>
+                        <Link className="textolink" to={REGISTER_URL}>Registrate aqui</Link>
                     </div>
                     </form>
                 </div>

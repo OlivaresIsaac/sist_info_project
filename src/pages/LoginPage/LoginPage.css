@@ -9,7 +9,7 @@
     height: 100vh;
 }
 .izquierda{
-    background: url(C:/Users/lddg0/Documents/sist_info_project/src/assets/Psyduck_registro.png) center; 
+    background: url('../../assets/Psyduck_registro.png') center; 
     background-size: cover;
     border-style: solid;
     border-width: 25px;
@@ -31,4 +31,8 @@
 .tituloRegistro{
     margin-bottom: 10px;
     font-size: 75px;
+}
+.textolink{
+    color: #000000;
+    font-size: medium;
 }

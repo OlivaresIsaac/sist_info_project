@@ -41,8 +41,8 @@ export function RegisterPage() {
         <div className="contenedorRegistro">
         <div className="izquierda"></div>
         <div className="derecha">
-        <form onSubmit={onSubmit}> 
-            <p >Registro</p>
+        <form onSubmit={onSubmit}>
+            <p className="tituloRegistro">Registro</p> 
             <div>
                 Seleccione un rol de usuario:   
                 <select className="seleccionador">
