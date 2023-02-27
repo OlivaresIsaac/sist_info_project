@@ -3,6 +3,8 @@ import './LoginPage.css'
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import { LANDING_URL } from "../../constants/url"
+import { REGISTER_URL } from "../../constants/url"
+
 
 
 export function LoginPage() {
@@ -41,14 +43,30 @@ export function LoginPage() {
 
     return (
         <div>
-            <form onSubmit={onSubmit}> 
-            <h1>Soy Login</h1>
-            <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange} className="input"/> 
-            <input placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange}/> 
-            <button  type="submit">Iniciar sesión</button>
-            <button onClick={handleLoginWithGoogle}>Iniciar con Google</button>
-            </form>
-       
+            <div className="contendorLogin">
+                <div className="izquierda"></div>
+                <div className="derecha">
+                    
+                    <form onSubmit={onSubmit}> 
+                    <p className="tituloRegistro">Login</p>
+                    <div>
+                        <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange} className="input"/> 
+                    </div>
+                    <div>
+                        <input placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange}/> 
+                    </div>
+                    <div>
+                        <button  type="submit">Iniciar sesión</button>
+                    </div>
+                    <div>
+                        <button onClick={handleLoginWithGoogle}>Iniciar con Google</button>
+                    </div>
+                    <div> 
+                        <button href="C:/Users/lddg0/Documents/sist_info_project/src/register/url">Resgistrate aqui</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

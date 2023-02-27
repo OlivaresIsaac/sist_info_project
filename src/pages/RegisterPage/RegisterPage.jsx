@@ -42,7 +42,7 @@ export function RegisterPage() {
         <div className="izquierda"></div>
         <div className="derecha">
         <form onSubmit={onSubmit}> 
-            <p className="tituloRegistro">Registro</p>
+            <p >Registro</p>
             <div>
                 Seleccione un rol de usuario:   
                 <select className="seleccionador">
@@ -73,7 +73,7 @@ export function RegisterPage() {
                 </select>
             </div>
             <div>
-            <button type="submit"> Registrarse</button>
+                <button type="submit"> Registrarse</button>
             </div>
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
