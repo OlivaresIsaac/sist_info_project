@@ -149,10 +149,10 @@ export function ChatsPage() {
                         />
                         <div className="flex-1 flex justify-between">
                             <div>
-                                <h1>Romero Anfibio</h1>
+                                <h1>Daniel Romero </h1>
                                 <p className="text-white-500 flex items-center gap-2">
                                     <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo escamas
+                                    Tengo hambre
                                 </p>
                             </div>
                             <div className="text-white-500 text-xs">ayer</div>
@@ -168,10 +168,10 @@ export function ChatsPage() {
                         />
                         <div className="flex-1 flex justify-between">
                             <div>
-                                <h1>Pudri</h1>
+                                <h1>Luis Exposito</h1>
                                 <p className="text-white-500 flex items-center gap-2">
                                     <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo ligma
+                                    Tengo fútbol
                                 </p>
                             </div>
                             <div className="text-white-500 text-xs">miércoles</div>
@@ -270,7 +270,7 @@ export function ChatsPage() {
                 {/*Enviar mensajes*/}
                 <div className="h-[8vh] text-white-500 flex items-center bg-[#ab90b9]">   
                     <form className="w-[60%] xl:w-10/12 flex" onSubmit={handleSubmit}>
-                        <input type="text" className="bg-[#D5D6DC] w-full py-2 px-6 rounded-full outline-none text-white-500"
+                        <input type="text" className="bg-[#D5D6DC] w-11/12 py-2 px-6 rounded-full outline-none text-white-500"
                             placeholder="Escriba un mensaje"
                             onChange={(e)=> setNewMessage(e.target.value)}
                             value={newMessage}
