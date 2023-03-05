@@ -9,18 +9,24 @@ export function LandingPage() {
     return (
         <>
         <section className='landing'>
-            <div>
-            <img src={psicologo} className='psicologo'/>
-            <div className='tittle'>
-                <h1 className='h1-title'>PSYDOCS</h1>
-                <h2 className='h2-title'>Salud mental a tu alcance</h2>
-                <h3 className='h3-title'>¿Quiénes Somos?</h3>
+            <div className='landing-row'>
+               <div className = "psicologo-div"> 
+                    <img src={psicologo} className='psicologo' alt='pysdocs'/>
+                    
+                </div>
+
+                <div className='title'>
+                    <h1 className='h1-title'>PSYDOCS</h1>
+                    <h2 className='h2-title'>Salud mental a tu alcance</h2>
+                    <h3 className='h3-title'>¿Quiénes Somos?</h3>
+                </div>
+               
             </div>
-            </div>
-            <div className='mariobuscadoroplolyolopongobonito'>
+
+            {/* <div className='mariobuscadoroplolyolopongobonito'>
                 <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" />
-            </div>
-            <div className='team'>   
+            </div> */}
+            {/* <div className='team'>   
                     <h4 className='h4-title'>EQUIPO DE PSYDOCS</h4>
                     <p className='teamText'>
                         Psydocs es una plataforma que busca conectar a especialistas de la psicología 
@@ -34,7 +40,7 @@ export function LandingPage() {
             </div>
             <div className='backtopimg'>
                     <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button> 
-            </div>
+            </div> */}
         </section>
         </>
     )
