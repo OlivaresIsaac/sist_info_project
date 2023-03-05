@@ -1,15 +1,29 @@
 .psicologo {
-    margin-left: 2%;
-    width: 35%;
+    /* margin-left: 2%; */
+    /* width: 20rem; */
     height: auto;
-    position: absolute;
+    position: relative;
     padding: 0;
+    /* align-self: center; */
+    /* display: flex; */
+}
+.psicologo-div{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    /* background-color: red; */
+    width: 17rem;
+  
 }
 
-.tittle{
+.title{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    margin-left: 50%;
     margin-bottom: 10%;
+    /* background-color: rgb(250, 142, 142); */
+    
 }
 
 .mariobuscadoroplolyolopongobonito{
@@ -18,85 +32,177 @@
 }
 
 .h1-title{
-    font-size: 100px;
+    font-size: 3rem;
     background-color: #815c97;
     margin-top: 60px;
     border-radius: 50px;
 }
 
 .h2-title{
-    font-size: 70px;
+    font-size: 2rem;
 }
 
 .h3-title{
-    font-size: 50px;
+    font-size: 1.5rem;
 }
 
 .h4-title{
-    margin-top: 350px;
+    position: absolute;
+
+    width: 90%;
+
     text-align: center;
-    font-size: 36px;
+    font-size: 1.5rem;
     color: #572975;;
+
+   top: 17rem
 }
 
 .h5-title{
     text-align: right;
-    font-size: 36px;
+    font-size: 1.2rem;
     font-weight: 600;
-    width: 1000px;
-    margin-left: 50px;
+    width: 90%;
+    margin-top:1rem;
+
 
 }
 
 .backtop{
     border: none;
+     position: relative;
+    top: 3rem;
+    left: 3rem; 
     cursor: pointer;
     background: none;
-    font-size: 56px;
+    font-size: 1.7rem;
     font-weight: 600;
-    width: 904px;
-    height: 155px;
+    width: 85%;
+    height: 5rem;
+    margin-bottom: 5rem;
     border-radius: 50px;
     color: #572975;
+    background-image: url(/src/assets/backtop.png); 
+     background-repeat: no-repeat;
+    background-position: center;  
 }
 
 .teamText{
-    margin-top: 20px;
+    display: flex;
     text-align: center;
-    font-size: 36px;
+    font-size: 1rem;
     font-weight: 600;
-    width: 1000px;
+    width: 90%;
 }
 
 .saying{
+    margin-top: 1rem;
+    display: flex;
     text-align: center;
-    font-size: 36px;
+    font-size: 1rem;
     font-weight: 600;
-    width: 1000px;
+    width: 90%;
+    text-align: center;
 
 }
 
 .team{
     display: flex;
-    flex-direction: column;
+    /* position: relative; */
+    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
-    background-image: url(/src/assets/team.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 781px;
+ 
+     /* background-image: url(/src/assets/team.png); 
+     background-color: red; 
+     background-repeat: no-repeat;
+    background-position: center;  */
+    /* height: 50rem; */
+}
+
+.team-img{
+    display: flex;
+    
+    width: 92%;
+    padding: 0;
+    align-content: center;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+   
+}
+
+.round-border{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    width: 92%;
+    border-radius: 30px;
+    height: 32rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 
 .backtopimg{
     text-align: center;
-    background-image: url(/src/assets/backtop.png);
+    position: absolute;
     margin-top: 5%;
     margin-bottom: 5%;
-    background-position: center;
+    margin-left: 3rem;
+    justify-self: center;
+    align-self: center;
+    width: 80%;
     height: auto;
-    background-repeat: no-repeat;
+    
 }
+.landing {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    justify-items: center;
+    flex-shrink: 0
+}
+.landing-row{
+    display: flex;
+    flex-direction: row;
+   
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.final-button{
+    position: relative;
+    justify-content: center;
+    align-content: center;
+}
+
+@media screen and (max-width: 640px) {
+    .psicologo-div{
+         width: 80%; 
+        }
+
+    .round-border{
+        height: 28rem;
+    }
+
+    /* .teamText{
+        margin-top: 7rem;
+        font-size: 1rem;
+       
+    }
+
+    .saying{
+        margin-top: 5rem;
+        font-size: 1rem;
+       
+    } */
+    } 
+    /* .landing-row {
+        flex-direction: column;
+    } */
 
 /* .intro-flex{
     display:flex;
