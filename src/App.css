@@ -44,3 +44,14 @@ body{
 }
 
 
+
+ html {
+  font-size: 12px;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 640px) { html {font-size:16px;} }
+@media (min-width:960px) { html {font-size:19px;} }
+@media (min-width:1100px) { html {font-size:25px;} } 
+
+

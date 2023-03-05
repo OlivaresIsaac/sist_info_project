@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Sidebar.css'
 import psydocs from '../../assets/psydocs.png'
-import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, PROFILE_URL, REGISTER_URL } from '../../constants/url'
+import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
 import { useUserContext } from '../../contexts/UserContext'
 import { logout } from '../../firebase/auth-service'
 
@@ -11,26 +11,36 @@ const Sidebar = () => {
         //console.log("Saliendo...")
         await logout()
     }
+
+    const openMenu = () => {
+        const div = document.getElementById('burgerMenu');
+        const sideBar = document.getElementById('sidebar')
+        const body = document.getElementById("sidebar").parentElement.childNodes[1]
+        console.log(body)
+        body.classList.toggle("change")
+        div.classList.toggle("change")
+        sideBar.classList.toggle("change")
+    }
     //console.log(user)
 
 
     const profileRoute = (!!user) ? "/profile/"+user.id : LANDING_URL
     //console.log(profileRoute)
     return (
-        <div className="sidebar">
-            <ul>
-                <li className='image'>
+        <div className="sidebar" id="sidebar">
+            <ul className='sidebar-ul'>
+                <div className='image'>
                    
                     <Link to={LANDING_URL} >
-                    <img src={psydocs}/> 
+                    <img src={psydocs} alt="Psydocs" /> 
                     </Link>
                   
-                </li>
+               </div>
                 {/* TODO formato bonito para usuario ya logeado */}
                 {!!user && (
-                    <li> 
+                    <div className='sidebar-li'> 
                     <Link to={profileRoute} className="user_name "> {user.displayName}</Link>
-                    </li>
+                   </div>
                 )}
                 {!user && (
                     <p> </p>
@@ -39,26 +49,33 @@ const Sidebar = () => {
                 
                 {/* <li>
                     <Link to={LANDING_URL} >Inicio</Link>
-                </li> */}
-                <li>
+               </div> */}
+                <div className='sidebar-li'>
                     <Link to={CHATS_URL} >Chats</Link>
-                </li>
-                <li>
+               </div>
+                <div className='sidebar-li'>
                     <Link to={CONSULTS_URL}  >Consultas</Link>
-                </li>
-                <li>
+               </div>
+                <div className='sidebar-li'>
                     <Link to={FEEDBACK_URL}  >Feedback</Link>
-                </li>
-                <li>
+               </div>
+                <div className='sidebar-li'>
                     <Link to={LOGIN_URL}  >Login</Link>
-                </li>
-                <li className='last'>
+               </div>
+                <div className='last sidebar-li'>
                     <Link to={REGISTER_URL}  >Registrarse</Link>
-                </li>
-                <li className='logout'>
-                {/* TODO logout url or functionality*/}
+               </div>
+                <div className='logout sidebar-li'>
+            
                     <Link to={LANDING_URL}  onClick={handleLogout}>Salir</Link>
-                </li>
+               </div>
+           
+               <div className="menu-container" onClick={openMenu} id="burgerMenu">
+                    <div className="bar1"></div>
+                   
+                    <span className="bar2"></span>
+                    <div className="bar3"></div>
+               </div>
             </ul>
         </div>
     )

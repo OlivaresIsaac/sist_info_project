@@ -22,6 +22,7 @@ export async function getUserProfile(email) {
             id: item.id
         }))
 
+        // OJO, no retorna objeto user, retorna objeto con la estructura de user
         return users[0]
     } else {
         return null

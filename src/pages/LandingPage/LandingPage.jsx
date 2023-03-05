@@ -7,10 +7,11 @@ import backtopimg from '../../assets/backtop.png'
 export function LandingPage() {
 
     return (
+        <>
         <section className='landing'>
             <div>
             <img src={psicologo} className='psicologo'/>
-            <div tittle className='tittle'>
+            <div className='tittle'>
                 <h1 className='h1-title'>PSYDOCS</h1>
                 <h2 className='h2-title'>Salud mental a tu alcance</h2>
                 <h3 className='h3-title'>¿Quiénes Somos?</h3>
@@ -22,7 +23,7 @@ export function LandingPage() {
             <div className='team'>   
                     <h4 className='h4-title'>EQUIPO DE PSYDOCS</h4>
                     <p className='teamText'>
-                        Pysdocs es una plataforma que busca conectar a especialistas de la psicología 
+                        Psydocs es una plataforma que busca conectar a especialistas de la psicología 
                         con personas que requieran su servicio. Busca doctores de todas partes del mundo 
                         y concreta la consulta perfecta
                     </p>
@@ -35,6 +36,7 @@ export function LandingPage() {
                     <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button> 
             </div>
         </section>
+        </>
     )
 }
 

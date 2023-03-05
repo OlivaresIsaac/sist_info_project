@@ -243,18 +243,18 @@ export function ChatsPage() {
                     {/* mensajes reales */}
                     
                     {
-                        messages.map((m) => {
+                        messages.map((m, key) => {
                             
                             if (m.sender === user.displayName) {
                                 return (
-                                    <div className="mb-3 flex justify-end">
+                                    <div className="mb-3 flex justify-end" key={key}>
                                     <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
                                     {m.text}
                                     </p>
                                 </div>
                                 )
                             } else {
-                                return (<div className="mb-3 flex">
+                                return (<div className="mb-3 flex" key={key}>
                                 <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
                                     {m.text}
                                 </p>

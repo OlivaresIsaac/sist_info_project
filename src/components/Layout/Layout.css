@@ -6,4 +6,17 @@
 
 .main-body {
     margin-left: 10%;
+    transition: 1s;
 }
+
+.main-body.change {
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 640px) {
+    .main-body{
+        margin-left: 0;
+        margin-top: 15%;
+    }
+
+  }
