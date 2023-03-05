@@ -1,6 +1,6 @@
 import './LandingPage.css'
 import psicologo from '../../assets/psicologo.png'
-import team from '../../assets/team.png'
+import team from '../../assets/team2.png'
 import backtopimg from '../../assets/backtop.png'
 
 
@@ -23,11 +23,14 @@ export function LandingPage() {
                
             </div>
 
-            {/* <div className='mariobuscadoroplolyolopongobonito'>
+            <div className='mariobuscadoroplolyolopongobonito'>
                 <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" />
-            </div> */}
-            {/* <div className='team'>   
-                    <h4 className='h4-title'>EQUIPO DE PSYDOCS</h4>
+            </div>
+
+            <div className='team'>   
+                <div className='round-border'>
+                <img src={team} className='team-img' alt='pysdocs'/>
+                 {/* <h4 className='h4-title'>EQUIPO DE PSYDOCS</h4> */}
                     <p className='teamText'>
                         Psydocs es una plataforma que busca conectar a especialistas de la psicología 
                         con personas que requieran su servicio. Busca doctores de todas partes del mundo 
@@ -38,9 +41,12 @@ export function LandingPage() {
                     </p>
                     <h5 className='h5-title'>~ Sigmund Freud </h5>
             </div>
-            <div className='backtopimg'>
-                    <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button> 
-            </div> */}
+            
+             </div>
+             <div className='final-button'>
+                {/* <img src={backtopimg} className='backtopimg' alt='pysdocs'/> */}
+                <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button>  
+            </div>
         </section>
         </>
     )
