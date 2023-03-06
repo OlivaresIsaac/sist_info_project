@@ -1,7 +1,10 @@
 import { signInWithPopup, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, getAdditionalUserInfo } from "@firebase/auth"
+import { Doctor } from "../models/doctor"
 import { User } from "../models/user"
-import { auth, googleProvider } from "./config"
-import { createUserProfile } from "./users-service"
+import { auth, db, googleProvider } from "./config"
+import { createDoctor, createUserProfile } from "./users-service"
+import { runTransaction } from "firebase/firestore";
+
 
 //TODO Hacer form que pase los parámetros aqui a esta función para hacer el createUser
 export const signInWithGoogle = async () => {
@@ -24,14 +27,28 @@ export const signInWithGoogle = async () => {
 
 export const registerWithEmailAndPassword = async (email, password, displayName, allData) => {
     try {
-        const result = await createUserWithEmailAndPassword(auth, email, password)
+    
+        await runTransaction(db, async (transaction) => {
+            const result = await createUserWithEmailAndPassword(auth, email, password)
       
-//TODO pasar data con todo lo necesario,
-        const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage)
+            //TODO convertir en transacci'on
+                    const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage)
+            
+                    await createUserProfile(result.user.uid, newUser.toObject())
+            
+                    if (newUser.isDoctor) {
+                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography)
+                        await createDoctor(newDoctor.toObject())
+                        console.log(newDoctor)
+                    }
+        })
+        console.log("Transacción completa!")
 
-        await createUserProfile(result.user.uid, newUser.toObject())
+        
+
     } catch (error) {
         console.log(error)
+        console.log("Transacción fallida :(")
         // TODO anuncio de usuario invalido porque ya existe
     }
 }
