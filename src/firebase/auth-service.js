@@ -22,12 +22,12 @@ export const signInWithGoogle = async () => {
     }
 }
 
-export const registerWithEmailAndPassword = async (email, password, displayName) => {
+export const registerWithEmailAndPassword = async (email, password, displayName, allData) => {
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password)
       
 //TODO pasar data con todo lo necesario,
-        const newUser = new User(result.user.uid, displayName, email, false)
+        const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage)
 
         await createUserProfile(result.user.uid, newUser.toObject())
     } catch (error) {

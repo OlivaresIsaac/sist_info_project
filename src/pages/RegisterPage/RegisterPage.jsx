@@ -5,12 +5,14 @@ import { registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/a
 import './RegisterPage.css'
 
 export function RegisterPage() {
-
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         displayName: "",
         email: "",
-        password: ""
+        password: "",
+        tlf: "",
+        isDoctor:"",
+        preferedLanguage:""
     })
 
     const handleOnChange = (event) => {
@@ -27,11 +29,16 @@ export function RegisterPage() {
 
     const onSubmit = async (event) => {
         event.preventDefault()
-        console.log({formData})
+        // console.log({formData})
         const {email, password, displayName} = formData
+        let aux = formData
+        aux.isDoctor = (formData.isDoctor === "true")
+        aux.preferedLanguage = (formData.preferedLanguage === "") ? 1 : parseInt(formData.preferedLanguage)
 
+        console.log(aux)
+        
         //TODO pasar isDoctor del form
-        await registerWithEmailAndPassword(email, password, displayName);
+        await registerWithEmailAndPassword(email, password, displayName, aux);
         //TODO navigate after valid register
         navigate(LANDING_URL)
     }
@@ -45,9 +52,9 @@ export function RegisterPage() {
             <p className="tituloRegistro">Registro</p> 
             <div>
                 Seleccione un rol de usuario:   
-                <select className="seleccionador">
-                    <option>Paciente</option>
-                    <option>Doctor</option>
+                <select className="seleccionador" name="isDoctor" onChange={handleOnChange} required>
+                    <option value={false}>Paciente</option>
+                    <option value={true} >Doctor</option>
                 </select>
             </div>
             <div>
@@ -64,12 +71,12 @@ export function RegisterPage() {
             </div> 
             <div>
                 Seleccione idioma conveniente:   
-                <select className="seleccionador">
-                    <option>Español</option>
-                    <option>English</option>
-                    <option>Português</option>
-                    <option>日本</option>
-                    <option>Latinus</option>
+                <select className="seleccionador" name="preferedLanguage" onChange={handleOnChange}>
+                    <option value={1}>Español</option>
+                    <option value={2}>English</option>
+                    <option value={3}>Português</option>
+                    <option value={4}>日本</option>
+                    <option value={5}>Latinus</option>
                 </select>
             </div>
             <div>
