@@ -22,11 +22,11 @@ export function FeedbackPage() {
     const handleMouseLeave=()=>{
         setHoverValue(undefined)
     };
-    
+
     return (
-        <div style={styles.container}>
+        <div className='container'>
             <h2>Soy Feedback</h2>
-            <div style={styles.stars}>
+            <div className='stars'>
                 {stars.map((_, index) => {
                     return(
                         <FaStar
@@ -44,38 +44,11 @@ export function FeedbackPage() {
                     )
                 })}
             </div>
-            <textarea
+            <textarea className='textarea'
                 placeholder="Whats your feedback"
-                style={styles.textarea}
+                //style={styles.textarea}
             />
-            <button style={styles.button}>Submit</button>
+            <button className='button'>Submit</button>
         </div>
     );
 };
-
-const styles={
-    container:{
-        display:"flex",
-        flexDirection:"column",
-        alignItems:"center",
-    },
-    textarea:{
-        border:"1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 300,
-        margin: "20 px 0",
-        minHight: 100,
-        padding: 10
-    },
-
-    button:{
-        border:"1px solid #a9a9a9",
-        borderRadius: 5,
-        width: 300,
-        padding: 10
-
-    }
-}
-
-
-

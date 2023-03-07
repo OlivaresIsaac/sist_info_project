@@ -1,0 +1,22 @@
+.container{
+    display:"flex";
+    flex-direction:"column";
+    align-items:"center";
+    background-color: red;
+}
+
+.textarea{
+    border:"1px solid #a9a9a9";
+    border-radius: 5;
+    width: 300;
+    margin: "20 px 0";
+    min-height: 100;
+    padding: 10;
+}
+
+.button{
+    border:"1px solid #a9a9a9";
+    border-radius:5;
+    width: 300;
+    padding: 10;
+}
