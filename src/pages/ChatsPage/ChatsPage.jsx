@@ -264,6 +264,7 @@ export function ChatsPage() {
                             
                         })
                     }
+                    
 
                 </main>
                 {/*Enviar mensajes*/}
