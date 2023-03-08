@@ -1,5 +1,100 @@
+import { useEffect, useState } from "react";
+import {updateDoc, doc,  addDoc, arrayUnion, collection, onSnapshot, query, serverTimestamp, Timestamp, where} from "firebase/firestore";
+import {auth, db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
+
+import { useUserContext } from "../../contexts/UserContext";
+
 export function ChatsPage() {
+
+    const [receptorName, setReceptorName] = useState("isaac");
+    const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState([]);
+
+    const [currentChat, setCurrentChat] = useState("31XWY3Tr5pReZfkrP0KU");
+    const [userChats, setUserChats] = useState([]);
+    const [userChatsDoc, setUserChatsDoc] = useState([]);
+
+    const {user} = useUserContext();
+
+    useEffect(() => {
+        // const queryMessages = query(messagesRef, where("room", "==", "pruebas"))
+        // onSnapshot(queryMessages, (snapshot) => {
+        //     let messages = [];
+        //     snapshot.forEach((doc) => {
+        //         messages.push({...doc.data(), id: doc.id});
+        //     });
+        // setMessages(messages);
+        //});
+        const recieve = onSnapshot(doc(db, "chats", currentChat), (doc) => {
+            if (doc.exists()) {
+                setMessages(doc.data().messages);
+            }
+        });
+        return () => {
+            recieve();
+        };
+    }, []);
+
+    const userChatsRef = collection(db, "usersChats");
+    const chatsRef = collection(db, "chats")
+
+    const getChats = async () => {
+        const queryChats = query(userChatsRef, where("id", "==", user.id));
+        onSnapshot(queryChats, (snapshot) => {
+            let chats = [];
+            snapshot.forEach((doc) => {
+                chats = doc.data().chatsID;
+            });
+            setUserChats(chats);
+        });
+            const queryChatsDoc = query(chatsRef, where("id", "in", userChats));
+            onSnapshot(queryChatsDoc, (snapshot2) => {
+                let chatsDoc = [];
+                snapshot2.forEach((doc) => {
+                    chatsDoc.push({...doc.data(), id: doc.id})
+                });
+                setUserChatsDoc(chatsDoc);
+            });
+        }
+
+    getChats()
+
+    const selectChat = async () => {
+        onSnapshot(doc(db, "chats", currentChat), (doc) => {
+            if (doc.exists()) {
+                setMessages(doc.data().messages);
+                setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
+            };
+        });
+    };
+
+    const prueba = async (key) => {
+        console.log(key)
+    }
+         
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (newMessage === "" || currentChat === "") return;
+
+        await updateDoc(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"),{
+            messages: arrayUnion({
+                text: newMessage,
+                sender: user.displayName,
+                date: Timestamp.now()
+            })
+        });
+
+        // await addDoc(messagesRef, {
+        //     text: newMessage,
+        //     createdAt: serverTimestamp(),           
+        //     room: "pruebas"
+        // });
+
+        setNewMessage("");
+    };
+
+
     return (
         <div className="min-h-screen grid grid-cols-1 xl:grid-cols-4 bg-[#FFFFFF] text-white-500">
             {/*Contactos*/}
@@ -31,102 +126,94 @@ export function ChatsPage() {
                 </div>
                 {/*Clientes*/}
                 <div className="h-[85vh] overflow-y-scroll">
-                    {/*Cliente*/}
-                    <div 
-                        className="p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32] hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Kira Yoshikage</h1>
-                                <p className="text-transparent-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
-                                    Mi nombre es Yoshikage Kira.
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">14:23</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Josuke Higashikata</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    <RiCameraLine/>
-                                    Foto
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">12:12</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Romero Anfibio</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo escamas
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">ayer</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Pudri</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo ligma
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">miércoles</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Heyo Mason</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Hey yo Mason
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">6:55</div>
-                        </div>
-                    </div>
+                    {
+                        userChatsDoc.map((c, key) => {
+                            if(user.isDoctor){
+                                if(currentChat === c.id){
+                                    return(<div 
+                                        key={key} className="p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32] hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.patient}</h1>
+                                                <p className="text-transparent-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">14:23</div>
+                                        </div>
+                                    </div>)
+                                }else{
+                                    return(<button
+                                        key={key} className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.patient}</h1>
+                                                <p className="text-white-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
+                                                    <RiCameraLine/>
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">12:12</div>
+                                        </div>
+                                    </button>)
+                                }
+                            }else{
+                                if(currentChat === c.id){
+                                    return(<button 
+                                        key={key} onClick={() => prueba(key)} className="w-full p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32]"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.doctor}</h1>
+                                                <p className="text-transparent-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">14:23</div>
+                                        </div>
+                                    </button>)
+                                }else{
+                                    return(<div
+                                        key={key} className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.doctor}</h1>
+                                                <p className="text-white-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
+                                                    <RiCameraLine/>
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">12:12</div>
+                                        </div>
+                                    </div>)
+                                }
+                            }
+                        })
+                    }
+
                 </div>
             </div>
             {/*Chat*/}
@@ -138,7 +225,7 @@ export function ChatsPage() {
                             className="w-10 h-10 object-cover rounded-full"
                         />
                         <div>
-                            <h1>Kira Yoshikage</h1>
+                            <h1>{receptorName}</h1>
                             <span className="text-white-500 text-sm">En línea</span>
                         </div>
                     </div>
@@ -150,35 +237,65 @@ export function ChatsPage() {
                 </header>
                 {/*Mensajes*/}
                 <main className="h-[84vh] overflow-y-scroll p-4">
-                        {/*Mensaje 1*/}
+                    {/* mensajes de prueba */}
+                    <div>
+                        {/* Mensaje 1
                         <div className="mb-3 flex">
                             <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
                                 Hola
                             </p>
                         </div>
-                        {/*Mensaje 2*/}
+                        {Mensaje 2}
                         <div className="mb-3 flex">
                             <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
                                 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
                             </p>
                         </div>
-                        {/*Mensaje 3*/}
+                        {Mensaje 3}
                         <div className="mb-3 flex justify-end">
                             <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
                                 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
                             </p>
-                        </div>
+                        </div> */}
+                    </div>
+                    {/* mensajes reales */}
+                    
+                    {
+                        messages.map((m, key) => {
+                            
+                            if (m.sender === user.displayName) {
+                                return (
+                                    <div key={key} className="mb-3 flex justify-end">
+                                        <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
+                                        {m.text}
+                                        </p>
+                                </div>
+                                )
+                            } else {
+                                return (
+                                    <div key={key} className="mb-3 flex">
+                                        <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
+                                            {m.text}
+                                        </p>
+                                    </div>
+                                ) 
+                            }                            
+                        })
+                    }  
+
                 </main>
                 {/*Enviar mensajes*/}
                 <div className="h-[8vh] text-white-500 flex items-center bg-[#ab90b9]">   
-                    <form className="w-[60%] xl:w-10/12">
+                    <form className="w-[60%] xl:w-10/12 flex" onSubmit={handleSubmit}>
                         <input type="text" className="bg-[#D5D6DC] w-full py-2 px-6 rounded-full outline-none text-white-500"
-                        placeholder="Escriba un mensaje"
+                            placeholder="Escriba un mensaje"
+                            onChange={(e)=> setNewMessage(e.target.value)}
+                            value={newMessage}
                         />
-                    </form>
-                    <div className="w-[40%] xl:w-1/12 flex justify-center text-2xl">
-                        <RiSendPlane2Fill className="hover:cursor-pointer"/>
-                    </div>
+                        <button type="submit">
+                            <RiSendPlane2Fill className="hover:cursor-pointer"/>
+                        </button>
+                    </form>                       
                 </div>
             </div>
         </div>
