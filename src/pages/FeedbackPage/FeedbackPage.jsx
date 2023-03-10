@@ -1,54 +1,86 @@
-import {FaStar} from "react-icons/fa";
-import React from "react";
-import "./FeedbackPage.css"
-const colors={
-    orange:"#FFBASA",
-    gray:"#a9a9a9"
-}
+
+//import React, { useState } from "react";
+import "./FeedbackPage.css";
+import {useState} from "react";
+import {AiFillStar,AiOutlineStar} from "react-icons/ai";
+
 export function FeedbackPage() {
-
-    const stars=Array(5).fill(0);
-    const [currentValue, setCurrentValue]=React.useState(0);
-    const [hoverValue,setHoverValue]=React.useState(undefined);
-
-    const handleClick=value=>{
-        setCurrentValue(value)
+    const [number,setNumber]=useState(0);
+    const [hoverStar,setHoverStar]=useState(undefined);
+    const handleText=()=>{
+        switch(number){
+            case 0:
+                return 'Califique su experiencia con este doctor';
+            case 1:
+                return 'Muy mala';
+            case 2:
+                return 'Mala';
+            case 3:
+                return 'Normal';
+            case 4:
+                return 'Buena';
+            case 5:
+                return 'Excelente';
+            default:
+                return 'Califique su experiencia con este doctor'    
+        }
     };
 
-    const handleMouseOver=value =>{
-        setHoverValue(value)
+    const handlePlaceHolder=()=>{
+        switch(number||hoverStar){
+            case 0:
+                return 'Escriba sus comentarios...';
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                return '¿Cuáles fueron tus prolemas en esta consulta?';
+            case 5:
+                return '¿Por qué te gustó este doctor?';
+            default:
+                return 'Escriba sus comentarios';
+                        
+        }
     };
-
-    const handleMouseLeave=()=>{
-        setHoverValue(undefined)
-    };
-
     return (
-        <div className='container'>
-            <h2>Soy Feedback</h2>
-            <div className='stars'>
-                {stars.map((_, index) => {
-                    return(
-                        <FaStar
-                            key={index}
-                            size={24}
-                            style={{
-                                marginRight: 10,
-                                cursor: "pointer"
-                            }}
-                            color={(hoverValue || currentValue)>index ? colors.orange : colors.grey}
-                            onClick={() => handleClick(index + 1)}
-                            onMouseOver={()=> handleMouseOver(index+1)}
-                            onMouseLeave={handleMouseLeave}
+        <div className="App">
+            <div className="popup">
+                <div className="content">
+                    <div className="doctor">
+                        <img 
+                            style={{width:100,height:100,objectFit:"cover",borderRadius:45}} 
+                            src="https://pbs.twimg.com/profile_images/1530563277/picoro_400x400.jpg" 
+                            alt="name" 
                         />
-                    )
-                })}
+                        <h1>Juanito De La Calzada</h1>
+                        <h3>Su última consulta con este doctor fue 12/12/2023</h3>
+                    </div>
+                    <div>
+                        <h1>{handleText()}</h1>
+                        {Array(5)
+                            .fill()
+                            .map((_, index)=>
+                                number >= index + 1 || hoverStar >= index + 1 ? (
+                                    <AiFillStar 
+                                        onMouseOver={() => !number && setHoverStar(index + 1)}
+                                        onMouseLeave={() => setHoverStar(undefined)}
+                                        style={{color:'orange'}} 
+                                        onClick={() => setNumber(index + 1)}
+                                    />
+                                ):(
+                                    <AiOutlineStar 
+                                        onMouseOver={() => !number && setHoverStar(index + 1)}
+                                        onMouseLeave={() => setHoverStar(undefined)}
+                                        style={{ color: "orange" }}
+                                        onClick={() => setNumber(index + 1)}
+                                    />
+                                )       
+                            )}
+                    </div>
+                    <textarea placeholder={handlePlaceHolder()}></textarea>
+                    <button className={` ${!number && "disabled"} `}>Enviar feedback</button>
+                </div>
             </div>
-            <textarea className='textarea'
-                placeholder="Whats your feedback"
-                //style={styles.textarea}
-            />
-            <button className='button'>Submit</button>
         </div>
     );
-};
+}
