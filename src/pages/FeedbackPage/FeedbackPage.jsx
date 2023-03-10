@@ -55,7 +55,7 @@ export function FeedbackPage() {
                         <h1>Juanito De La Calzada</h1>
                         <h3>Su última consulta con este doctor fue 12/12/2023</h3>
                     </div>
-                    <div>
+                    <div className="stars">
                         <h1>{handleText()}</h1>
                         {Array(5)
                             .fill()

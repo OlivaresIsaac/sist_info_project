@@ -57,4 +57,12 @@
   .doctor h3 {
     font-size: 15px;
   }
+  .stars{
+    align-items: center;
+    display: flex;
+    font-size: 50px;
+  }
+  .stars h1{
+    font-size: 15px;
+  }
   
