@@ -7,6 +7,7 @@ import { useUserContext } from "../../contexts/UserContext";
 
 export function ChatsPage() {
 
+    const [receptorName, setReceptorName] = useState("");
     const [newMessage, setNewMessage] = useState("");
     const [msg, setMessages] = useState([]);
     const {user} = useUserContext();
@@ -19,10 +20,13 @@ export function ChatsPage() {
         //         messages.push({...doc.data(), id: doc.id});
         //     });
         // setMessages(messages);
-
         //});
         const recieve = onSnapshot(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"), (doc) => {
-            doc.exists() && setMessages(doc.data().messages);
+            if (doc.exists()) {
+                setMessages(doc.data().messages);
+            }
+             
+        
         });
 
         return () => {
@@ -31,6 +35,15 @@ export function ChatsPage() {
     }, []);
 
     //const chatsRef = collection(db, "chats");
+
+    const selectChat = onSnapshot(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"), (doc) => {
+        if (doc.exists()) {
+            setMessages(doc.data().messages);
+            setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor)
+        }
+    })
+         
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -192,7 +205,7 @@ export function ChatsPage() {
                             className="w-10 h-10 object-cover rounded-full"
                         />
                         <div>
-                            <h1>Kira Yoshikage</h1>
+                            <h1>{receptorName}</h1>
                             <span className="text-white-500 text-sm">En línea</span>
                         </div>
                     </div>
@@ -228,14 +241,25 @@ export function ChatsPage() {
                     {/* mensajes reales */}
                     
                     {
-                        msg.map((m) => {
-                            return(
-                            <div className="mb-3 flex">
-                                    <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
-                                        {m.text}
+                        messages.map((m) => {
+                            
+                            if (m.sender === user.displayName) {
+                                return (
+                                    <div className="mb-3 flex justify-end">
+                                    <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
+                                    {m.text}
                                     </p>
-                            </div>
-                            )
+                                </div>
+                                )
+                            } else {
+                                return (<div className="mb-3 flex">
+                                <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
+                                    {m.text}
+                                </p>
+                                </div>) 
+                            }
+
+                            
                         })
                     }
                     
