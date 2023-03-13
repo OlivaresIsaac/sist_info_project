@@ -6,12 +6,13 @@ import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill
 import { useUserContext } from "../../contexts/UserContext";
 
 export function ChatsPage() {
+    const [isChatSelected, setChatSelected] = useState(false)
 
-    const [receptorName, setReceptorName] = useState("isaac");
+    const [receptorName, setReceptorName] = useState("");
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([]);
 
-    const [currentChat, setCurrentChat] = useState("31XWY3Tr5pReZfkrP0KU");
+    const [currentChat, setCurrentChat] = useState("");
     const [userChats, setUserChats] = useState([]);
     const [userChatsDoc, setUserChatsDoc] = useState([]);
 
@@ -26,13 +27,17 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
-        const recieve = onSnapshot(doc(db, "chats", currentChat), (doc) => {
-            if (doc.exists()) {
-                setMessages(doc.data().messages);
+        const recieve = () => {
+            if(currentChat != ""){
+                onSnapshot(doc(db, "chats", currentChat), (doc) => {
+                    if (doc.exists()) {
+                        setMessages(doc.data().messages);
+                    }
+                });
             }
-        });
+        }
         return () => {
-            recieve();
+            recieve()
         };
     }, []);
 
@@ -69,10 +74,6 @@ export function ChatsPage() {
             };
         });
     };
-
-    const prueba = async (key) => {
-        console.log(key)
-    }
          
     const handleSubmit = async (e) => {
         e.preventDefault();
