@@ -7,9 +7,14 @@ import { useUserContext } from "../../contexts/UserContext";
 
 export function ChatsPage() {
 
-    const [receptorName, setReceptorName] = useState("");
+    const [receptorName, setReceptorName] = useState("isaac");
     const [newMessage, setNewMessage] = useState("");
-    const [msg, setMessages] = useState([]);
+    const [messages, setMessages] = useState([]);
+
+    const [currentChat, setCurrentChat] = useState("31XWY3Tr5pReZfkrP0KU");
+    const [userChats, setUserChats] = useState([]);
+    const [userChatsDoc, setUserChatsDoc] = useState([]);
+
     const {user} = useUserContext();
 
     useEffect(() => {
@@ -21,35 +26,59 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
-        const recieve = onSnapshot(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"), (doc) => {
+        const recieve = onSnapshot(doc(db, "chats", currentChat), (doc) => {
             if (doc.exists()) {
                 setMessages(doc.data().messages);
             }
-             
-        
         });
-
         return () => {
             recieve();
         };
     }, []);
 
-    //const chatsRef = collection(db, "chats");
+    const userChatsRef = collection(db, "usersChats");
+    const chatsRef = collection(db, "chats")
 
-    const selectChat = onSnapshot(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"), (doc) => {
-        if (doc.exists()) {
-            setMessages(doc.data().messages);
-            setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor)
+    const getChats = async () => {
+        const queryChats = query(userChatsRef, where("id", "==", user.id));
+        onSnapshot(queryChats, (snapshot) => {
+            let chats = [];
+            snapshot.forEach((doc) => {
+                chats = doc.data().chatsID;
+            });
+            setUserChats(chats);
+        });
+            const queryChatsDoc = query(chatsRef, where("id", "in", userChats));
+            onSnapshot(queryChatsDoc, (snapshot2) => {
+                let chatsDoc = [];
+                snapshot2.forEach((doc) => {
+                    chatsDoc.push({...doc.data(), id: doc.id})
+                });
+                setUserChatsDoc(chatsDoc);
+            });
         }
-    })
-         
-    
 
+    getChats()
+
+    const selectChat = async (index) => {
+        onSnapshot(doc(db, "chats", userChats[index]), (doc) => {
+            if (doc.exists()) {
+                setCurrentChat(userChats[index])
+                setMessages(doc.data().messages);
+                setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
+            };
+        });
+    };
+
+    const prueba = async (key) => {
+        console.log(key)
+    }
+         
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (newMessage === "") return;
+        if (newMessage === "" || currentChat === "") return;
 
-        await updateDoc(doc(db, "chats", "31XWY3Tr5pReZfkrP0KU"),{
+        await updateDoc(doc(db, "chats", currentChat),{
             messages: arrayUnion({
                 text: newMessage,
                 sender: user.displayName,
@@ -98,102 +127,110 @@ export function ChatsPage() {
                 </div>
                 {/*Clientes*/}
                 <div className="h-[85vh] overflow-y-scroll">
-                    {/*Cliente*/}
-                    <div 
-                        className="p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32] hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Kira Yoshikage</h1>
-                                <p className="text-transparent-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
-                                    Mi nombre es Yoshikage Kira.
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">14:23</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Josuke Higashikata</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    <RiCameraLine/>
-                                    Foto
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">12:12</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Romero Anfibio</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo escamas
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">ayer</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Pudri</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Tengo ligma
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">miércoles</div>
-                        </div>
-                    </div>
-                    {/*Cliente*/}
-                    <div
-                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                    >
-                        <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                            className="w-10 h-10 object-cover rounded-full"
-                        />
-                        <div className="flex-1 flex justify-between">
-                            <div>
-                                <h1>Heyo Mason</h1>
-                                <p className="text-white-500 flex items-center gap-2">
-                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
-                                    Hey yo Mason
-                                </p>
-                            </div>
-                            <div className="text-white-500 text-xs">6:55</div>
-                        </div>
-                    </div>
+                    {
+                        userChatsDoc.map((c, key) => {
+                            if(user.isDoctor){
+                                if(currentChat === c.id){
+                                    return(<div 
+                                        key={key} 
+                                        onClick={()=>{
+                                            selectChat(key)
+                                        }}
+                                        className="p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32] hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.patient}</h1>
+                                                <p className="text-transparent-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">14:23</div>
+                                        </div>
+                                    </div>)
+                                }else{
+                                    return(<button
+                                        key={key} 
+                                        onClick={()=>{
+                                            selectChat(key)
+                                        }}
+                                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.patient}</h1>
+                                                <p className="text-white-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
+                                                    <RiCameraLine/>
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">12:12</div>
+                                        </div>
+                                    </button>)
+                                }
+                            }else{
+                                if(currentChat === c.id){
+                                    return(<button 
+                                        key={key} 
+                                        onClick={()=>{
+                                            selectChat(key)
+                                        }}
+                                        className="w-full p-4 flex items-center gap-4 bg-[#D5D6DC] border-b border-[#222C32]"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.doctor}</h1>
+                                                <p className="text-transparent-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "} 
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">14:23</div>
+                                        </div>
+                                    </button>)
+                                }else{
+                                    return(<div
+                                        key={key} 
+                                        onClick={()=>{
+                                            selectChat(key)
+                                        }}
+                                        className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                    >
+                                        <img
+                                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                            className="w-10 h-10 object-cover rounded-full"
+                                        />
+                                        <div className="flex-1 flex justify-between">
+                                            <div>
+                                                <h1>{c.doctor}</h1>
+                                                <p className="text-white-500 flex items-center gap-2">
+                                                    <RiCheckDoubleFill className="text-lg text-cyan-500"/>{" "}
+                                                    <RiCameraLine/>
+                                                    {c.lastMessage}
+                                                </p>
+                                            </div>
+                                            <div className="text-white-500 text-xs">12:12</div>
+                                        </div>
+                                    </div>)
+                                }
+                            }
+                        })
+                    }
+
                 </div>
             </div>
             {/*Chat*/}
@@ -241,28 +278,27 @@ export function ChatsPage() {
                     {/* mensajes reales */}
                     
                     {
-                        messages.map((m) => {
+                        messages.map((m, key) => {
                             
                             if (m.sender === user.displayName) {
                                 return (
-                                    <div className="mb-3 flex justify-end">
-                                    <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
-                                    {m.text}
-                                    </p>
+                                    <div key={key} className="mb-3 flex justify-end">
+                                        <p className="bg-[#ab90b9] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
+                                        {m.text}
+                                        </p>
                                 </div>
                                 )
                             } else {
-                                return (<div className="mb-3 flex">
-                                <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
-                                    {m.text}
-                                </p>
-                                </div>) 
-                            }
-
-                            
+                                return (
+                                    <div key={key} className="mb-3 flex">
+                                        <p className="bg-[#D5D6DC] max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
+                                            {m.text}
+                                        </p>
+                                    </div>
+                                ) 
+                            }                            
                         })
-                    }
-                    
+                    }  
 
                 </main>
                 {/*Enviar mensajes*/}
@@ -276,8 +312,7 @@ export function ChatsPage() {
                         <button type="submit">
                             <RiSendPlane2Fill className="hover:cursor-pointer"/>
                         </button>
-                    </form>
-                         
+                    </form>                       
                 </div>
             </div>
         </div>

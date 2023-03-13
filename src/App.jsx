@@ -22,16 +22,25 @@ function App() {
             <Route element={<Layout/>}>
 
               <Route path={LANDING_URL} exact={true} element={<LandingPage />} />
-              <Route path={CHATS_URL} exact={true} element={<ChatsPage />} />
+              <Route path={CHATS_URL} exact={true} element={
+                <PrivateRoute>
+                <ChatsPage/>
+               </PrivateRoute>} />
               <Route path={CONSULTS_URL} exact={true} element={<ConsultsPage />} />
-              <Route path={FEEDBACK_URL} exact={true} element={<FeedbackPage />} />
+              <Route path={FEEDBACK_URL} exact={true} element={
+                <PrivateRoute>
+                <FeedbackPage/>
+               </PrivateRoute>
+              } />
               <Route path={LOGIN_URL} exact={true} element={<LoginPage />} />
               <Route path={REGISTER_URL} exact={true} element={<RegisterPage />} />
               <Route path={PROFILE_URL} exact={true} element={
+              
               <PrivateRoute>
                <ProfilePage/>
               </PrivateRoute>
               } />
+
               <Route path="*" exact={true} element={<h1> NOT FOUND</h1>} /> 
 
             </Route>

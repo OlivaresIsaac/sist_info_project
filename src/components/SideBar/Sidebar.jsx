@@ -20,22 +20,26 @@ const Sidebar = () => {
         <div className="sidebar">
             <ul>
                 <li className='image'>
-                    <img src={psydocs}/>
+                   
+                    <Link to={LANDING_URL} >
+                    <img src={psydocs}/> 
+                    </Link>
+                  
                 </li>
                 {/* TODO formato bonito para usuario ya logeado */}
                 {!!user && (
                     <li> 
-                    <Link to={profileRoute}> {user.displayName}</Link>
+                    <Link to={profileRoute} className="user_name "> {user.displayName}</Link>
                     </li>
                 )}
                 {!user && (
                     <p> </p>
                 )}
+                 
                 
-                
-                <li>
+                {/* <li>
                     <Link to={LANDING_URL} >Inicio</Link>
-                </li>
+                </li> */}
                 <li>
                     <Link to={CHATS_URL} >Chats</Link>
                 </li>
