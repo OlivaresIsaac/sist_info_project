@@ -4,6 +4,7 @@ import {auth, db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
 
 import { useUserContext } from "../../contexts/UserContext";
+import { async } from "@firebase/util";
 
 export function ChatsPage() {
     const [isChatSelected, setChatSelected] = useState(false)
@@ -27,6 +28,19 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
+
+        const getChats = async () => {
+            const queryChats = query(userChatsRef, where("id", "==", user.id));
+            onSnapshot(queryChats, (snapshot) => {
+                let chats = [];
+                snapshot.forEach((doc) => {
+                    chats = doc.data().chatsID;
+                });
+                setUserChats(chats);
+                getChatsDoc()
+            });
+        }
+
         const recieve = () => {
             if(currentChat != ""){
                 onSnapshot(doc(db, "chats", currentChat), (doc) => {
@@ -37,22 +51,13 @@ export function ChatsPage() {
             }
         }
         return () => {
+            getChats()
             recieve()
         };
     }, []);
 
-    const userChatsRef = collection(db, "usersChats");
-    const chatsRef = collection(db, "chats")
-
-    const getChats = async () => {
-        const queryChats = query(userChatsRef, where("id", "==", user.id));
-        onSnapshot(queryChats, (snapshot) => {
-            let chats = [];
-            snapshot.forEach((doc) => {
-                chats = doc.data().chatsID;
-            });
-            setUserChats(chats);
-        });
+    const getChatsDoc = async() => {
+        if(userChats.length != 0){
             const queryChatsDoc = query(chatsRef, where("id", "in", userChats));
             onSnapshot(queryChatsDoc, (snapshot2) => {
                 let chatsDoc = [];
@@ -62,8 +67,14 @@ export function ChatsPage() {
                 setUserChatsDoc(chatsDoc);
             });
         }
+    }
 
-    getChats()
+    const userChatsRef = collection(db, "usersChats");
+    const chatsRef = collection(db, "chats")
+
+    if(userChatsDoc.length == 0){
+        getChatsDoc()
+    }
 
     const selectChat = async (index) => {
         onSnapshot(doc(db, "chats", userChats[index]), (doc) => {
@@ -84,7 +95,8 @@ export function ChatsPage() {
                 text: newMessage,
                 sender: user.displayName,
                 date: Timestamp.now()
-            })
+            }),
+            lastMessage: newMessage
         });
 
         // await addDoc(messagesRef, {
