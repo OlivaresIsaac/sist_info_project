@@ -1,4 +1,4 @@
-.input {
+.inputlogin {
     margin-left: 1rem;
     justify-self: center;
     width: 10rem; 
@@ -8,20 +8,20 @@
     grid-template-columns: 1fr 1fr;
     height: 100vh;
 }
-.izquierda{
+.izquierdalogin{
     background: url('../../assets/Psyduck_registro.png') center; 
     background-size: cover;
     border-style: solid;
     border-width: 25px;
     border-color: #572975;
 }
-.derecha{
+.derechalogin{
     display: grid;
     grid-template-rows:subgrid;
     place-items: center;
     text-align: center;
 }
-.derecha div{
+.derechalogin .loginCuadro{
     background-color: white;
     margin-bottom: 10px;
     border-style: solid;

@@ -45,24 +45,24 @@ export function LoginPage() {
     return (
         <div>
             <div className="contendorLogin">
-                <div className="izquierda"></div>
-                <div className="derecha">
+                <div className="izquierdalogin"></div>
+                <div className="derechalogin">
                     
                     <form onSubmit={onSubmit}> 
                     <p className="tituloRegistro">Login</p>
-                    <div>
-                        <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange} className="input"/> 
+                    <div className="loginCuadro">
+                        <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange} className="inputlogin"/> 
                     </div>
-                    <div>
+                    <div className="loginCuadro">
                         <input type={'password'} placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange} required minLength={6}/> 
                     </div>
-                    <div>
-                        <button  type="submit">Iniciar sesión</button>
+                    <div className="loginCuadro">
+                        <button  className="buttonLogin" type="submit">Iniciar sesión</button>
                     </div>
-                    <div>
-                        <button onClick={handleLoginWithGoogle}>Iniciar con Google</button>
+                    <div className="loginCuadro">
+                        <button className="buttonLogin" onClick={handleLoginWithGoogle}>Iniciar con Google</button>
                     </div>
-                    <div> 
+                    <div className="loginCuadro"> 
                         <Link className="textolink" to={REGISTER_URL}>Registrate aqui</Link>
                     </div>
                     </form>
