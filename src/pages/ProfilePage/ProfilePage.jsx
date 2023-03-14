@@ -1,6 +1,6 @@
 import { useUserContext } from '../../contexts/UserContext'
 import './ProfilePage.css'
-import temp_pfp from '/Users/Andrés Castro/Documents/GitHub/sist_info_project/sist_info_project/src/assets/temp_pfp.png'
+import temp_pfp from '../../assets/temp_pfp.png'
 
 export function ProfilePage() {
     const {user} = useUserContext()
