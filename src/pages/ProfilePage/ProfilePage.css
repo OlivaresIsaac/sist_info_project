@@ -1,0 +1,162 @@
+.file {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.doctor{
+    background-color: #AB90B9;
+    margin: 5%;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 15px;
+}
+
+.pacient{
+    background-color: #AB90B9;
+    margin: 5%;
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 15px;
+
+}
+
+.pfp-doc{
+    padding: 1rem;
+    float: left;
+    height: auto;
+    width: 39%;
+}
+
+.pfp-pacient{
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 40%;
+}
+
+.h1-tittle{
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: white;
+}
+
+.h2-tittle{
+    display:flex;
+    background-color: #572975;
+    background-size: auto;
+    position: inherit;
+    margin: 0.5rem;
+    border-radius: 0.4rem;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: white;
+    justify-content: center;
+    height: 6rem;
+    padding: 10px;
+}
+
+.h3-tittle{
+    text-align: center;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.h4-tittle{
+    margin-left: 2rem;
+    color: white;
+    width: 100%;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.h5-tittle{
+    display: inline-block;
+    margin: 1%;
+    margin-left: 2rem;
+    font-size: 1.4rem;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-bottom: 2px solid;
+    border-color: #572975;
+    align-content: center;
+}
+
+.h6-tittle{
+    background-color: white;
+    display: inline-block;
+    width: 15%;
+    color: black;
+    border-left: 5px solid;
+    border-radius: 5px;
+    border-color: #572975;
+}
+
+.h7-tittle{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+
+.h8-tittle{
+    font-size: 1.8rem;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.h9-tittle{
+    text-align: center;
+    color: white;
+    width: 100%;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.h10-tittle{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.h11-tittle{
+    margin: 0.3rem;
+    background-color: white;
+    display: inline-block;
+    width: 70%;
+    color: black;
+    border-left: 5px solid;
+    border-radius: 5px;
+    border-color: #572975;
+
+}
+
+.biography{
+        background-color: white;
+        width: 80%;
+        color: black;
+        border-left: 5px solid;
+        border-radius: 5px;
+        border-color: #572975;
+        text-align: center;
+}
+
+.first-data{
+    width: 61%;
+}
+
+.second-data{
+    width: 100%;
+}
+
+.third-data{
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
