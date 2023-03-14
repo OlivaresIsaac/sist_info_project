@@ -1,11 +1,9 @@
 import { useState } from "react"
-import { useNavigate } from "react-router"
-import { LANDING_URL } from "../../constants/url"
 import { registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/auth-service"
 import './RegisterPage.css'
 
 export function RegisterPage() {
-    const navigate = useNavigate()
+
     const [showLog, setshowLog] = useState("false")
     const [formData, setFormData] = useState({
         displayName: "",
@@ -48,10 +46,9 @@ export function RegisterPage() {
         aux.pricePerHour = (formData.pricePerHour === "") ? "" : parseInt(formData.pricePerHour)
         console.log(aux)
         
-        //TODO pasar isDoctor del form
+
         await registerWithEmailAndPassword(email, password, displayName, aux);
-        //TODO navigate after valid register
-        navigate(LANDING_URL)
+       
     }
  
 

@@ -1,8 +1,6 @@
 import { loginWithEmailAndPassword, signInWithGoogle } from "../../firebase/auth-service"
 import './LoginPage.css'
 import { useState } from "react"
-import { useNavigate } from "react-router"
-import { LANDING_URL } from "../../constants/url"
 import { REGISTER_URL } from "../../constants/url"
 import { Link } from 'react-router-dom'
 
@@ -15,7 +13,7 @@ export function LoginPage() {
     }
 
     
-    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -36,8 +34,6 @@ export function LoginPage() {
         const {email, password} = formData
 
         await loginWithEmailAndPassword(email, password);
-        //TODO navigate after valid register
-        navigate(LANDING_URL)
     }
  
 

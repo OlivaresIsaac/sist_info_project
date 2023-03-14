@@ -48,8 +48,11 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
 
     } catch (error) {
         console.log(error)
-        console.log("Transacción fallida :(")
-        // TODO anuncio de usuario invalido porque ya existe
+        if (error.code === "auth/email-already-in-use") {
+            alert("Alerta, usuario ya existe")
+          } else {
+            alert("Alerta, error al momento del registro, intente de nuevo")
+          }
     }
 }
 
@@ -58,6 +61,13 @@ export const loginWithEmailAndPassword = async (email, password) => {
         await signInWithEmailAndPassword(auth, email, password)
     } catch (error) {
         console.log(error)
+        if (error.code === "auth/wrong-password") {
+            alert("Contraseña incorrecta");
+        } else if (error.code === "auth/user-not-found") {
+            alert("Usuario inexistente");
+        } else {
+            alert ("Ha ocurrido un error inesperado")
+        }
     }
 }
 
