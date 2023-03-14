@@ -54,7 +54,7 @@ export function LoginPage() {
                         <input placeholder="Ingrese su correo"  name="email" onChange={handleOnChange} className="input"/> 
                     </div>
                     <div>
-                        <input placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange}/> 
+                        <input type={'password'} placeholder="Ingrese su contraseña"  name="password" onChange={handleOnChange} required minLength={6}/> 
                     </div>
                     <div>
                         <button  type="submit">Iniciar sesión</button>

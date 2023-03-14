@@ -6,17 +6,25 @@ import './RegisterPage.css'
 
 export function RegisterPage() {
     const navigate = useNavigate()
+    const [showLog, setshowLog] = useState("false")
     const [formData, setFormData] = useState({
         displayName: "",
         email: "",
         password: "",
         tlf: "",
-        isDoctor:"",
+        isDoctor:"false",
         preferedLanguage:"",
         pricePerHour: ""
     })
 
     const handleOnChange = (event) => {
+        if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "false" & formData.tlf != ""){
+            setshowLog("true")
+        }else if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
+            setshowLog("true")
+        }else{
+            setshowLog("false")
+        }
         const {name, value} = event.target
         setFormData({
             ...formData,
@@ -67,7 +75,7 @@ export function RegisterPage() {
             <input placeholder="Ingrese su correo" type="email" name="email" onChange={handleOnChange}/> 
             </div> 
             <div>
-            <input placeholder="Ingrese su contraseña" type="password" name="password" onChange={handleOnChange}/> 
+            <input type={'password'} placeholder="Ingrese su contraseña" name="password" onChange={handleOnChange} required minLength={6}/> 
             </div>
             <div>
             <input placeholder="Ingrese su telefono"  name="tlf" onChange={handleOnChange}/> 
@@ -110,7 +118,7 @@ export function RegisterPage() {
             }
 
             <div>
-                <button type="submit"> Registrarse</button>
+            {(showLog === "true") && ( <button type="submit"> Registrarse</button>)}
             </div>
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
