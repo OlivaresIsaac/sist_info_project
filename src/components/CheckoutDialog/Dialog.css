@@ -1,0 +1,206 @@
+.counter{
+    margin-top: 3%;
+}
+
+.h1_tittle{
+    display: inline;
+}
+
+.hour-input{
+    border-radius: 10px;
+    width:15%;
+    text-align: center;
+    margin-left: 0.3rem ;
+    margin-right: 0.3rem;
+    display: inline;
+    background-color: white;
+}
+
+.forms{
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay{
+    --tw-bg-opacity: 1;
+    background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+    --tw-bg-opacity: 0.5;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+.dialog{
+    --tw-bg-opacity: 1;
+    background-color: rgba(233, 213, 255, var(--tw-bg-opacity));
+    border-radius: 0.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.5rem;
+    max-width: 100%;
+    width: 24rem;
+}
+
+.dialog-content{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.dialog-tittle-style{
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-tittle {
+    align-self: center;
+    width: 55%;
+    background-color: #ab90b9;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.75rem;
+    margin-bottom: 0.5rem;
+    --tw-text-opacity: 1;
+    color: rgba(17, 24, 39, var(--tw-text-opacity));
+    text-align: center;
+    border-radius: 1rem;
+}
+
+.btn {
+--tw-bg-opacity: 1;
+background-color: rgba(168, 85, 247, var(--tw-bg-opacity));
+border-radius: 0.75rem;
+font-weight: 500;
+margin-right: 1rem;
+padding-top: 0.75rem;
+padding-bottom: 0.75rem;
+padding-left: 1rem;
+padding-right: 1rem;
+--tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+--tw-text-opacity: 1;
+color: rgba(255, 255, 255, var(--tw-text-opacity));
+-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+        user-select: none;
+}
+
+.btn:hover {
+--tw-bg-opacity: 1;
+background-color: rgba(192, 132, 252, var(--tw-bg-opacity));
+--tw-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.btn:focus {
+outline: 2px solid transparent;
+outline-offset: 2px;
+--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+--tw-ring-opacity: 1;
+--tw-ring-color: rgba(192, 132, 252, var(--tw-ring-opacity));
+--tw-ring-opacity: 0.5;
+}
+
+.dialog-confirm {
+    --tw-bg-opacity: 1;
+    background-color: rgb(192, 132, 252, var(--tw-bg-opacity));
+    border-radius: 0.75rem;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+
+.dialog-confirm:focus{
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.dialog-confirm{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.dialog-confirm:focus{
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgba(192, 132, 252, var(--tw-ring-opacity));
+    --tw-ring-opacity: 0.5;
+}
+  
+.dialog-confirm{
+    --tw-text-opacity: 1;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+  
+.dialog-confirm:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgba(192, 132, 252, var(--tw-text-opacity));
+    border-color: rgba(192, 132, 252);
+    border-width: 1px;
+}
+
+.dialog-cancel {
+    border-radius: 0.75rem;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+  
+.dialog-cancel:focus{
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+  
+.dialog-cancel{
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+  
+.dialog-cancel:focus{
+    --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgba(75, 85, 99, var(--tw-ring-opacity));
+    --tw-ring-opacity: 0.5;
+}
+  
+.dialog-cancel{
+    --tw-text-opacity: 1;
+    color: rgba(17, 24, 39, var(--tw-text-opacity));
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+  
+.dialog-cancel:hover {
+    --tw-text-opacity: 1;
+    color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
+
+.dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
