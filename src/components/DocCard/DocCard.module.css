@@ -1,0 +1,28 @@
+.DoccardContainer{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    text-align: center;
+    margin-left: 1rem;
+}
+
+.DocMidContainer{
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    text-align: center;
+}
+.CardDoctorTop{
+    color: black;
+    font-size: 3rem;
+}
+
+.CardDoctorMid{
+    color: black;
+    font-size: 1.5rem;
+
+}
+.CardDoctorBottom{
+    color: black;
+    font-size: 1.5rem;
+}

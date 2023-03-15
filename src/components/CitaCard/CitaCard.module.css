@@ -1,0 +1,34 @@
+.CitacardContainer{
+    flex-direction: column;
+    place-items: center;
+    text-align: center;
+}
+
+.CitaMidContainer{
+    flex-direction: row;
+    place-items: center;
+    text-align: center;
+}
+.CitaTopContainer{
+    flex-direction: row;
+    place-items: center;
+    text-align: center;
+}
+.CitaBottomContainer{
+    flex-direction: row;
+    place-items: center;
+    text-align: center;
+}
+.CardCitaTop{
+    color: black;
+    font-size: 2rem;
+}
+
+.CardCitaMid{
+    color: black;
+    font-size: 1rem;
+}
+.CardCitaBottom{
+    color: black;
+    font-size: 1rem;
+}

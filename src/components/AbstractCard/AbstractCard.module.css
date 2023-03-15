@@ -1,0 +1,35 @@
+.cardContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.1rem 1rem;
+    background: white;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    height: 15rem;
+    border-radius: 1.5rem;
+}
+
+.cardInfo{
+    text-align: center;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.cardPoster{
+    width: 100%;
+}
+.CardButton{
+    font-size: 1.5rem;
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: white;
+}
+.ButtonContainer{
+    background-color: #572975;
+    border-radius: 1rem;
+}
+

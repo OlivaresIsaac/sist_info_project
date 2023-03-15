@@ -2,10 +2,20 @@ import './LandingPage.css'
 import psicologo from '../../assets/psicologo.png'
 import team from '../../assets/team2.png'
 import backtopimg from '../../assets/backtop.png'
+import AbstractCard from "../../components/AbstractCard/AbstractCard";
+import { useState, useEffect } from "react"
 
 
 export function LandingPage() {
-
+    const [Info, setInfo] = useState({
+        NombreDoc: "Luis Domingos",
+        NombrePaciente: "Isaac Olivares",
+        Idioma: "Español",
+        Fecha: "12/12/12",
+        Hora: "12:21",
+        imagen: '../../assets/psicologo.png'
+    })
+    const [isDoc, setisDoc] = useState(false)
     return (
         <>
         <section className='landing'>
@@ -24,7 +34,7 @@ export function LandingPage() {
             </div>
 
             <div className='mariobuscadoroplolyolopongobonito'>
-                <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" />
+                <AbstractCard Info={Info} isDoc={isDoc}/>
             </div>
 
             <div className='team'>   
