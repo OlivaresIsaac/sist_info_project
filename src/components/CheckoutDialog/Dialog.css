@@ -204,3 +204,14 @@ box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+
+  .CardButtonDialog{
+    font-size: 1.5rem;
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: #D5C6DC;
+    place-items: center;
+ 
+}

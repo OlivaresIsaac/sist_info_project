@@ -3,12 +3,36 @@ import { useState, useRef } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import moment from 'moment';
+import { useNavigate } from "react-router"
+import { CHECKOUTURL } from "../../constants/url";
 
-const CheckoutDialog = ({show}) => {
+const CheckoutDialog = ({doctor}) => {
     const [showTaskDialog, setShowTaskDialog] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [count, setCount] = useState(0);
+    
+
+    const navigate = useNavigate()
+
+    const buildChoosedData = () => {
+        return {
+            date: startDate,
+            consultHours: count
+        }
+    }
+
+    const navigateToCheckOut = () => {
+        navigate(CHECKOUTURL, {
+            state: {
+                doctor: doctor,
+                choosedData: buildChoosedData()}
+        });
+      };
 
     const confirm = () => {
         setShowTaskDialog(false);
+        navigateToCheckOut()
+        
     };
 
     const cancel = () => {
@@ -16,7 +40,7 @@ const CheckoutDialog = ({show}) => {
     };
 
     const Counter = () => {
-        const [count, setCount] = useState(0);
+        
         const [quantity, setQuantity] = useState(0);
 
         const handleSubtractOne = () => {
@@ -42,7 +66,7 @@ const CheckoutDialog = ({show}) => {
     };
 
     const DatesPicker = () => {
-        const [startDate, setStartDate] = useState(new Date());
+      
         return (
             <div>
                 <h1 className="h1_tittle"> Fecha de la consulta: </h1>
@@ -61,7 +85,7 @@ const CheckoutDialog = ({show}) => {
             <div className="overlay">
                 <div className="dialog">   
                     <div className="dialog-content">
-                        <div className="dialog-tittle-style"><h1 className="dialog-tittle"> Elija sus preferencias </h1></div>
+                        <div className="dialog-tittle-style"><h1 className="dialog-tittle"> Agendar cita con {doctor.Nombre} </h1></div>
                             <div className="forms">
                                 <DatesPicker/>
                                 <Counter />
@@ -77,7 +101,8 @@ const CheckoutDialog = ({show}) => {
 
     return(
         <div>
-            <button className='btn' onClick={() => {setShowTaskDialog(true)}}> Checkout Dialog </button>
+            <button className="CardButtonDialog" onClick={() => {setShowTaskDialog(true)}}>Hacer Cita</button>
+            {/* <button className='btn' onClick={() => {setShowTaskDialog(true)}}> Checkout Dialog </button> */}
             <Dialog show={showTaskDialog}/>
         </div>
         )

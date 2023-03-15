@@ -32,10 +32,10 @@ export function LandingPage() {
                 </div>
                
             </div>
-            
+{/*             
             <div className='provisional'>
                 <CheckoutDialog/>
-            </div>
+            </div> */}
 
             <div className='mariobuscadoroplolyolopongobonito'>
                 <AbstractCard Info={Info} isDoc={isDoc}/>
