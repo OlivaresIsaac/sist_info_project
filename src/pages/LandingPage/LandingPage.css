@@ -211,3 +211,9 @@
     background-color: red;
     
 } */
+
+
+.provisional{
+    display: flex;
+    justify-content: center;
+}

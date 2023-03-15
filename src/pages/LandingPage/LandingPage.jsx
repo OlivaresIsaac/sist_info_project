@@ -2,9 +2,11 @@ import './LandingPage.css'
 import psicologo from '../../assets/psicologo.png'
 import team from '../../assets/team2.png'
 import backtopimg from '../../assets/backtop.png'
+import CheckoutDialog from '../../components/CheckoutDialog/Dialog'
 
 
 export function LandingPage() {
+
 
     return (
         <>
@@ -22,9 +24,13 @@ export function LandingPage() {
                 </div>
                
             </div>
+            
+            <div className='provisional'>
+                <CheckoutDialog/>
+            </div>
 
             <div className='mariobuscadoroplolyolopongobonito'>
-                <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" />
+                <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" alt=''/>
             </div>
 
             <div className='team'>   
