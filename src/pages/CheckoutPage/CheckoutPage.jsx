@@ -1,6 +1,6 @@
 import styles from './CheckoutPage.module.css'
 import temp_pfp from '../../assets/temp_pfp.png'
-import Paypal from './CheckoutController'
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export function CheckoutPage() {
     return (
@@ -23,9 +23,13 @@ export function CheckoutPage() {
             <div className={styles.inncerFacturacion}>
                 <h1>Duracion: 3horas*</h1>
                 <h1>Monto 10USD*</h1>
-                <Paypal/>
+                <PayPalScriptProvider options={{ "client-id": "test" }}>
+                    <PayPalButtons style={{ layout: "horizontal" }} />
+                </PayPalScriptProvider>
             </div>
          </div>
+
+       
     
 
         </div>

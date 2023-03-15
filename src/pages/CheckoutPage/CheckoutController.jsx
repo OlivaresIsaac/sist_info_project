@@ -1,9 +1,9 @@
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { CheckoutPage } from "./CheckoutPage";
  
-export default function Paypal() {
+export function CheckoutController() {
    return (
-       <PayPalScriptProvider options={{ "client-id": "test" }}>
-           <PayPalButtons style={{ layout: "horizontal" }} />
-       </PayPalScriptProvider>
-   );
+    <>
+    <CheckoutPage/>
+    </> 
+   )
 }
