@@ -1,0 +1,53 @@
+.mainFlex {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    place-items: center;
+  
+
+}
+
+.infoCitaContainer {
+    background-color: white;
+    margin-top: 3rem;
+    border-radius:20px;
+    width: 20rem;
+    height: 20rem;
+    place-items: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.cardTitle {
+    text-decoration: underline black;
+    margin-bottom: 0.5rem;
+
+}
+
+.inncerInfoCita{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    
+}
+
+.doctorImg{
+    border-radius: 100px;
+    height: 5rem;
+    margin-right: 0.5rem;
+}
+
+.doctorInfoContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.inncerFacturacion{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+
+    
+}

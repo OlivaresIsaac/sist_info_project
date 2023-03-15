@@ -4,7 +4,6 @@ import {auth, db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
 
 import { useUserContext } from "../../contexts/UserContext";
-import { async } from "@firebase/util";
 
 export function ChatsPage() {
     const [isChatSelected, setChatSelected] = useState(false)

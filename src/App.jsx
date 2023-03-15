@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, PROFILE_URL, REGISTER_URL } from "./constants/url";
+import { CHATS_URL, CHECKOUTURL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, PROFILE_URL, REGISTER_URL } from "./constants/url";
 import { Routes, Route, BrowserRouter, Router } from "react-router-dom";
 import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { ChatsPage } from "./pages/ChatsPage/ChatsPage";
@@ -11,6 +11,7 @@ import { ConsultsPage } from "./pages/ConsultsPage/ConsultsPage";
 import { Layout } from "./components/Layout/Layout";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { CheckoutPage } from "./pages/CheckoutPage/CheckoutPage";
 
 function App() {
   return (
@@ -38,6 +39,13 @@ function App() {
               
               <PrivateRoute>
                <ProfilePage/>
+              </PrivateRoute>
+              } />
+
+              <Route path={CHECKOUTURL} exact={true} element={
+              
+              <PrivateRoute>
+               <CheckoutPage/>
               </PrivateRoute>
               } />
 

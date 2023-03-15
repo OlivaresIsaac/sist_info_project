@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Sidebar.css'
 import psydocs from '../../assets/psydocs.png'
-import { CHATS_URL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
+import { CHATS_URL, CHECKOUTURL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_URL, REGISTER_URL } from '../../constants/url'
 import { useUserContext } from '../../contexts/UserContext'
 import { logout } from '../../firebase/auth-service'
 
@@ -42,7 +42,8 @@ const Sidebar = () => {
                             handleMenu();
                         }
                     }}> 
-                    <Link to={profileRoute} className="user_name "> {user.displayName}</Link>
+                    {/* <Link to={profileRoute} className="user_name "> {user.displayName}</Link> */}
+                    <Link to={CHECKOUTURL} className="user_name "> {user.displayName}</Link>
                    </div>
                 )}
                 {!user && (
