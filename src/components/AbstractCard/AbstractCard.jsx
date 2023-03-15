@@ -4,11 +4,11 @@ import DocCard from "../DocCard/DocCard";
 import CitaCard from "../CitaCard/CitaCard";
 
 export default function Card({isDoc, Info}) {
-    const BASE_IMG_URL = "https://image.tmdb.org/t/p/original";
     return (
+        
         <div className={styles.cardContainer}>
-            <div>
-                <img className={styles.cardImg} src={`${BASE_IMG_URL}${Info.imagen}`} alt="imagen"/>
+            <div className={styles.cardContainerImg}>
+                <img className={styles.cardImg} src={Info.imagen} alt="imagen"/>
             </div>
             <div className={styles.CardInfo}>
                 

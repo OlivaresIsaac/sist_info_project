@@ -17,18 +17,37 @@
     justify-content: center;
 }
 
-.cardPoster{
-    width: 100%;
+.cardImg{
+    border-radius: 1rem;
 }
 .CardButton{
     font-size: 1.5rem;
     display: block;
-    width: 10rem;
+    /*width: 10rem;*/
     height: 10rem;
     border-radius: 50%;
-    background-color: white;
+    background-color: #D5C6DC;
+    width: 0;
+    opacity: 0;
+    transition: ease 0.3s,
+}
+@media screen and (max-width: 640px) {
+    .CardButton{
+    width: 10rem;
+    opacity: 100%;
+    }
+}
+.cardContainer:hover  .CardButton{
+    width: 10rem;
+    opacity: 100%;
 }
 .ButtonContainer{
+    background-color: #572975;
+    border-radius: 1rem;
+}
+.cardContainerImg{
+    place-items: center;
+    justify-content: center;
     background-color: #572975;
     border-radius: 1rem;
 }

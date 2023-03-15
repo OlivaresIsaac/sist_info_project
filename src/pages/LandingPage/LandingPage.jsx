@@ -8,14 +8,13 @@ import { useState, useEffect } from "react"
 
 export function LandingPage() {
     const [Info, setInfo] = useState({
-        NombreDoc: "Luis Domingos",
-        NombrePaciente: "Isaac Olivares",
+        Nombre: "Luis Domingos",
         Idioma: "Español",
-        Fecha: "12/12/12",
-        Hora: "12:21",
-        imagen: '../../assets/psicologo.png'
+        Especialidad: "Especialidad",
+        Price: "215466",
+        imagen: '../../assets/psydocs.png'
     })
-    const [isDoc, setisDoc] = useState(false)
+    const [isDoc, setisDoc] = useState(true)
     return (
         <>
         <section className='landing'>
