@@ -2,12 +2,20 @@ import './LandingPage.css'
 import psicologo from '../../assets/psicologo.png'
 import team from '../../assets/team2.png'
 import backtopimg from '../../assets/backtop.png'
+import AbstractCard from "../../components/AbstractCard/AbstractCard";
 import CheckoutDialog from '../../components/CheckoutDialog/Dialog'
+import { useState, useEffect } from "react"
 
 
 export function LandingPage() {
-
-
+    const [Info, setInfo] = useState({
+        Nombre: "Luis Domingos",
+        Idioma: "Español",
+        Especialidad: "Especialidad",
+        Price: "215466",
+        imagen: '../../assets/psydocs.png'
+    })
+    const [isDoc, setisDoc] = useState(true)
     return (
         <>
         <section className='landing'>
@@ -30,7 +38,7 @@ export function LandingPage() {
             </div>
 
             <div className='mariobuscadoroplolyolopongobonito'>
-                <img src="https://shoplineimg.com/6270c198a039e3002fe13d43/6350f0f34765840022bc45f9/800x.jpg?" alt=''/>
+                <AbstractCard Info={Info} isDoc={isDoc}/>
             </div>
 
             <div className='team'>   
