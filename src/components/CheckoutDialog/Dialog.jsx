@@ -85,7 +85,7 @@ const CheckoutDialog = ({doctor}) => {
             <div className="overlay">
                 <div className="dialog">   
                     <div className="dialog-content">
-                        <div className="dialog-tittle-style"><h1 className="dialog-tittle"> Agendar cita con {doctor.Nombre} </h1></div>
+                        <div className="dialog-tittle-style"><h1 className="dialog-tittle"> Agendar cita con {doctor.displayName} </h1></div>
                             <div className="forms">
                                 <DatesPicker/>
                                 <Counter />
