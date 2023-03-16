@@ -19,7 +19,7 @@ const languages = ["Español", "Inglés", "Portugués", "Japonés", "Latín"]
                 <p className={styles.CardDoctorMid}>Especialidad: {Info.specialty}</p>
             </div>
             <div>
-                <p className={styles.CardDoctorBottom}>Price: ${Info.pricePerHour}</p>
+                <p className={styles.CardDoctorBottom}>Precio la hora: ${Info.pricePerHour}</p>
             </div>
         </div>
     );

@@ -1,4 +1,3 @@
-import { useUserContext } from '../../contexts/UserContext';
 import styles from "./AbstractCard.module.css";
 import DocCard from "../DocCard/DocCard";
 import CitaCard from "../CitaCard/CitaCard";
