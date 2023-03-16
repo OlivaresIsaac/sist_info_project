@@ -37,7 +37,7 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
                     await createUserProfile(result.user.uid, newUser.toObject())
             
                     if (newUser.isDoctor) {
-                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography)
+                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName )
                         await createDoctor(newDoctor.toObject())
                         console.log(newDoctor)
                     }

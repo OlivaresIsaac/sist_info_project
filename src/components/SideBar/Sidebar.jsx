@@ -75,20 +75,25 @@ const Sidebar = () => {
                 }}>
                     <Link to={FEEDBACK_URL}  >Feedback</Link>
                </div>
-                <div className='sidebar-li' onClick={()=>{
-                    if (window.innerWidth <= 640) {
-                        handleMenu();
-                    }
-                }}>
-                    <Link to={LOGIN_URL}  >Login</Link>
-               </div>
-                <div className='last sidebar-li' onClick={()=>{
+               {!user && ( 
+                    <div className='sidebar-li' onClick={()=>{
+                        if (window.innerWidth <= 640) {
+                            handleMenu();
+                        }
+                    }}>
+                        <Link to={LOGIN_URL}  >Login</Link>
+                   </div>
+                    )}
+                {!user && (
+                    <div className='last sidebar-li' onClick={()=>{
                     if (window.innerWidth <= 640) {
                         handleMenu();
                     }
                 }}>
                     <Link to={REGISTER_URL}  >Registrarse</Link>
                </div>
+                )}
+                
                 <div className='logout sidebar-li'>
             
                     <Link to={LANDING_URL}  onClick={() => {

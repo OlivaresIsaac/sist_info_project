@@ -5,18 +5,33 @@ import backtopimg from '../../assets/backtop.png'
 import AbstractCard from "../../components/AbstractCard/AbstractCard";
 import CheckoutDialog from '../../components/CheckoutDialog/Dialog'
 import { useState, useEffect } from "react"
+import { getDoctors } from "../../firebase/doctors-service";
 
 
-export function LandingPage() {
-    const [Info, setInfo] = useState({
-        id: "123",
-        Nombre: "Luis Domingos",
-        Idioma: "Español",
-        Especialidad: "Especialidad",
-        Price: "215466",
-        imagen: '../../assets/psydocs.png'
-    })
+export function LandingPage({doctors}) {
+    const [info, setInfo] = useState([])
     const [isDoc, setisDoc] = useState(true)
+
+    
+useEffect(() => {
+    
+
+    const loadDoctors = async () => {
+        await getDoctors().then((result) => {
+            setInfo(result)
+            // setDoctors(result)
+            // console.log(result)
+        })
+       
+    }
+
+    return () => {
+        loadDoctors()
+    };
+}, []);   
+    
+
+
     return (
         <>
         <section className='landing'>
@@ -38,8 +53,17 @@ export function LandingPage() {
                 <CheckoutDialog/>
             </div> */}
 
-            <div className='mariobuscadoroplolyolopongobonito'>
-                <AbstractCard Info={Info} isDoc={isDoc}/>
+            <div className='abstractCardContainer'>
+                {
+                    info.map((cardInfo, key) => {
+                       return(
+                        <div className='abstractCard'> 
+                       <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
+                       </div> 
+                       )
+                    })
+                }
+               
             </div>
 
             <div className='team'>   

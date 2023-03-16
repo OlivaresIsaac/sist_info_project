@@ -13,7 +13,7 @@ export function CheckoutController() {
          console.log(consult)
          canTrigger = false
          createConsult(consult).then(() => {
-            console.log("exito máximo")
+            console.log("exito máximo") //TODO navigate to consults
          })
         }
       },

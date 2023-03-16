@@ -213,3 +213,17 @@
     display: flex;
     justify-content: center;
 }
+
+.abstractCard{
+    margin-bottom: 1rem;
+}
+
+ .abstractCardContainer{
+    overflow-y: scroll;
+    max-height: 20rem;
+    
+} 
+
+.abstractCardContainer::-webkit-scrollbar {
+    display: none;
+}
