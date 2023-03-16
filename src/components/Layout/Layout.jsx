@@ -3,6 +3,8 @@ import { UserContextProvider } from "../../contexts/UserContext";
 import Sidebar from "../SideBar/Sidebar";
 import './Layout.css'
 
+// Componente que retorna el diseño del Layout principal de cada página en conjunto con el sidebar.
+
 export function Layout(){
     return (
         <div> 

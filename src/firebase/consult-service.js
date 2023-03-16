@@ -2,6 +2,8 @@ import {setDoc, addDoc, collection, runTransaction} from "firebase/firestore"
 import {db} from "./config"
 
 
+// Servicio que crea las consultas
+
 
 export async function createConsult(consult) {
 

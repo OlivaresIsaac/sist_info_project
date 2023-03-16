@@ -1,5 +1,5 @@
-import { ChatsPage } from "./ChatsPage";
- 
+import { ChatsPage } from "./ChatsPage"; 
+
 export function ChatsController() {
    return (
     <>

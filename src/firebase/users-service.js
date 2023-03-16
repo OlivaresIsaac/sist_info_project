@@ -1,6 +1,12 @@
 import {setDoc, doc, query, collection, where, getDocs} from "firebase/firestore"
 import {db} from "./config"
 
+
+// Servicio que retorna la información acerca del usuario logueado en la web.
+
+
+
+
 export async function createUserProfile(userId, userData) {
     return setDoc(doc(db,"users", userId), userData)
 }

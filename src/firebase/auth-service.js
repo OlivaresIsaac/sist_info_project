@@ -6,6 +6,8 @@ import { createDoctor, createUserProfile } from "./users-service"
 import { runTransaction } from "firebase/firestore";
 import { createUserChats} from "./chats-service"
 
+// Servicio de autentificación de registro y login.
+
 
 //TODO Hacer form que pase los parámetros aqui a esta función para hacer el createUser
 export const signInWithGoogle = async () => {
@@ -27,6 +29,7 @@ export const signInWithGoogle = async () => {
     }
 }
 
+// Registro a partir de un correo electrónico y contraseña
 export const registerWithEmailAndPassword = async (email, password, displayName, allData) => {
     try {
     
@@ -59,6 +62,7 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
     }
 }
 
+// Login a partir de correo electrónico y contraseña.
 export const loginWithEmailAndPassword = async (email, password) => {
     try {
         await signInWithEmailAndPassword(auth, email, password)
@@ -74,6 +78,8 @@ export const loginWithEmailAndPassword = async (email, password) => {
     }
 }
 
+
+// Logout del usuario actualmente logueado.
 export const logout = async () => {
     try {
         await signOut(auth)

@@ -1,11 +1,12 @@
 import {setDoc, collection, addDoc, runTransaction, doc, getDoc,query, where, getDocs} from "firebase/firestore"
 import {db} from "./config"
 
+// Servicio que controla la gestión de chats
 
 
+// Crea el documento que guarda la informacion de los chats entre pacientes y doctores.
 export async function createChat(userid, doctorid, chat) {
    
-
     try {
        
         await runTransaction(db, async (transaction) => {
@@ -22,6 +23,8 @@ export async function createChat(userid, doctorid, chat) {
     }
 }
 
+
+// Utiliza la colección de UsersChats y actualiza los chats asociados a los usuarios, asocia los chats de nuevas consultas a los usuarios de dicha consulta.
 export async function updateUsersChats(userId, doctorId, chatId) {
     try {
         const idArray = []
@@ -53,6 +56,8 @@ export async function updateUsersChats(userId, doctorId, chatId) {
     
 }
 
+
+// Crea un chat que asocia a un paciente junto con su doctor.
 export async function createUserChats(userId) {
     const newChatObject = {
         chatsID: [],
