@@ -9,6 +9,7 @@ import { useState, useEffect } from "react"
 
 export function LandingPage() {
     const [Info, setInfo] = useState({
+        id: "123",
         Nombre: "Luis Domingos",
         Idioma: "Español",
         Especialidad: "Especialidad",
