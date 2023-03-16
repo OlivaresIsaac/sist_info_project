@@ -15,6 +15,7 @@ export function CheckoutPage({setConsult, user}) {
 
     const doctor =  location.state.doctor
     const choosedData = location.state.choosedData
+    console.log(doctor, choosedData)
     //TODO Mostrar datos del doctor
 
     useEffect(() => {
@@ -37,11 +38,11 @@ export function CheckoutPage({setConsult, user}) {
           .create({
             purchase_units: [
               {
-                description: "Consulta con Nombredoctor*",
+                description: "Consulta psydocs*",
                 amount: {
                   currency_code: "USD",
                   //TODO PONER VALOR CORRECTO
-                  value: 20,
+                  value: (doctor.pricePerHour * choosedData.consultHours) ,
                 },
               },
             ],
@@ -60,9 +61,9 @@ export function CheckoutPage({setConsult, user}) {
         setErrorMessage("An Error occured with your payment ");
       };
 
-      const setConsultObject = () => {
-        setConsult('A')
-      }
+    //   const setConsultObject = () => {
+    //     setConsult('A')
+    //   }
 
       const createConsult = () => {
         const consult = {
@@ -72,7 +73,7 @@ export function CheckoutPage({setConsult, user}) {
             hour: "3pm*", //TODO implementar hora correcta
 
             date: choosedData.date,
-            payedAmount: 5 //TODO implementar monto correcto
+            payedAmount: (doctor.pricePerHour * choosedData.consultHours) 
 
         }
         return consult
@@ -91,7 +92,7 @@ export function CheckoutPage({setConsult, user}) {
             <div className={styles.inncerInfoCita}> 
                 <img src={temp_pfp} className={styles.doctorImg} alt='pysdocs'/>
                 <div className={styles.doctorInfoContainer}>
-                    <h1>Nombre doctor*</h1>
+                    <h1>{doctor.displayName}</h1>
                     <h1>{choosedData.date.getDate()} de {monthNames[choosedData.date.getMonth()]} de {choosedData.date.getFullYear()}</h1>
                     <h1>Hora 3pm*</h1>
                 </div>
@@ -101,7 +102,7 @@ export function CheckoutPage({setConsult, user}) {
             <h1 className={styles.cardTitle}>Facturación</h1>
             <div className={styles.inncerFacturacion}>
                 <h1>Duracion: {choosedData.consultHours} horas</h1>
-                <h1>Monto 10USD*</h1>
+                <h1>{doctor.pricePerHour * choosedData.consultHours} USD</h1>
                 
             </div>
             <PayPalScriptProvider options={{ "client-id": "test" }}>
