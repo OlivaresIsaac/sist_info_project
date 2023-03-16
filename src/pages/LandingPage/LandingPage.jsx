@@ -25,8 +25,10 @@ useEffect(() => {
        
     }
 
+    loadDoctors()
+
     return () => {
-        loadDoctors()
+      
     };
 }, []);   
     
