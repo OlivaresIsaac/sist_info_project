@@ -1,7 +1,7 @@
 import { useUserContext } from '../../contexts/UserContext'
 import './ProfilePage.css'
 import temp_pfp from '../../assets/temp_pfp.png'
-
+//Muestra la información del usuario
 export function ProfilePage() {
     const {user} = useUserContext()
 

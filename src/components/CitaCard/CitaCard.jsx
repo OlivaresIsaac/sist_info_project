@@ -1,5 +1,8 @@
 import styles from "./CitaCard.module.css";
 
+
+// Componente que retorna el contenido del molde de AbstractCard, dependiendo de la condición se mostrará DocCard o CitaCard.
+
 //Nombre Doctor, fecha y hora, 
 export default function CitaCard({Info}) {
     return (

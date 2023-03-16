@@ -3,6 +3,11 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+
+// Servicio que inicializa las variables de Firebase
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyCPJQYa3Aq7oMZoav9ORQo3-XNtVk2ahls",
   authDomain: "psydocs-ce936.firebaseapp.com",

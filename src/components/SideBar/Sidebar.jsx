@@ -5,6 +5,8 @@ import { CHATS_URL, CHECKOUTURL, CONSULTS_URL, FEEDBACK_URL, LANDING_URL, LOGIN_
 import { useUserContext } from '../../contexts/UserContext'
 import { logout } from '../../firebase/auth-service'
 
+// Componente que retorna el sidebar de la página.
+
 const Sidebar = () => {
     const {user} = useUserContext()
     const handleLogout = async () => {

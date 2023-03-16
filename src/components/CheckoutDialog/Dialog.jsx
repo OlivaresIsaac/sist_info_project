@@ -6,6 +6,8 @@ import moment from 'moment';
 import { useNavigate } from "react-router"
 import { CHECKOUTURL } from "../../constants/url";
 
+// Componente que retorna un botón que muestra un dialog que pide información necesaria antes de proceder al Checkout. 
+
 const CheckoutDialog = ({doctor}) => {
     const [showTaskDialog, setShowTaskDialog] = useState(false);
     const [startDate, setStartDate] = useState(new Date());

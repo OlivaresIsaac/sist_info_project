@@ -1,3 +1,4 @@
+//Permite modelar el objeto User que se guardará en la base de datos y facilita su manipulación
 export class User {
 
     // Prefered language, 1 español, 2 ingles, 3 portugues, 4 japones, 5 latin

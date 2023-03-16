@@ -1,6 +1,8 @@
 import {setDoc, runTransaction, collection, query, onSnapshot, getDocs} from "firebase/firestore"
 import {db} from "./config"
 
+// Servicio que retorna la información acerca del doctor logueado en la web.
+
 
 
 export async function getDoctors() {
