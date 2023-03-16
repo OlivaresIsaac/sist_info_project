@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 
-export function CheckoutPage({setConsult, user}) {
+export function CheckoutPage({setConsult, user, setDoctorName}) {
     
     const [show, setShow] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -15,21 +15,22 @@ export function CheckoutPage({setConsult, user}) {
 
     const doctor =  location.state.doctor
     const choosedData = location.state.choosedData
-    console.log(doctor, choosedData)
+    // console.log(doctor, choosedData)
     //TODO Mostrar datos del doctor
 
-    useEffect(() => {
-        if (success) {
-        //   alert("Pago exitoso!!");
-        }
-      },
-      [success]
-    );
+    // useEffect(() => {
+    //     if (success) {
+    //     //   alert("Pago exitoso!!");
+    //     }
+    //   },
+    //   [success]
+    // );
     const onApprove = (data, actions) => {
         return actions.order.capture().then(function (details) {
         //   const { payer } = details;
-          setSuccess(true);
-          setConsult(createConsult())
+        setDoctorName(doctor.displayName)
+        setSuccess(true);
+        setConsult(createConsult())
         });
       };
 

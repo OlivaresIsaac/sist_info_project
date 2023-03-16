@@ -23,7 +23,7 @@ export async function getDoctors() {
              
               });
 
-             console.log("aqui", doctorArray)
+        
              return doctorArray
 
             //  onSnapshot(queryChats, (snapshot) => {

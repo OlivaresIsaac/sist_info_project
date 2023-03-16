@@ -30,7 +30,7 @@ export function LoginPage() {
     
     const onSubmit = async (event) => {
         event.preventDefault()
-        console.log({formData})
+        // console.log({formData})
         const {email, password} = formData
 
         await loginWithEmailAndPassword(email, password);

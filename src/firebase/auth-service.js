@@ -4,6 +4,7 @@ import { User } from "../models/user"
 import { auth, db, googleProvider } from "./config"
 import { createDoctor, createUserProfile } from "./users-service"
 import { runTransaction } from "firebase/firestore";
+import { createUserChats} from "./chats-service"
 
 
 //TODO Hacer form que pase los parámetros aqui a esta función para hacer el createUser
@@ -18,6 +19,7 @@ export const signInWithGoogle = async () => {
             const newUser = new User(result.user.uid, result.user.displayName, result.user.email, false)
 
             await createUserProfile(result.user.uid, newUser.toObject())
+            await createUserChats(result.user.uid)
         }
 
     } catch (error) {
@@ -31,10 +33,11 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
         await runTransaction(db, async (transaction) => {
             const result = await createUserWithEmailAndPassword(auth, email, password)
       
-            //TODO convertir en transacci'on
+           
                     const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage)
-            
+                    
                     await createUserProfile(result.user.uid, newUser.toObject())
+                    await createUserChats(result.user.uid)
             
                     if (newUser.isDoctor) {
                         const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName )
