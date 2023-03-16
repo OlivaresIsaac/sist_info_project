@@ -4,7 +4,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-
+//La página se encarga de mostrar la usuario la factura de la consulta y darle la interfaz de pago con PayPal
 export function CheckoutPage({setConsult, user, setDoctorName}) {
     
     const [show, setShow] = useState(false);

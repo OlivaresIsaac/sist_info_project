@@ -1,3 +1,4 @@
+//Permite modelar el objeto Doctor que se guardará en la base de datos y facilita su manipulación
 export class Doctor {
 
     // TODO demas atributos como feedback y foto de perfil

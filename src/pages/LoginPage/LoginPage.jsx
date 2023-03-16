@@ -5,7 +5,7 @@ import { REGISTER_URL } from "../../constants/url"
 import { Link } from 'react-router-dom'
 
 
-
+//Muestra el formulario de login, dando la opción de logearse con Google
 export function LoginPage() {
 
     const handleLoginWithGoogle = async () => {
