@@ -1,3 +1,4 @@
+//Permite modelar el objeto Consult que se guardará en la base de datos y facilita su manipulación
 export class Consult {
 
 

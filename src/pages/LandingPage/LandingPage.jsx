@@ -7,7 +7,7 @@ import CheckoutDialog from '../../components/CheckoutDialog/Dialog'
 import { useState, useEffect } from "react"
 import { getDoctors } from "../../firebase/doctors-service";
 
-
+//Muestra la bienvenida a página y tiene la lista de doctores
 export function LandingPage({doctors}) {
     const [info, setInfo] = useState([])
     const [isDoc, setisDoc] = useState(true)

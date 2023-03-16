@@ -1,5 +1,6 @@
-import { ChatsPage } from "./ChatsPage"; 
 
+import { ChatsPage } from "./ChatsPage";
+//Controlador que retorna e inicia toda la funcionalidad de ChatsPage.jsx
 export function ChatsController() {
    return (
     <>
@@ -7,3 +8,4 @@ export function ChatsController() {
     </> 
    )
 }
+//Por realizar

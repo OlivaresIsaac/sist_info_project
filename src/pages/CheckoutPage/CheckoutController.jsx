@@ -3,7 +3,7 @@ import { CheckoutPage } from "./CheckoutPage";
 import { useUserContext } from '../../contexts/UserContext'
 import { createConsult } from "../../firebase/consult-service"
 import { createChat, updateUsersChats } from "../../firebase/chats-service";
- 
+//CheckOutController, se encarga de llamar los métodos de firebase para crear consultas y chats
 export function CheckoutController() {
     const [consult, setConsult] = useState(null)
     const [doctorName, setDoctorName] = useState(null)

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { registerWithEmailAndPassword, signInWithGoogle } from "../../firebase/auth-service"
 import './RegisterPage.css'
-
+//Registra a un usuario en la base datos, con validaciones dando la opción de registrarse por Google
 export function RegisterPage() {
 
     const [showLog, setshowLog] = useState("false")

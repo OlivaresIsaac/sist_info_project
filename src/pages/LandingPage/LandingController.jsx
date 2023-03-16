@@ -2,7 +2,7 @@ import { LandingPage } from "./LandingPage";
 import { useState, useEffect} from "react"
 import { getDoctors } from "../../firebase/doctors-service";
 
-
+//LandingController estar para a futuro los querys para traer los doctores
 export function LandingController() {
 
 

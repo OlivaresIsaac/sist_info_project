@@ -3,7 +3,7 @@
 import "./FeedbackPage.css";
 import {useState} from "react";
 import {AiFillStar,AiOutlineStar} from "react-icons/ai";
-
+//FeedBackPage se encarga de mostrar el 5 rating stars y la caja de comentarios al doctor
 export function FeedbackPage() {
     const [number,setNumber]=useState(0);
     const [hoverStar,setHoverStar]=useState(undefined);
