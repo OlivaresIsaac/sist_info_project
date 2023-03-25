@@ -12,11 +12,11 @@ export function ChatsPage() {
     const [newMessage, setNewMessage] = useState("");
     const [messages, setMessages] = useState([]);
 
+    const {user} = useUserContext();
+
     const [currentChat, setCurrentChat] = useState("");
     const [userChats, setUserChats] = useState([]);
     const [userChatsDoc, setUserChatsDoc] = useState([]);
-
-    const {user} = useUserContext();
 
     useEffect(() => {
         // const queryMessages = query(messagesRef, where("room", "==", "pruebas"))
@@ -28,37 +28,15 @@ export function ChatsPage() {
         // setMessages(messages);
         //});
 
-        const getChats = async () => {
-            const queryChats = query(userChatsRef, where("id", "==", user.id));
-            onSnapshot(queryChats, (snapshot) => {
-                let chats = [];
-                snapshot.forEach((doc) => {
-                    chats = doc.data().chatsID;
-                });
-                setUserChats(chats);
-                getChatsDoc()
-            });
-        }
-
-        getChats()
-
-        return () => {
-            
-        };
+        const queryChats = query(collection(db, "chats"), where("id", "in", user.userChats))
+        onSnapshot(queryChats, (snapshot) => {
+            let a = []
+            snapshot.forEach((doc) => {
+                a.push(doc)
+            })
+            setUserChatsDoc(a)
+        })
     }, []);
-
-    const getChatsDoc = async() => {
-        if(userChats.length != 0){
-            const queryChatsDoc = query(chatsRef, where("id", "in", userChats));
-            onSnapshot(queryChatsDoc, (snapshot2) => {
-                let chatsDoc = [];
-                snapshot2.forEach((doc) => {
-                    chatsDoc.push({...doc.data(), id: doc.id})
-                });
-                setUserChatsDoc(chatsDoc);
-            });
-        }
-    }
 
     const recieve = async() => {
         if(currentChat != ""){
@@ -70,23 +48,24 @@ export function ChatsPage() {
         }
     }
 
-    const userChatsRef = collection(db, "usersChats");
-    const chatsRef = collection(db, "chats")
-
-    if(userChatsDoc.length == 0){
-        getChatsDoc()
-    }
     recieve()
 
     const selectChat = async(index) => {
-        onSnapshot(doc(db, "chats", userChats[index]), (doc) => {
-            if (doc.exists()) {
-                setCurrentChat(userChats[index])
-                setMessages(doc.data().messages);
-                setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
-                setChatSelected(true);
-            };
-        });
+        let chat;
+        for(let i = 0; i < user.userChats.length; i++){
+            if(user.userChats[index] === userChatsDoc[i].id){
+                chat = userChatsDoc[i].id;
+                break;
+            }
+        }
+            onSnapshot(doc(db, "chats", chat), (doc) => {
+                if (doc.exists()) {
+                    setCurrentChat(user.userChats[index])
+                    setMessages(doc.data().messages);
+                    setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
+                    setChatSelected(true);
+                };
+            });
     };
          
     const handleSubmit = async (e) => {
@@ -146,7 +125,7 @@ export function ChatsPage() {
                                 onClick={()=>{
                                     selectChat(key)
                                 }}
-                                className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                className="p-4 w-screen flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
                             >
                                 <img
                                     src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
@@ -154,12 +133,11 @@ export function ChatsPage() {
                                 />
                                 <div className="flex-1 flex justify-between">
                                     <div>
-                                        <h1>{c.patient}</h1>
+                                        <h1>{c.data().patient}</h1>
                                         <p className="text-white-500 truncate flex items-center gap-2">
-                                            {c.lastMessage}
+                                            {c.data().lastMessage}
                                         </p>
                                     </div>
-                                    <div className="text-white-500 text-xs">12:12</div>
                                 </div>
                             </button>)
                         }
@@ -177,12 +155,11 @@ export function ChatsPage() {
                                 />
                                 <div className="flex-1 flex truncate justify-between">
                                     <div>
-                                        <h1>{c.doctor}</h1>
+                                        <h1>{c.data().doctor}</h1>
                                         <p className="text-white-500 flex items-center gap-2">
-                                            {c.lastMessage}
+                                            {c.data().lastMessage}
                                         </p>
                                     </div>
-                                    <div className="text-white-500 text-xs">12:12</div>
                                 </div>
                             </div>)
                         }

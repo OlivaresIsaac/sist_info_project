@@ -1,4 +1,4 @@
-import {setDoc, collection, addDoc, runTransaction, doc, getDoc,query, where, getDocs} from "firebase/firestore"
+import {updateDoc, arrayUnion,setDoc, collection, addDoc, runTransaction, doc, getDoc,query, where, getDocs} from "firebase/firestore"
 import {db} from "./config"
 
 // Servicio que controla la gestión de chats
@@ -31,17 +31,15 @@ export async function updateUsersChats(userId, doctorId, chatId) {
         idArray.push(userId)
         idArray.push(doctorId)
         // const q = query(collection(db, "usersChats"));
-            const q = query(collection(db, "usersChats"), where("id", "in", idArray));
+            const q = query(collection(db, "users"), where("id", "in", idArray));
             const querySnapshot = await getDocs(q);
             
             querySnapshot.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
               
-                let aux = doc.data()
-                
-                aux.chatsID.push(chatId)
-                console.log(aux)
-                await setDoc(doc.ref, aux)
+                await updateDoc(doc(db, "users", doc.data().id),{
+                    userChats: arrayUnion(chatId),
+                });
 
         
               });

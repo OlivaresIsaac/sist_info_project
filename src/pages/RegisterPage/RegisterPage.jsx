@@ -12,7 +12,8 @@ export function RegisterPage() {
         tlf: "",
         isDoctor:"false",
         preferedLanguage:"",
-        pricePerHour: ""
+        pricePerHour: "",
+        userChats: []
     })
 
     const handleOnChange = (event) => {
