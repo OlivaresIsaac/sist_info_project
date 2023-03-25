@@ -8,23 +8,26 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
   }
 
   .content {
     position: absolute;
     top: 50%;
-    left: 16%;
-    transform: translate(-50%, -50%);
+    left: 45%;
     background: #ab90b9;
-    padding: 20px;
+    transform: translate(-50%, -50%);
+    padding: 15px;
     border-radius: 10px;
-    width: 405px;
+    width: 75%;
+    height: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+
   }
+
+
   .doctor {
     display: flex;
     align-items: center;
@@ -34,6 +37,7 @@
     width: 100%;
     border-radius: 6px;
     padding: 10px;
+    height: 100%;
   }
   .content button {
     background: #572975;
@@ -52,17 +56,20 @@
   }
 
   .doctor h1 {
-    font-size: 40px;
+    font-size: 50px;
+    padding-left: 30px;
   }
   .doctor h3 {
-    font-size: 15px;
+    font-size: 20px;
   }
   .stars{
     align-items: center;
     display: flex;
     font-size: 50px;
+    padding: 10px;
+    padding-left: 0%;
   }
   .stars h1{
-    font-size: 15px;
+    font-size: 30px;
   }
   

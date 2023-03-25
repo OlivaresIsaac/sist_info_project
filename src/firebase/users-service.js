@@ -34,5 +34,10 @@ export async function getUserProfile(email) {
     } else {
         return null
     }
-     
+}
+
+export async function updateUserLastDoctor(user,doctorId){
+    let userCopy=user
+    userCopy.lastDoctor=doctorId
+    return setDoc(doc(db,"users", userCopy.id), userCopy)
 }

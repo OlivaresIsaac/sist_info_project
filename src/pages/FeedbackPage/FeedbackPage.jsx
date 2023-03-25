@@ -32,9 +32,10 @@ export function FeedbackPage() {
                 return 'Escriba sus comentarios...';
             case 1:
             case 2:
+                return '¿Cuáles fueron sus problemas en esta consulta?';
             case 3:
+                return 'Escriba sus comentarios';
             case 4:
-                return '¿Cuáles fueron tus prolemas en esta consulta?';
             case 5:
                 return '¿Por qué te gustó este doctor?';
             default:
@@ -47,8 +48,8 @@ export function FeedbackPage() {
             <div className="popup">
                 <div className="content">
                     <div className="doctor">
-                        <img 
-                            style={{width:100,height:100,objectFit:"cover",borderRadius:45}} 
+                        <img className="doctorPhoto" 
+                            style={{width:155,height:155,objectFit:"cover",borderRadius:45}} 
                             src="https://pbs.twimg.com/profile_images/1530563277/picoro_400x400.jpg" 
                             alt="name" 
                         />
