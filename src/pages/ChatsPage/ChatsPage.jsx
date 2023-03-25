@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {updateDoc, doc,  addDoc, arrayUnion, collection, onSnapshot, query, serverTimestamp, Timestamp, where} from "firebase/firestore";
-import {auth, db} from "../../firebase/config"
+import { db} from "../../firebase/config"
 import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
 
 import { useUserContext } from "../../contexts/UserContext";
