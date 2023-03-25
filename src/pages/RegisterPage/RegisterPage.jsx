@@ -16,9 +16,9 @@ export function RegisterPage() {
     })
 
     const handleOnChange = (event) => {
-        if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "false" & formData.tlf != ""){
+        if(formData.displayName !== "" & formData.email !== "" & formData.password !== "" & formData.isDoctor === "false" & formData.tlf !== ""){
             setshowLog("true")
-        }else if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
+        }else if(formData.displayName !== "" & formData.email !== "" & formData.password !== "" & formData.isDoctor === "true" & formData.tlf !== "" & formData.pricePerHour !== ""){
             setshowLog("true")
         }else{
             setshowLog("false")
