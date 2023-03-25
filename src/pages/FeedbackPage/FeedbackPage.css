@@ -24,20 +24,19 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-
   }
 
 
   .doctor {
     display: flex;
     align-items: center;
+    width: max-content;
   }
 
   textarea {
     width: 100%;
     border-radius: 6px;
-    padding: 10px;
-    height: 100%;
+    padding: 0.2rem;
   }
   .content button {
     background: #572975;
@@ -56,20 +55,25 @@
   }
 
   .doctor h1 {
-    font-size: 50px;
+    font-size: 3rem;
     padding-left: 30px;
   }
   .doctor h3 {
     font-size: 20px;
+    text-align: center;
   }
   .stars{
     align-items: center;
     display: flex;
-    font-size: 50px;
-    padding: 10px;
-    padding-left: 0%;
+    font-size: 2.5rem;
+    padding: 1px;
   }
   .stars h1{
     font-size: 30px;
+  }
+  .doctor .caracter{
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
   }
   
