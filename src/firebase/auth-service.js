@@ -43,7 +43,7 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
                     await createUserChats(result.user.uid)
             
                     if (newUser.isDoctor) {
-                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName )
+                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName,[],0)
                         await createDoctor(newDoctor.toObject())
                         console.log(newDoctor)
                     }
