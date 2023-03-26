@@ -97,35 +97,35 @@ export function FeedbackPage() {
                             <h1>{doctor.displayName}</h1>
                             <h3>Especialidad: {doctor.specialty}</h3>
                         </div>
-                        
                     </div>
-                    <form onSubmit={onSubmit}>
-                        <div className="stars">
-                            <h1>{handleText()}</h1>
-                            {Array(5)
-                                .fill()
-                                .map((_, index)=>
-                                    number >= index + 1 || hoverStar >= index + 1 ? (
-                                        <AiFillStar 
-                                            onMouseOver={() => !number && setHoverStar(index + 1)}
-                                            onMouseLeave={() => setHoverStar(undefined)}
-                                            style={{color:'orange'}} 
-                                            onClick={() => changeStars(index)}
-                                        />
-                                    ):(
-                                        <AiOutlineStar 
-                                            onMouseOver={() => !number && setHoverStar(index + 1)}
-                                            onMouseLeave={() => setHoverStar(undefined)}
-                                            style={{ color: "orange" }}
-                                            onClick={() => changeStars(index)}
-                                        />
-                                    )       
-                                )}
-                        </div>
-                        <textarea onChange={handleOnChange} name="comentario" placeholder={handlePlaceHolder}></textarea>
-                        <button type="submit" className={` ${!number && "disabled"} `}>Enviar feedback</button>
-                    </form>
-                    
+                    <div className="infoFeedback">
+                        <form onSubmit={onSubmit}>
+                                <div className="stars">
+                                    <h1>{handleText()}</h1>
+                                    {Array(5)
+                                        .fill()
+                                        .map((_, index)=>
+                                            number >= index + 1 || hoverStar >= index + 1 ? (
+                                                <AiFillStar 
+                                                    onMouseOver={() => !number && setHoverStar(index + 1)}
+                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                                    style={{color:'orange'}} 
+                                                    onClick={() => changeStars(index)}
+                                                />
+                                            ):(
+                                                <AiOutlineStar 
+                                                    onMouseOver={() => !number && setHoverStar(index + 1)}
+                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                                    style={{ color: "orange" }}
+                                                    onClick={() => changeStars(index)}
+                                                />
+                                            )       
+                                        )}
+                                </div>
+                                <textarea onChange={handleOnChange} name="comentario" placeholder={handlePlaceHolder()}></textarea>
+                                <button type="submit" className={` ${!number && "disabled"} `}>Enviar feedback</button>
+                        </form>
+                    </div>     
                 </div>
             </div>
         </div>
