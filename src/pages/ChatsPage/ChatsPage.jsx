@@ -36,9 +36,7 @@ export function ChatsPage() {
             })
             setUserChatsDoc(a)
         })
-    }, []);
 
-    const recieve = async() => {
         if(currentChat != ""){
             onSnapshot(doc(db, "chats", currentChat), (doc) => {
                 if (doc.exists()) {
@@ -46,21 +44,16 @@ export function ChatsPage() {
                 }
             });
         }
-    }
 
-    recieve()
+    }, []);
 
     const selectChat = async(index) => {
-        let chat;
-        for(let i = 0; i < user.userChats.length; i++){
-            if(user.userChats[index] === userChatsDoc[i].id){
-                chat = userChatsDoc[i].id;
-                break;
-            }
-        }
-            onSnapshot(doc(db, "chats", chat), (doc) => {
+            
+            const chat = userChatsDoc[index];
+
+            onSnapshot(doc(db, "chats", chat.id), (doc) => {
                 if (doc.exists()) {
-                    setCurrentChat(user.userChats[index])
+                    setCurrentChat(doc.data().id)
                     setMessages(doc.data().messages);
                     setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
                     setChatSelected(true);
@@ -71,14 +64,20 @@ export function ChatsPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (newMessage === "" || currentChat === "") return;
+        
+        const mes = newMessage
+        const arr = messages
+        arr.push(newMessage)
+        setNewMessage("")
+        setMessages(arr)
 
         await updateDoc(doc(db, "chats", currentChat),{
             messages: arrayUnion({
-                text: newMessage,
+                text: mes,
                 sender: user.displayName,
                 date: Timestamp.now()
             }),
-            lastMessage: newMessage
+            lastMessage: mes
         });
 
         // await addDoc(messagesRef, {
@@ -93,18 +92,15 @@ export function ChatsPage() {
     if(!isChatSelected){
         return(
         <div >
-            <div className="p-4 h-[17vh]">
+            <div className="h-min bg-[#572975] p-4 h-[17vh]">
                      <div className="flex items-center justify-between mb-1.5">
                          <div>
-                             <img 
-                                src="https://img.freepik.com/foto-gratis/retrato-empresario-excitado-vestido-traje_171337-154.jpg"
-                                className="w-10 h-10 object-cover rounded-full"
-                            />
+                            <h1 className="italic text-white">Chats</h1>
                         </div>
-                        <div className="flex items-center gap-8 text-2xl text-white-500">
-                            <RiChat1Line className="hover:cursor-pointer"/>
-                            <RiArchiveLine className="hover:cursor-pointer"/>
-                            <RiMore2Fill className="hover:cursor-pointer"/>
+                        <div className="flex items-center text-white-500">
+                            <button className="rounded-full p-2 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
+                                Archivados
+                            </button>
                         </div>
                     </div>
                     {/* <form className="w-full">
@@ -125,7 +121,7 @@ export function ChatsPage() {
                                 onClick={()=>{
                                     selectChat(key)
                                 }}
-                                className="p-4 w-screen flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                className="p-4 w-[90vw] flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
                             >
                                 <img
                                     src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
@@ -183,7 +179,6 @@ export function ChatsPage() {
                     </div>
                     <div className="flex items-center gap-8 text-2xl text-white-500">
                         <RiLinkM className="hover:cursor-pointer"/>
-                        <RiMore2Fill className="hover:cursor-pointer"/>
                     </div>
                 </header>
                 {/*Mensajes*/}
