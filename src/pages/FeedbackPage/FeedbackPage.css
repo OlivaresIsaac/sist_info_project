@@ -19,12 +19,11 @@
     padding: 15px;
     border-radius: 10px;
     width: 85%;
-    height: 90%;
+    height: 93%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin-right: 100%;
   }
 
 
@@ -86,5 +85,6 @@
     border: none;
     font-weight: bolder;
     cursor: pointer;
+    margin-top: -2rem;
   }
   

@@ -7,6 +7,7 @@ import {AiFillStar,AiOutlineStar} from "react-icons/ai";
 import { getUserProfile } from "../../firebase/users-service";
 import { useUserContext } from "../../contexts/UserContext";
 import { updateDoctorFeedback } from "../../firebase/feedback-service";
+import Swal from 'sweetalert2';
 //FeedBackPage se encarga de mostrar el 5 rating stars y la caja de comentarios al doctor
 export function FeedbackPage() {
     const {user} = useUserContext()
@@ -26,12 +27,18 @@ export function FeedbackPage() {
           })
         }
         loadDoctor();
-  
         return () => {
-        
+
         };
   
-      }, []);
+    },[]);
+    const mostrarAlerta=()=>{
+        Swal.fire(
+            '¡Feedback enviado con éxito!',
+            'Gracias por su tiempo',
+            'success'
+          )
+    }
     const [number,setNumber]=useState(0);
     const [hoverStar,setHoverStar]=useState(undefined);
     const handleText=()=>{
@@ -123,7 +130,7 @@ export function FeedbackPage() {
                                         )}
                                 </div>
                                 <textarea onChange={handleOnChange} name="comentario" placeholder={handlePlaceHolder()}></textarea>
-                                <button type="submit" className={` ${!number && "disabled"} `}>Enviar feedback</button>
+                                <button type="submit" onClick={mostrarAlerta} className={` ${!number && "disabled"} `}>Enviar feedback</button>
                         </form>
                     </div>     
                 </div>
