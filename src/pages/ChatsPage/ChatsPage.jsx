@@ -10,6 +10,8 @@ import { useUserContext } from "../../contexts/UserContext";
 //Función que recupera los documentos de chats y mantiene actulizado los mensajes
 export function ChatsPage() {
     const [isChatSelected, setChatSelected] = useState(false)
+    const [archived, setArchived] = useState(false)
+    const [changeButton, setChangeButton] = useState("Archivados")
 
     const [receptorName, setReceptorName] = useState("");
     const [newMessage, setNewMessage] = useState("");
@@ -18,6 +20,7 @@ export function ChatsPage() {
     const {user} = useUserContext();
 
     const [currentChat, setCurrentChat] = useState("");
+    const [currentDoc, setCurrentDoc] = useState()
     const [userChats, setUserChats] = useState([]);
     const [userChatsDoc, setUserChatsDoc] = useState([]);
 
@@ -56,6 +59,7 @@ export function ChatsPage() {
 
             onSnapshot(doc(db, "chats", chat.id), (doc) => {
                 if (doc.exists()) {
+                    setCurrentDoc(doc)
                     setCurrentChat(doc.data().id)
                     setMessages(doc.data().messages);
                     setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
@@ -63,6 +67,37 @@ export function ChatsPage() {
                 };
             });
     };
+
+    const seeArchived =async() => {
+        setArchived(!archived)
+        if(!archived){
+            setChangeButton("Chats")
+        }else{
+            setChangeButton("Archivados")
+        }
+    }
+
+    const archive = async() => {
+        await updateDoc(doc(db, "chats", currentChat),{
+            isArchived: !currentDoc.data().isArchived
+        })
+        onSnapshot(doc(db, "chats", currentChat), (doc) => {
+            if (doc.exists()) {
+                setCurrentDoc(doc)
+            };
+        });
+    }
+
+    const activate = async() => {
+        await updateDoc(doc(db, "chats", currentChat),{
+            active: !currentDoc.data().active
+        })
+        onSnapshot(doc(db, "chats", currentChat), (doc) => {
+            if (doc.exists()) {
+                setCurrentDoc(doc)
+            };
+        });
+    }
 
     const backChat = async() => {
         setCurrentChat("")
@@ -109,8 +144,8 @@ export function ChatsPage() {
                             <h1 className="italic text-white">Chats</h1>
                         </div>
                         <div className="flex items-center text-white-500">
-                            <button className="rounded-full p-2 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
-                                Archivados
+                            <button onClick={()=>{seeArchived()}} className="rounded-full p-2 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
+                                {changeButton}
                             </button>
                         </div>
                     </div>
@@ -126,50 +161,52 @@ export function ChatsPage() {
                 </div>
             {
                 userChatsDoc.map((c, key) => {
-                    if(user.isDoctor){
-                            return(<button
-                                key={key} 
-                                onClick={()=>{
-                                    selectChat(key)
-                                }}
-                                className="p-4 w-[90vw] flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                            >
-                                <img
-                                    src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                                    className="w-10 h-10 object-cover rounded-full"
-                                />
-                                <div className="flex-1 flex justify-between">
-                                    <div>
-                                        <h1>{c.data().patient}</h1>
-                                        <p className="text-white-500 truncate flex items-center gap-2">
-                                            {c.data().lastMessage}
-                                        </p>
+                    if(c.data().isArchived == archived){
+                        if(user.isDoctor){
+                                return(<button
+                                    key={key} 
+                                    onClick={()=>{
+                                        selectChat(key)
+                                    }}
+                                    className="p-4 w-[90vw] flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                >
+                                    <img
+                                        src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                        className="w-10 h-10 object-cover rounded-full"
+                                    />
+                                    <div className="flex-1 flex justify-between">
+                                        <div>
+                                            <h1>{c.data().patient}</h1>
+                                            <p className="text-white-500 truncate flex items-center gap-2">
+                                                {c.data().lastMessage}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </button>)
-                        }
-                    else{
-                            return(<div
-                                key={key} 
-                                onClick={()=>{
-                                    selectChat(key)
-                                }}
-                                className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
-                            >
-                                <img
-                                    src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
-                                    className="w-10 h-10 object-cover rounded-full"
-                                />
-                                <div className="flex-1 flex truncate justify-between">
-                                    <div>
-                                        <h1>{c.data().doctor}</h1>
-                                        <p className="text-white-500 flex items-center gap-2">
-                                            {c.data().lastMessage}
-                                        </p>
+                                </button>)
+                            }
+                        else{
+                                return(<div
+                                    key={key} 
+                                    onClick={()=>{
+                                        selectChat(key)
+                                    }}
+                                    className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
+                                >
+                                    <img
+                                        src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                        className="w-10 h-10 object-cover rounded-full"
+                                    />
+                                    <div className="flex-1 flex truncate justify-between">
+                                        <div>
+                                            <h1>{c.data().doctor}</h1>
+                                            <p className="text-white-500 flex items-center gap-2">
+                                                {c.data().lastMessage}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>)
-                        }
+                                </div>)
+                            }
+                    }
                     }
                 )
             }
@@ -192,54 +229,87 @@ export function ChatsPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-8 text-2xl text-white-500">
-                        <button className="rounded-full pr-3 pl-3 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
-                            Archivar
-                        </button>
+                        {
+                            currentDoc.data().doctor == user.displayName && !currentDoc.data().isArchived && currentDoc.data().active &&(
+                                <button onClick={() => {archive()}} className="rounded-full pr-3 pl-3 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
+                                    Archivar
+                                </button>
+                            )
+                        }
+                        {
+                            currentDoc.data().doctor == user.displayName && currentDoc.data().isArchived && currentDoc.data().active &&(
+                                <button onClick={() => {archive()}} className="rounded-full pr-3 pl-3 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
+                                    Desarchivar
+                                </button>
+                            )
+                        }
                     </div>
                 </header>
                 {/*Mensajes*/}
                 <main className={styles.chatMesCont}>
                     {/* mensajes reales */}
-                    
                     {
-                        messages.map((m, key) => {
-                            
-                            if (m.sender === user.displayName) {
-                                return (
-                                    <div key={key} className="mb-3 flex justify-end">
-                                        <p className="bg-[#ab90b9] break-words flex-wrap max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
-                                        {m.text}
-                                        </p>
-                                </div>
-                                )
-                            } else {
-                                return (
-                                    <div key={key} className="mb-3 flex">
-                                        <p className="bg-[#D5D6DC] flex-wrap max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
-                                            {m.text}
-                                        </p>
-                                    </div>
-                                ) 
-                            }                            
-                        })
-                    }  
+                        currentDoc.data().active && (
+
+                            <div>
+
+                            {
+                                messages.map((m, key) => {
+                                    
+                                    if (m.sender === user.displayName) {
+                                        return (
+                                            <div key={key} className="mb-3 flex justify-end">
+                                                <p className="bg-[#ab90b9] break-words flex-wrap max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
+                                                {m.text}
+                                                </p>
+                                        </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <div key={key} className="mb-3 flex">
+                                                <p className="bg-[#D5D6DC] flex-wrap max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tr-xl rounded-br-xl rounded-bl-xl">
+                                                    {m.text}
+                                                </p>
+                                            </div>
+                                        ) 
+                                    }                            
+                                })
+                            }  
+                            </div>
+                        )
+                    }
+                    {
+                        !currentDoc.data().active && currentDoc.data().doctor == user.displayName &&(
+                            <div className="mb-3 flex justify-end">
+                                <button onClick={() => activate()} className="bg-[green] text-white break-words flex-wrap max-w-[80%] xl:max-w-2xl py-1 px-4 rounded-tl-xl rounded-bl-xl rounded-br-xl">
+                                    activar chat
+                                </button>
+                            </div>
+                        )
+                    }
 
                 </main>
                 {/*Enviar mensajes*/}
-                <div className={styles.chatInput}>   
-                    <form className="flex" onSubmit={handleSubmit}>
-                        <input type="text" className="bg-[#D5D6DC] w-[70vw] py-2 px-6 rounded-full outline-none text-white-500"
-                            placeholder="Escriba un mensaje"
-                            onChange={(e)=> setNewMessage(e.target.value)}
-                            value={newMessage}
-                        />
-                        <button type="submit">
-                            <RiSendPlane2Fill className="hover:cursor-pointer"/>
-                        </button>
-                    </form>                       
+                <div className={styles.chatInput}>
+                {
+                    !!currentDoc.data().active && !currentDoc.data().isArchived &&(
+                        <form className="flex" onSubmit={handleSubmit}>
+                    
+                            <input type="text" className="bg-[#D5D6DC] w-[70vw] py-2 px-6 rounded-full outline-none text-white-500"
+                                placeholder="Escriba un mensaje"
+                                onChange={(e)=> setNewMessage(e.target.value)}
+                                value={newMessage}
+                            />
+                            <button type="submit">
+                                <RiSendPlane2Fill className="hover:cursor-pointer"/>
+                            </button>
+                        </form>   
+                    )
+                }                       
                 </div>
             </div>
         )
+    }
     }
 
     // return (
@@ -463,4 +533,4 @@ export function ChatsPage() {
     //         </div>
     //     </div>
     // )
-}
+
