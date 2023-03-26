@@ -68,11 +68,9 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
 
       const createConsult = () => {
         const consult = {
-            consultId: null,
             doctorId: doctor.id,
             patientId: user.id,
             hour: "3pm*", //TODO implementar hora correcta
-
             date: choosedData.date,
             payedAmount: (doctor.pricePerHour * choosedData.consultHours) 
 

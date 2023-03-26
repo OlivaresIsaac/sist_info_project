@@ -11,7 +11,7 @@ export async function createConsult(consult) {
        
         await runTransaction(db, async (transaction) => {
            
-            const ref = await await addDoc(collection(db, "consults"), consult)
+            const ref = await addDoc(collection(db, "consults"), consult)
             let aux = consult
             aux.id = ref.id
             await setDoc(ref, aux)
