@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.chatCont{
+    display: grid;
+    grid-auto-rows: repeat(10, 1fr);
+    height: 100%;
+}
+
+.chatHeader{
+    grid-row: 1/2;
+}
+
+.chatMesCont{
+    grid-row: 2/8;
+    padding: 10px;
+    overflow-y: scroll;
+    height: 67vh;
+    scroll-behavior: auto;
+}
+
+.chatMesCont::-webkit-scrollbar {
+    display: none;
+}
+
+.chatInput{
+    grid-row: 8/11;
+    padding: 10px;
+    background-color: #ab90b9;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+}

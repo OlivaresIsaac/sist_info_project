@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import {updateDoc, doc,  addDoc, arrayUnion, collection, onSnapshot, query, serverTimestamp, Timestamp, where} from "firebase/firestore";
 import { db} from "../../firebase/config"
-import { RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
+import {RiChat1Line,RiMore2Fill,RiArchiveLine,RiSearchEyeLine,RiCheckDoubleFill,RiCameraLine,RiLinkM,RiEmotionLine,RiSendPlane2Fill} from "react-icons/ri";
+import {AiFillCaretLeft} from "react-icons/ai"
+
+import styles from "./ChatsPage.module.css"
 
 import { useUserContext } from "../../contexts/UserContext";
 //Función que recupera los documentos de chats y mantiene actulizado los mensajes
@@ -60,6 +63,14 @@ export function ChatsPage() {
                 };
             });
     };
+
+    const backChat = async() => {
+        setCurrentChat("")
+        setMessages([]);
+        setReceptorName("");
+        setNewMessage("")
+        setChatSelected(false);
+    }
          
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -166,9 +177,12 @@ export function ChatsPage() {
         )
     }else{
         return(
-            <div className="w-[90vw]">
-                <header className="h-[15vh] bg-[#ab90b9] p-4 flex items-center justify-between">
+            <div className={styles.chatCont}>
+                <header className="chatHeader p-3 bg-[#ab90b9] flex items-center justify-between">
                     <div className="flex items-center gap-4">
+                        <button onClick={()=>{backChat()}}>
+                            <AiFillCaretLeft />
+                        </button>
                         <img
                             src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
                             className="w-10 h-10 object-cover rounded-full"
@@ -178,11 +192,13 @@ export function ChatsPage() {
                         </div>
                     </div>
                     <div className="flex items-center gap-8 text-2xl text-white-500">
-                        <RiLinkM className="hover:cursor-pointer"/>
+                        <button className="rounded-full pr-3 pl-3 bg-[#D5D6DC] hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer">
+                            Archivar
+                        </button>
                     </div>
                 </header>
                 {/*Mensajes*/}
-                <main className="h-[75vh] overflow-y-scroll p-4">
+                <main className={styles.chatMesCont}>
                     {/* mensajes reales */}
                     
                     {
@@ -210,7 +226,7 @@ export function ChatsPage() {
 
                 </main>
                 {/*Enviar mensajes*/}
-                <div className="h-[10vh] justify-center text-white-500 flex bg-[#ab90b9]">   
+                <div className={styles.chatInput}>   
                     <form className="flex" onSubmit={handleSubmit}>
                         <input type="text" className="bg-[#D5D6DC] w-[70vw] py-2 px-6 rounded-full outline-none text-white-500"
                             placeholder="Escriba un mensaje"
