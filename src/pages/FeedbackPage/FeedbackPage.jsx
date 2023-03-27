@@ -105,7 +105,7 @@ export function FeedbackPage() {
                             <h3>Especialidad: {doctor.specialty}</h3>
                         </div>
                     </div>
-                    <div className="infoFeedback">
+                    <div className="patata">
                         <form onSubmit={onSubmit}>
                                 <div className="stars">
                                     <h1>{handleText()}</h1>
