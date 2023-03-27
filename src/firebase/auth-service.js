@@ -21,7 +21,7 @@ export const signInWithGoogle = async () => {
             const newUser = new User(result.user.uid, result.user.displayName, result.user.email, false)
 
             await createUserProfile(result.user.uid, newUser.toObject())
-            await createUserChats(result.user.uid)
+            // await createUserChats(result.user.uid)
         }
 
     } catch (error) {
@@ -37,13 +37,13 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
             const result = await createUserWithEmailAndPassword(auth, email, password)
       
            
-                    const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage)
+                    const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage, allData.userChats)
                     
                     await createUserProfile(result.user.uid, newUser.toObject())
-                    await createUserChats(result.user.uid)
+                    // await createUserChats(result.user.uid)
             
                     if (newUser.isDoctor) {
-                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName )
+                        const newDoctor = new Doctor(result.user.uid, allData.pricePerHour, allData.specialty, allData.biography, allData.preferedLanguage, allData.displayName,[],0,[])
                         await createDoctor(newDoctor.toObject())
                         console.log(newDoctor)
                     }

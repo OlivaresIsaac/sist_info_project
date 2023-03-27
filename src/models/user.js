@@ -3,13 +3,14 @@ export class User {
 
     // Prefered language, 1 español, 2 ingles, 3 portugues, 4 japones, 5 latin
 
-    constructor(id, displayName, email, isDoctor, tlf, preferedLanguage){
+    constructor(id, displayName, email, isDoctor, tlf, preferedLanguage, userChats){
         this.id = id
         this.displayName = displayName
         this.email = email
         this.isDoctor = isDoctor
         this.tlf = tlf
         this.preferedLanguage = preferedLanguage
+        this.userChats = userChats
     }
 
     toObject() {
@@ -19,7 +20,8 @@ export class User {
             email: this.email,
             isDoctor: this.isDoctor,
             tlf: this.tlf,
-            preferedLanguage: this.preferedLanguage
+            preferedLanguage: this.preferedLanguage,
+            userChats: this.userChats
         }
     }
 }

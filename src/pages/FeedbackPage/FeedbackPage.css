@@ -8,32 +8,35 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
   }
 
   .content {
     position: absolute;
     top: 50%;
-    left: 16%;
-    transform: translate(-50%, -50%);
+    left: 45%;
     background: #ab90b9;
-    padding: 20px;
+    transform: translate(-50%, -50%);
+    padding: 15px;
     border-radius: 10px;
-    width: 405px;
+    width: 85%;
+    height: 93%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
   }
+
+
   .doctor {
     display: flex;
     align-items: center;
+    margin-bottom: -.5rem;
   }
 
-  textarea {
+  .patata textarea {
+    height: 7.5rem;
     width: 100%;
     border-radius: 6px;
-    padding: 10px;
   }
   .content button {
     background: #572975;
@@ -52,17 +55,36 @@
   }
 
   .doctor h1 {
-    font-size: 40px;
+    font-size: 3rem;
+    padding-left: 30px;
   }
   .doctor h3 {
-    font-size: 15px;
+    font-size: 20px;
+    text-align: center;
   }
   .stars{
     align-items: center;
     display: flex;
-    font-size: 50px;
+    font-size: 2.5rem;
+    padding: 1px;
   }
   .stars h1{
-    font-size: 15px;
+    font-size: 30px;
+  }
+  .doctor .caracter{
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+  }
+
+  .patata{
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 10px 0;
+    border: none;
+    font-weight: bolder;
+    cursor: pointer;
+    margin-top: 1rem;
   }
   

@@ -3,6 +3,8 @@ import { CheckoutPage } from "./CheckoutPage";
 import { useUserContext } from '../../contexts/UserContext'
 import { createConsult } from "../../firebase/consult-service"
 import { createChat, updateUsersChats } from "../../firebase/chats-service";
+import { updateUserLastDoctor } from "../../firebase/users-service";
+import Swal from "sweetalert2";
 //CheckOutController, se encarga de llamar los métodos de firebase para crear consultas y chats
 export function CheckoutController() {
     const [consult, setConsult] = useState(null)
@@ -14,12 +16,19 @@ export function CheckoutController() {
         if (canTrigger && consult) {
          canTrigger = false
          createDocuments().then(() => {
-            console.log("exito máximo") //TODO navigate to consults
+            mostrarAlerta()
          })
         }
       },
       [consult]
     );
+    const mostrarAlerta=()=>{
+        Swal.fire(
+            '¡Pago realizado con éxito!',
+            '¡Gracias por preferirnos!',
+            'success'
+          )
+    }
 
     const createChatObject = () => {
         return {
@@ -27,7 +36,9 @@ export function CheckoutController() {
             id: null,
             lastMessage: null,
             messages: [],
-            patient: user.displayName
+            patient: user.displayName,
+            isArchived: false,
+            active: false
         }
     }
 
@@ -35,6 +46,7 @@ export function CheckoutController() {
         createChat(user.id, consult.doctorId, createChatObject())
         createConsult(consult)
         // updateUsersChats(user.id, consult.doctorId)
+        updateUserLastDoctor(user,consult.doctorId)
     }
 
    return (

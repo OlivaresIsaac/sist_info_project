@@ -17,7 +17,7 @@ export function LandingController() {
 //     imagen: '../../assets/psydocs.png'
 // }
 
-const [doctors, setDoctors] = useState([])
+
 
 
 // useEffect(() => {
@@ -39,7 +39,7 @@ const [doctors, setDoctors] = useState([])
     
     return (
         <>
-        <LandingPage doctors={doctors}/>
+        <LandingPage />
         </>
     )
 }
