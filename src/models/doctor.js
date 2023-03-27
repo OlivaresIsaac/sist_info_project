@@ -5,7 +5,7 @@ export class Doctor {
 
     // TODO demas atributos como feedback y foto de perfil
 
-    constructor(id, pricePerHour, specialty, biography, preferedLanguage, displayName,feedbacks,avgScore){
+    constructor(id, pricePerHour, specialty, biography, preferedLanguage, displayName,feedbacks,avgScore, scheduleTaken){
         this.id = id
         this.pricePerHour = pricePerHour
         this.specialty = specialty
@@ -14,6 +14,7 @@ export class Doctor {
         this.preferedLanguage = preferedLanguage
         this.feedbacks=feedbacks
         this.avgScore=avgScore
+        this.scheduleTaken=scheduleTaken
     }
 
     toObject() {
@@ -25,7 +26,8 @@ export class Doctor {
             preferedLanguage: this.preferedLanguage,
             displayName: this.displayName,
             feedbacks: this.feedbacks,
-            avgScore:this.avgScore
+            avgScore:this.avgScore,
+            scheduleTaken: this.scheduleTaken
         }
     }
 }
