@@ -27,7 +27,9 @@ export function CheckoutController() {
             id: null,
             lastMessage: null,
             messages: [],
-            patient: user.displayName
+            patient: user.displayName,
+            isArchived: false,
+            active: false
         }
     }
 

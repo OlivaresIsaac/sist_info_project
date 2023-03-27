@@ -33,15 +33,16 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
-        console.log(user.userChats)
-        const queryChats = query(collection(db, "chats"), where("id", "in", user.userChats))
-        onSnapshot(queryChats, (snapshot) => {
-            let a = []
-            snapshot.forEach((doc) => {
-                a.push(doc)
+        if(user.userChats != []){
+            const queryChats = query(collection(db, "chats"), where("id", "in", user.userChats))
+            onSnapshot(queryChats, (snapshot) => {
+                let a = []
+                snapshot.forEach((doc) => {
+                    a.push(doc)
+                })
+                setUserChatsDoc(a)
             })
-            setUserChatsDoc(a)
-        })
+        }
 
         if(currentChat != ""){
             onSnapshot(doc(db, "chats", currentChat), (doc) => {
