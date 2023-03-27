@@ -63,5 +63,27 @@ export async function getDoctorProfile(userId) {
   } else {
       return null
   }
+ 
 }
 
+export async function getPacienteProfile(userId) {
+    const userQuery = query(
+        collection(db, 'users'),
+        where("id", "==", userId)
+    )
+  
+    const results = await getDocs(userQuery);
+  
+    if (results.size > 0) {
+        const doctors = results.docs.map(item => ({
+            ...item.data(),
+            id: item.id
+        }))
+  
+        // OJO, no retorna objeto user, retorna objeto con la estructura de user
+        return doctors[0]
+    } else {
+        return null
+    }
+   
+  }

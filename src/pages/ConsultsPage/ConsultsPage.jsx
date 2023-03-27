@@ -33,12 +33,20 @@ export function ConsultsPage(cita) {
 
     return (<div>
         <div>
-            Hola
+            Consultas Asignadas
         </div>
-        
+        <div className='abstractCardContainer'>
+                {
+                    info.map((cardInfo, key) => {
+                       return(
+                        <div className='abstractCard'> 
+                       <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
+                       </div> 
+                       )
+                    })
+                }
+               
+            </div>
     </div>
     )
 }
-
-//Por realizar
-
