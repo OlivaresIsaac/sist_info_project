@@ -30,16 +30,21 @@ export async function updateUsersChats(userId, doctorId, chatId) {
         const idArray = []
         idArray.push(userId)
         idArray.push(doctorId)
+   
         // const q = query(collection(db, "usersChats"));
             const q = query(collection(db, "users"), where("id", "in", idArray));
             const querySnapshot = await getDocs(q);
             
             querySnapshot.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
-              
-                await updateDoc(doc(db, "users", doc.data().id),{
-                    userChats: arrayUnion(chatId),
-                });
+                const user = doc.data();
+                user.userChats.push(chatId)
+               
+                await setDoc(doc.ref, user)
+
+                // await updateDoc(doc(db, "users", doc.data().id),{
+                //     userChats: arrayUnion(chatId),
+                // });
 
         
               });
