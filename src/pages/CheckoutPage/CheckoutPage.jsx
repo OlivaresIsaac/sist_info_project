@@ -108,7 +108,8 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
                     <PayPalButtons style={{ layout: "horizontal" , tagline: false}} className={styles.paypalButton}
                      createOrder={createOrder}
                      onApprove={onApprove} 
-                     onError={onError}/>
+                     onError={onError}
+                     />
                 </PayPalScriptProvider>
          </div>
 
