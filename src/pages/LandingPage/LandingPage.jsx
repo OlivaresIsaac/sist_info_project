@@ -104,7 +104,7 @@ const resetSearchData = () => {
                
             </div>
 
-            <div className='doctor-searcher'> 
+            <div className='doctor-searcher'id="buscador-doctores"> 
             <form onSubmit={onSubmit}>
 
                 <h2 className='h2-title'>Buscador de Doctores</h2> 
@@ -154,6 +154,7 @@ const resetSearchData = () => {
 
                     <div >
                         <button type="button" onClick={resetSearchData}> Ver todos</button>
+                        
                     </div>
                    
 
@@ -205,9 +206,9 @@ const resetSearchData = () => {
             </div>
             
              </div>
-             <div className='final-button'>
+            <div className='final-button'>
                 {/* <img src={backtopimg} className='backtopimg' alt='pysdocs'/> */}
-                <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button>  
+                <a href="#buscador-doctores" className='backtop'> BUSCA LA CONSULTA PERFECTA </a>  
             </div>
         </section>
         </>
