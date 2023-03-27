@@ -5,6 +5,7 @@ import './RegisterPage.css'
 export function RegisterPage() {
 
     const [showLog, setshowLog] = useState("false")
+    const [showLogGoogle, setshowLogGoogle] = useState("false")
     const [formData, setFormData] = useState({
         displayName: "",
         email: "",
@@ -16,6 +17,13 @@ export function RegisterPage() {
     })
 
     const handleOnChange = (event) => {
+        if(formData.isDoctor == "false" & formData.tlf != "") {
+            setshowLogGoogle("true")
+        }else if(formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
+            setshowLogGoogle("true")
+        }else {
+            setshowLogGoogle("false")
+        }
         if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "false" & formData.tlf != ""){
             setshowLog("true")
         }else if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
@@ -111,7 +119,7 @@ export function RegisterPage() {
                 
                 
             )
-               
+            
             }
 
             <div>
@@ -120,7 +128,7 @@ export function RegisterPage() {
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
             <div>
-            <button onClick={handleRegisterWithGoogle}>Registrarse con Google</button>
+            {(showLogGoogle === "true") && (<button onClick={handleRegisterWithGoogle}>Registrarse con Google</button>)}
             </div>
         </form>
         </div>
