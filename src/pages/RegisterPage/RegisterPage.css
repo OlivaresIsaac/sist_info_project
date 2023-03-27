@@ -53,3 +53,9 @@
 .seleccionador{
     margin-left: 5px;
 }
+.notPush{
+    opacity: 50%;
+}
+.canPush{
+    opacity: 100%;
+}
