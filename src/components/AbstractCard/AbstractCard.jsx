@@ -41,6 +41,3 @@ export default function Card({isDoc, Info}) {
         </div>
     );
 }
-
-
-

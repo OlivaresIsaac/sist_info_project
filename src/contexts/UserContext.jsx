@@ -17,7 +17,7 @@ export function UserContextProvider({ children }) {
       setIsLoadingUser(true);
       if (firebaseUser ) { //&& !user
         const userProfile = await getUserProfile(firebaseUser.email);
-       
+
         setUser(userProfile);
        
       } else {
@@ -46,3 +46,4 @@ export function UserContextProvider({ children }) {
 export function useUserContext() {
   return useContext(UserContext);
 }
+

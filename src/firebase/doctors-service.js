@@ -1,5 +1,9 @@
-import {setDoc, runTransaction, collection, query, onSnapshot, getDocs} from "firebase/firestore"
+
+import {setDoc, runTransaction, collection, query, getDocs, getDoc, where} from "firebase/firestore"
 import {db} from "./config"
+
+
+
 
 // Servicio que retorna la información acerca del doctor logueado en la web.
 
@@ -37,16 +41,27 @@ export async function getDoctors() {
             //     getChatsDoc()
             // });
        
-       
+ 
+}
 
+export async function getDoctorProfile(userId) {
+  const userQuery = query(
+      collection(db, 'doctors'),
+      where("id", "==", userId)
+  )
 
-   
+  const results = await getDocs(userQuery);
 
+  if (results.size > 0) {
+      const doctors = results.docs.map(item => ({
+          ...item.data(),
+          id: item.id
+      }))
 
-   
-    
-                
-    
-    
+      // OJO, no retorna objeto user, retorna objeto con la estructura de user
+      return doctors[0]
+  } else {
+      return null
+  }
 }
 

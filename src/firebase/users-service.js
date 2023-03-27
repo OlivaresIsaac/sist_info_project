@@ -5,8 +5,6 @@ import {db} from "./config"
 // Servicio que retorna la información acerca del usuario logueado en la web.
 
 
-
-
 export async function createUserProfile(userId, userData) {
     return setDoc(doc(db,"users", userId), userData)
 }
@@ -34,5 +32,10 @@ export async function getUserProfile(email) {
     } else {
         return null
     }
-     
+}
+
+export async function updateUserLastDoctor(user,doctorId){
+    let userCopy=user
+    userCopy.lastDoctor=doctorId
+    return setDoc(doc(db,"users", userCopy.id), userCopy)
 }
