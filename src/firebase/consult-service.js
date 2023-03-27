@@ -1,4 +1,4 @@
-import {setDoc, addDoc, collection, runTransaction} from "firebase/firestore"
+import {setDoc, addDoc, collection, runTransaction, query, where, getDocs} from "firebase/firestore"
 import {db} from "./config"
 
 
@@ -25,5 +25,27 @@ export async function createConsult(consult) {
     //  let aux = consult
     // aux.consultId= ref.id
     // return setDoc(ref, aux) 
+}
+
+
+export async function getConsultsById(isDoctor, userId){
+    const consultArray = []
+    let consultQuery;
+    if (isDoctor) {
+        consultQuery = query(collection(db, "consults"), where("doctorId", "==", userId))
+    } else {
+        consultQuery = query(collection(db, "consults"), where("patientId", "==", userId))
+    }
+   
+    const querySnapshot = await getDocs(consultQuery)
+ 
+    querySnapshot.forEach((doc) => {
+        
+        consultArray.push(doc.data())
+     
+      });
+
+
+     return consultArray
 }
 
