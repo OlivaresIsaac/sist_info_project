@@ -40,8 +40,10 @@ export function ChatsPage() {
             });
         }
 
+        getChats()
+
         return () => {
-            getChats()
+            
         };
     }, []);
 
