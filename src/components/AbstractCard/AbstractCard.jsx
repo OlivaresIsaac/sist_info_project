@@ -10,7 +10,6 @@ export default function Card({isDoc, Info}) {
         
         <div className={styles.cardContainer}>
             <div className={styles.cardContainerImg}>
-                {/* <img className={styles.cardImg} src={Info.imagen} alt="imagen"/> */}
             </div>
             <div className={styles.CardInfo}>
                 
