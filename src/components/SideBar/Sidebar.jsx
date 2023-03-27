@@ -44,7 +44,7 @@ const Sidebar = () => {
                             handleMenu();
                         }
                     }}> 
-                    <Link to={profileRoute} className="user_name "> {user.displayName}</Link>
+                    <Link to={profileRoute} state={{user: user, canEdit: true}} className="user_name "> {user.displayName}</Link>
                     {/* <Link to={CHECKOUTURL} className="user_name "> {user.displayName}</Link> */}
                    </div>
                 )}

@@ -177,7 +177,7 @@ const resetSearchData = () => {
                 {
                     showedInfo.map((cardInfo, key) => {
                        return(
-                        <div className='abstractCard' key={key}> 
+                        <div className='abstractCard' key={key} > 
                        <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
                        </div> 
                        )

@@ -8,17 +8,25 @@ import EditText from '../../components/EditText/EditText'
 import { db } from '../../firebase/config'
 import { doc, updateDoc } from 'firebase/firestore'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-
+import { useLocation } from "react-router-dom";
+import { getUserProfileById } from '../../firebase/users-service'
 
 //Muestra la información del usuario
 
 
-export function ProfilePage({canEdit}) {    
+export function ProfilePage({canEditPage}) {    
     // Informacion del usuario
-    const {user} = useUserContext();
-
+   
+    // const doctor = location.state ? location.state
+    const location = useLocation();
+    const user = location.state.user 
+    const canEdit = location.state ? location.state.canEdit : canEditPage
+    
+ 
+    
     //Informacion del doctor
     const [doctor, setDoctor] = useState(null);
+   
 
     // Constantes para manejar cambio de imagen
     const [showButton, setShowButton] = useState(true);
@@ -72,6 +80,8 @@ export function ProfilePage({canEdit}) {
         }
 
       };
+
+      
     
 
     // Obtener doctor de firebase
@@ -81,7 +91,10 @@ export function ProfilePage({canEdit}) {
             setDoctor(result);
         })
       }
+
+    
       loadDoctor();
+     
 
       return () => {
       

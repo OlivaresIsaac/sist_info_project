@@ -23,8 +23,18 @@
     font-size: 1.5rem;
 
 }
+
+.goProfile{
+    color: #572975;
+    font-size: 1.5rem;
+
+}
 .CardDoctorBottom{
     color: black;
     font-size: 1.5rem;
+}
+
+.goProfile:hover{
+    cursor:pointer;
 }
 

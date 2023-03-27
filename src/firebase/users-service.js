@@ -34,6 +34,27 @@ export async function getUserProfile(email) {
     }
 }
 
+export async function getUserProfileById(id) {
+    const userQuery = query(
+        collection(db, 'users'),
+        where("id", "==", id)
+    )
+
+    const results = await getDocs(userQuery);
+
+    if (results.size > 0) {
+        const users = results.docs.map(item => ({
+            ...item.data(),
+            id: item.id
+        }))
+
+        // OJO, no retorna objeto user, retorna objeto con la estructura de user
+        return users[0]
+    } else {
+        return null
+    }
+}
+
 export async function updateUserLastDoctor(user,doctorId){
     let userCopy=user
     userCopy.lastDoctor=doctorId

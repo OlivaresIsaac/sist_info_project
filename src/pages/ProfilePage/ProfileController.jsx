@@ -4,7 +4,7 @@ export function ProfileController() {
 
     return (
         <>
-        <ProfilePage canEdit={true}/>
+        <ProfilePage canEditPage={true}/>
         </>
     )
 }
