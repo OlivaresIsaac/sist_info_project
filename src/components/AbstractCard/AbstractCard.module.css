@@ -4,10 +4,11 @@
     justify-content: space-between;
     padding: 0.1rem 1rem;
     background: white;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    height: 15rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    /* height: 15rem; */
     border-radius: 1.5rem;
+    /* padding-right: 1rem; */
 }
 
 .cardInfo{
@@ -32,10 +33,10 @@
     transition: ease 0.3s,
 }
 @media screen and (max-width: 640px) {
-    .CardButton{
+    /* .CardButton{
     width: 10rem;
     opacity: 100%;
-    }
+    } */
 }
 .cardContainer:hover  .CardButton{
     width: 10rem;
