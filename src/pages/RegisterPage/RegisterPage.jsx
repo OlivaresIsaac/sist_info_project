@@ -117,7 +117,7 @@ export function RegisterPage() {
             }
 
             <div>
-            {(showLog === "true") && ( <button type="submit"> Registrarse</button>)}
+                {(showLog === "true") && ( <button type="submit"> Registrarse</button>)}
             </div>
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
