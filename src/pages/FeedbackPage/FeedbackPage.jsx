@@ -8,6 +8,8 @@ import { getUserProfile } from "../../firebase/users-service";
 import { useUserContext } from "../../contexts/UserContext";
 import { updateDoctorFeedback } from "../../firebase/feedback-service";
 import Swal from 'sweetalert2';
+
+
 //FeedBackPage se encarga de mostrar el 5 rating stars y la caja de comentarios al doctor
 export function FeedbackPage() {
     const {user} = useUserContext()

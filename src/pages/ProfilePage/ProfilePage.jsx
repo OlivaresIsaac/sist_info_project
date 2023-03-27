@@ -7,6 +7,7 @@ import { PencilIcon } from '@heroicons/react/24/solid'
 import EditText from '../../components/EditText/EditText'
 import { db } from '../../firebase/config'
 import { doc, updateDoc } from 'firebase/firestore'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 
 
 //Muestra la información del usuario
@@ -18,10 +19,11 @@ export function ProfilePage() {
 
     //Informacion del doctor
     const [doctor, setDoctor] = useState(null);
-    
+
     // Constantes para manejar cambio de imagen
     const [showButton, setShowButton] = useState(true);
     const [newValue, setNewValue] = useState(null);
+    const [hoverStar,setHoverStar]=useState(undefined);
 
     const changeProfilePic = () => {
         setShowButton(false)
@@ -44,17 +46,32 @@ export function ProfilePage() {
         const updates = {};
         updates[attribute] = newValue;
 
-        updateDoc(userRef, updates)
-        updateDoc(doctorRef, updates)
+        if (!isNaN(parseInt(newValue))){
+            updateDoc(userRef, parseInt(newValue))
+            updateDoc(doctorRef, parseInt(newValue))
+        }
+        else {
+            updateDoc(userRef, updates)
+            updateDoc(doctorRef, updates)
+        }
+
     };
       
     const handleUserSave = (newValue, attribute) => {
         const userRef = doc(db, 'users', user.id)
         const updates = {};
-        updates[attribute] = newValue;
+        
 
-        updateDoc(userRef, updates)
-      };  
+        if (!isNaN(parseInt(newValue))){    
+            updates[attribute] = parseInt(newValue);
+            updateDoc(userRef, updates)
+        }
+        else {
+            updates[attribute] = newValue;
+            updateDoc(userRef, updates)
+        }
+
+      };
     
 
     // Obtener doctor de firebase
@@ -87,7 +104,25 @@ export function ProfilePage() {
                         <h1 className='h1-tittle'>Dr.<EditText values={doctor.displayName} onSave={value => handleDocSave(value, "displayName")} type={1}/></h1>
                         <h1 className='h2-tittle'>Soy especialista en: <EditText values={doctor.specialty} onSave={value => handleDocSave(value, "specialty")} type={2}/></h1>
                         <h1 className='h3-tittle'>Calificación de los clientes:</h1>
-                        <h1 className='h3-tittle'>*calificación*</h1>
+                        <div className="stars">
+                                    {Array(5)
+                                        .fill()
+                                        .map((_, index)=>
+                                            doctor.avgScore >= index + 1 || hoverStar >= index + 1 ? (
+                                                <AiFillStar 
+                                                    onMouseOver={() => !doctor.avgScore && setHoverStar(index + 1)}
+                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                                    style={{color:'orange'}} 
+                                                />
+                                            ):(
+                                                <AiOutlineStar 
+                                                    onMouseOver={() => !doctor.avgScore && setHoverStar(index + 1)}
+                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                                    style={{ color: "orange" }}
+                                                />
+                                            )       
+                                        )}
+                        </div>
                     </div>
                     <div className='secondDoc-data'>
                         <div className='docBtn'>

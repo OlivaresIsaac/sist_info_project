@@ -5,8 +5,8 @@ import './EditText.css'
 const EditText = ({values, onSave, type}) => {
     const[editing, setEditing] = useState(false)
     const [newValue, setNewValue] = useState(values);
-    const inputClass1 = editing ? 'editInput editing' : 'editInput1';
-    const inputClass2 = editing ? 'editInput editing' : 'editInput2';
+    const inputClass1 = editing ? 'editInput1 editing' : 'editInput1';
+    const inputClass2 = editing ? 'editInput2 editing' : 'editInput2';
 
     const handleEditClick = () => {
         setEditing(true);
