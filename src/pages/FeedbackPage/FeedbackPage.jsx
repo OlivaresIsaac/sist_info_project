@@ -32,12 +32,20 @@ export function FeedbackPage() {
         };
   
     },[]);
+
     const mostrarAlerta=()=>{
         Swal.fire(
             '¡Feedback enviado con éxito!',
             'Gracias por su tiempo',
             'success'
           )
+    }
+    const noConsultas=()=>{
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '¡No haz hecho ninguna consulta!',
+          })
     }
     const [number,setNumber]=useState(0);
     const [hoverStar,setHoverStar]=useState(undefined);
@@ -59,13 +67,13 @@ export function FeedbackPage() {
                 return 'Califique su experiencia con este doctor'    
         }
     };
+
     const changeStars=(index)=>{
         setNumber(index+1)
         setFeedback({
             ...feedback,
             hoverStar: index+1
         })
-
     }
 
     const handlePlaceHolder=()=>{
@@ -90,51 +98,56 @@ export function FeedbackPage() {
             console.log("éxito máximo") //TODO navigate to consults
          })
     }
-    return (
-        <div className="App">
-            <div className="popup">
-                <div className="content">
-                    <div className="doctor">
-                        <img className="doctorPhoto" 
-                            style={{width:200,height:200,objectFit:"cover",borderRadius:45}} 
-                            src="https://pbs.twimg.com/profile_images/1530563277/picoro_400x400.jpg" 
-                            alt="name" 
-                        />
-                        <div className="caracter">
-                            <h1>{doctor.displayName}</h1>
-                            <h3>Especialidad: {doctor.specialty}</h3>
+    if (user.lastDoctor!==undefined){
+        return (
+            <div className="App">
+                <div className="popup">
+                    <div className="content">
+                        <div className="doctor">
+                            <img className="doctorPhoto" 
+                                style={{width:200,height:200,objectFit:"cover",borderRadius:45}} 
+                                src="https://pbs.twimg.com/profile_images/1530563277/picoro_400x400.jpg" 
+                                alt="name" 
+                            />
+                            <div className="caracter">
+                                <h1>{doctor.displayName}</h1>
+                                <h3>Especialidad: {doctor.specialty}</h3>
+                            </div>
                         </div>
+                        <div className="patata">
+                            <form onSubmit={onSubmit}>
+                                    <div className="stars">
+                                        <h1>{handleText()}</h1>
+                                        {Array(5)
+                                            .fill()
+                                            .map((_, index)=>
+                                                number >= index + 1 || hoverStar >= index + 1 ? (
+                                                    <AiFillStar 
+                                                        onMouseOver={() => !number && setHoverStar(index + 1)}
+                                                        onMouseLeave={() => setHoverStar(undefined)}
+                                                        style={{color:'orange'}} 
+                                                        onClick={() => changeStars(index)}
+                                                    />
+                                                ):(
+                                                    <AiOutlineStar 
+                                                        onMouseOver={() => !number && setHoverStar(index + 1)}
+                                                        onMouseLeave={() => setHoverStar(undefined)}
+                                                        style={{ color: "orange" }}
+                                                        onClick={() => changeStars(index)}
+                                                    />
+                                                )       
+                                            )}
+                                    </div>
+                                    <textarea onChange={handleOnChange} name="comentario" placeholder={handlePlaceHolder()}></textarea>
+                                    <button type="submit" onClick={mostrarAlerta} className={` ${!number && "disabled"} `}>Enviar feedback</button>
+                            </form>
+                        </div>     
                     </div>
-                    <div className="patata">
-                        <form onSubmit={onSubmit}>
-                                <div className="stars">
-                                    <h1>{handleText()}</h1>
-                                    {Array(5)
-                                        .fill()
-                                        .map((_, index)=>
-                                            number >= index + 1 || hoverStar >= index + 1 ? (
-                                                <AiFillStar 
-                                                    onMouseOver={() => !number && setHoverStar(index + 1)}
-                                                    onMouseLeave={() => setHoverStar(undefined)}
-                                                    style={{color:'orange'}} 
-                                                    onClick={() => changeStars(index)}
-                                                />
-                                            ):(
-                                                <AiOutlineStar 
-                                                    onMouseOver={() => !number && setHoverStar(index + 1)}
-                                                    onMouseLeave={() => setHoverStar(undefined)}
-                                                    style={{ color: "orange" }}
-                                                    onClick={() => changeStars(index)}
-                                                />
-                                            )       
-                                        )}
-                                </div>
-                                <textarea onChange={handleOnChange} name="comentario" placeholder={handlePlaceHolder()}></textarea>
-                                <button type="submit" onClick={mostrarAlerta} className={` ${!number && "disabled"} `}>Enviar feedback</button>
-                        </form>
-                    </div>     
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+    else{
+        return (noConsultas())
+    }
 }
