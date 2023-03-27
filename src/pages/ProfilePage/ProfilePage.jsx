@@ -16,7 +16,7 @@ export function ProfilePage() {
                         <h1 className='h3-tittle'>Calificación de los clientes:</h1>
                         <h1 className='h3-tittle'>*calificación*</h1>
                     </div>
-                        <h1 className='h4-tittle'>Cambiar foto de perfil</h1>    
+                        <button className='h4-tittle'>Cambiar foto de perfil</button>    
                     <div className='second-data'>
                         <div className='h7-tittle'>
                             <h1 className='h5-tittle'>Precio por hora:</h1> 
@@ -40,7 +40,7 @@ export function ProfilePage() {
             <div className='file'>
                 <div className='pacient'>
                     <img src={temp_pfp} className='pfp-pacient' alt='pysdocs'/>
-                    <h1 className='h9-tittle'>Cambiar foto de perfil</h1>    
+                    <button className='h4-tittle'>Cambiar foto de perfil</button>    
                         <div className='h10-tittle'>
                             <h1 className='h11-tittle'>{user.displayName}</h1>
                             <h1 className='h11-tittle'>{user.tlf}</h1>
