@@ -12,7 +12,8 @@ export function RegisterPage() {
         tlf: "",
         isDoctor:"false",
         preferedLanguage:"",
-        pricePerHour: ""
+        pricePerHour: "",
+        userChats: []
     })
 
     const handleOnChange = (event) => {
@@ -39,6 +40,7 @@ export function RegisterPage() {
         // console.log({formData})
         const {email, password, displayName} = formData
         let aux = formData
+        aux.userChats = []
         aux.isDoctor = (formData.isDoctor === "true")
         aux.preferedLanguage = (formData.preferedLanguage === "") ? 1 : parseInt(formData.preferedLanguage)
         aux.specialty = (formData.specialty === "") ? "Parejas" : formData.specialty
