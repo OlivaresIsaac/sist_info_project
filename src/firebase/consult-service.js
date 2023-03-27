@@ -26,3 +26,4 @@ export async function createConsult(consult) {
     // aux.consultId= ref.id
     // return setDoc(ref, aux) 
 }
+
