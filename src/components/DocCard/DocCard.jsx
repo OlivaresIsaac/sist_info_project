@@ -1,4 +1,5 @@
 import styles from "./DocCard.module.css";
+import {AiFillStar,AiOutlineStar} from "react-icons/ai";
 
 // Componente que retorna el contenido del molde de AbstractCard, dependiendo de la condición se mostrará DocCard o CitaCard.
 
@@ -21,6 +22,26 @@ const languages = ["Español", "Inglés", "Portugués", "Japonés", "Latín"]
             <div>
                 <p className={styles.CardDoctorBottom}>Precio la hora: ${Info.pricePerHour}</p>
             </div>
+            <div className="stars">
+                                 
+                                    {Array(5)
+                                        .fill()
+                                        .map((_, index)=>
+                                            Info.avgScore >= index + 1  ? (
+                                                <AiFillStar 
+                                                   
+                                                    style={{color:'orange'}} 
+                                                  
+                                                />
+                                            ):(
+                                                <AiOutlineStar 
+                                                   
+                                                    style={{ color: "orange" }}
+                                                    
+                                                />
+                                            )       
+                                        )}
+                                </div>
         </div>
     );
 }
