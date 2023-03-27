@@ -6,9 +6,11 @@ import { useState, useEffect } from "react"
 import { getDoctors } from "../../firebase/doctors-service";
 
 //Muestra la bienvenida a página y tiene la lista de doctores
-export function LandingPage({doctors}) {
-    const [info, setInfo] = useState([])
+export function LandingPage() {
+    const [docsInfo, setDocsInfo] = useState([])
+    const [showedInfo, setShowedInfo] = useState([])
     const [isDoc, setisDoc] = useState(true)
+    const [searchData, setSearchData] = useState({displayName: "", specialty:"",preferedLanguage: "", avgScore:""})
 
     
 useEffect(() => {
@@ -16,7 +18,8 @@ useEffect(() => {
 
     const loadDoctors = async () => {
         await getDoctors().then((result) => {
-            setInfo(result)
+            setShowedInfo(result)
+            setDocsInfo(result)
             // setDoctors(result)
             // console.log(result)
         })
@@ -27,6 +30,58 @@ useEffect(() => {
         loadDoctors()
     };
 }, []);   
+
+
+const onSubmit = (event) => {
+    event.preventDefault();
+    const doctorsToShow = []
+    docsInfo.forEach((doctor) => {
+        let nameBoolean = true
+        let languageBoolean = true
+        let starsBoolean = true
+        let specialtyBoolean = true
+
+        if (searchData.displayName !== "") {
+            nameBoolean = (doctor.displayName.includes(searchData.displayName)) 
+        } 
+
+        if (searchData.specialty !== "") {
+
+            specialtyBoolean = (searchData.specialty === doctor.specialty) 
+        } 
+
+        if (searchData.preferedLanguage !== "") {
+           
+            languageBoolean = (parseInt(searchData.preferedLanguage) === doctor.preferedLanguage) 
+        } 
+
+        if (searchData.avgScore !== "") {
+            starsBoolean = (parseInt(searchData.avgScore) === doctor.avgScore) 
+        } 
+
+        if (nameBoolean && languageBoolean && specialtyBoolean && starsBoolean) {
+            doctorsToShow.push(doctor)
+        }
+      
+    })
+
+    setShowedInfo(doctorsToShow)
+
+}
+
+const handleOnChange = (event) => {
+   
+    const {name, value} = event.target
+    setSearchData({
+        ...searchData,
+        [name]: value
+    })
+}
+
+const resetSearchData = () => {
+    setSearchData({displayName: "", specialty:"",preferedLanguage: "", avgScore:""})
+    setShowedInfo(docsInfo)
+}
     
 
 
@@ -46,16 +101,81 @@ useEffect(() => {
                 </div>
                
             </div>
-{/*             
-            <div className='provisional'>
-                <CheckoutDialog/>
-            </div> */}
 
-            <div className='abstractCardContainer'>
+            <div className='doctor-searcher'> 
+            <form onSubmit={onSubmit}>
+
+                <h2 className='h2-title'>Buscador de Doctores</h2> 
+                <div className='doctor-searcher-inputs'>
+
+
+                <div>
+                    <input placeholder="Nombre del doctor"  onChange={handleOnChange} className="input"  name="displayName"/>
+                </div> 
+
+                    <div>
+                        Idioma:   
+                        <select className="seleccionador" name="preferedLanguage" onChange={handleOnChange}> 
+                            <option value={1}>Español</option>
+                            <option value={2}>English</option>
+                            <option value={3}>Português</option>
+                            <option value={4}>日本</option>
+                            <option value={5}>Latinus</option>
+                        </select>
+                    </div>
+
+                <div>
+                    Especialidad:   
+                    <select className="seleccionador" name="specialty" onChange={handleOnChange}>
+                        <option value="Parejas">Parejas</option>
+                        <option value="Infantil">Infantil</option>
+                        <option value="Salud Mental">Salud Mental</option>
+                        <option value="Tercera edad">Tercera edad</option>
+                        <option value="Familia">Familia</option>
+                    </select>
+                </div>
+
+                <div>
+                    Estrellas:   
+                    <select className="seleccionador" name="avgScore" onChange={handleOnChange}>
+                        <option value={1}>1</option>
+                            <option value={2}>2</option>
+                            <option value={3}>3</option>
+                            <option value={4}>4</option>
+                            <option value={5}>5</option>
+                    </select>
+                </div>
+                    
+                    <div>
+                        <button type="submit"> Buscar</button>
+                    </div>
+
+                    <div >
+                        <button type="button" onClick={resetSearchData}> Ver todos</button>
+                    </div>
+                   
+
+                    
+                </div>
+
+              
+                </form>
+
+                
+            </div>
+           
+            {(showedInfo.length === 0) && (
+                <div className='abstractCardContainer'>
+                      <h2 className='h1-title'>No se han encontrado doctores</h2>
+                </div>
+            )}
+
+            {(showedInfo.length > 0) && (
+                <div className='abstractCardContainer'>
                 {
-                    info.map((cardInfo, key) => {
+                    showedInfo.map((cardInfo, key) => {
                        return(
-                        <div className='abstractCard'> 
+                        <div className='abstractCard' key={key}> 
                        <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
                        </div> 
                        )
@@ -63,6 +183,9 @@ useEffect(() => {
                 }
                
             </div>
+            )}
+
+            
 
             <div className='team'>   
                 <div className='round-border'>

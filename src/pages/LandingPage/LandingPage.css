@@ -32,6 +32,7 @@
     background-color: #815c97;
     margin-top: 60px;
     border-radius: 50px;
+    text-align: center;
 }
 
 .h2-title{
@@ -220,6 +221,9 @@
 
  .abstractCardContainer{
     overflow-y: scroll;
+    justify-content: center;
+    align-self: center;
+    width: 90%;
     max-height: 20rem;
     
 } 
@@ -227,3 +231,37 @@
 .abstractCardContainer::-webkit-scrollbar {
     display: none;
 }
+
+.doctor-searcher{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    text-align: center  ;
+}
+
+.doctor-searcher-inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+   
+    
+    
+}
+
+.doctor-searcher-inputs div {
+    background-color: white;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-width: 2px 2px 2px 5px;
+    border-color: black black black #572975;
+    margin-left: 1rem;
+    width: 15rem;
+    margin-top: 0.3rem;
+}
+
