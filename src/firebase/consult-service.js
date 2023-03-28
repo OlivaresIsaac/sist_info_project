@@ -1,4 +1,4 @@
-import {setDoc, addDoc, collection, runTransaction, query, where, getDocs} from "firebase/firestore"
+import {setDoc, addDoc, collection, runTransaction, query, where, getDocs, doc} from "firebase/firestore"
 import {db} from "./config"
 
 
@@ -48,4 +48,9 @@ export async function getConsultsById(isDoctor, userId){
 
      return consultArray
 }
-
+export async function updateUserConsulta(consulta){
+    let consultaCopy=consulta
+    consultaCopy.status="cancelada"
+    
+    setDoc(doc(db,"consults", consultaCopy.id), consultaCopy)
+}

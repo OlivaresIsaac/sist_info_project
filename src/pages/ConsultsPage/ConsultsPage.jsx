@@ -10,6 +10,7 @@ export function ConsultsPage(cita) {
     const {user} = useUserContext()
     const [info, setInfo] = useState([])
     const [isDoc, setisDoc] = useState(false)
+
     
         
      useEffect(() => {
@@ -18,6 +19,13 @@ export function ConsultsPage(cita) {
     const loadConsults = async () => {
         await getConsultsById(user.isDoctor, user.id).then((result) => {
             setInfo(result)
+            const consultToShow = []
+            result.forEach((consult)=> {
+                if(consult.status != "cancelada"){
+                    consultToShow.push(consult)
+                }
+            })
+            setInfo(consultToShow)
             console.log(result)
         })
            
@@ -37,11 +45,12 @@ export function ConsultsPage(cita) {
         <div className={styles.abstractCardContainer}>
                 {
                     info.map((cardInfo, key) => {
-                       return(
-                        <div className={styles.abstractCard}> 
-                       <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
-                       </div> 
-                       )
+                        return(
+                            <div className={styles.abstractCard}> 
+                               <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
+                            </div>
+                        )
+                       
                     })
                 }
                
