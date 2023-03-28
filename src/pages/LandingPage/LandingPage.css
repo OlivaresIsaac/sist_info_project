@@ -184,7 +184,6 @@
     .round-border{
         height: 28rem;
     }
-
     } 
     /* .landing-row {
         flex-direction: column;
@@ -204,7 +203,7 @@
     margin-bottom: 1rem;
 }
 
- .abstractCardContainer{
+.abstractCardContainer{
     overflow-y: scroll;
     justify-content: center;
     align-self: center;
