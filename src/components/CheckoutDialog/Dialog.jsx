@@ -73,7 +73,7 @@ const CheckoutDialog = ({doctor}) => {
         const handleHourChange = (newValue) => {
             setSelected(true);
             hour.push(newValue);
-            console.log(hour)
+            // console.log(hour)
         }
 
         return(
