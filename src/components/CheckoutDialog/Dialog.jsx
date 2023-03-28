@@ -1,10 +1,9 @@
 import "./Dialog.css"
-import { useState, useRef } from "react";
+import { useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from "react-router"
 import { CHECKOUTURL } from "../../constants/url";
 import DatePicker from 'react-datepicker';
-import dayjs from "dayjs";
 import moment from "moment/moment";
 
 // Componente que retorna un botón que muestra un dialog que pide información necesaria antes de proceder al Checkout. 
@@ -12,16 +11,17 @@ import moment from "moment/moment";
 const CheckoutDialog = ({doctor}) => {
     const [showTaskDialog, setShowTaskDialog] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
-    const [hour, setHour] = useState();
+    let hour = [];
     const [count, setCount] = useState(0);
-    
-    
-    
+
+
     const navigate = useNavigate();
 
+    
     const buildChoosedData = () => {
         return {
             date: startDate,
+            hour: hour,
             consultHours: count
         }
     }
@@ -37,7 +37,7 @@ const CheckoutDialog = ({doctor}) => {
     const confirm = () => {
         setShowTaskDialog(false);
         navigateToCheckOut();
-        console.log(startDate)
+
     };
 
     const cancel = () => {
@@ -65,19 +65,31 @@ const CheckoutDialog = ({doctor}) => {
         )
     };
 
-    const handleHourChange = (newValue) => {
-        setHour(newValue)
+
+    const HourButton = ({newValue}) => {
+        const [selected, setSelected] = useState(false)
+        const buttonClass = selected ? 'timeBtn selected' : 'timeBtn';
+
+        const handleHourChange = (newValue) => {
+            setSelected(true);
+            hour.push(newValue);
+            console.log(hour)
+        }
+
+        return(
+            <button className={buttonClass} onClick={() => handleHourChange(newValue)} disabled={selected}>{newValue}</button>
+        )
     }
 
     const DateBlocks = () => {
         return (
             <div className="dateBlock">
-                <button className="timeBtn" onClick={handleHourChange("8:00 AM - 9:00 AM")} >8:00 AM - 9:00 AM</button>
-                <button className="timeBtn" onClick={handleHourChange("9:00 AM - 10:00 AM")} >9:00 AM - 10:00 AM</button>
-                <button className="timeBtn" onClick={handleHourChange("10:00 AM - 11:00 AM")} >10:00 AM - 11:00 AM</button>
-                <button className="timeBtn" onClick={handleHourChange("11:00 AM - 12:00 PM")} >11:00 AM - 12:00 PM</button>
-                <button className="timeBtn" onClick={handleHourChange("12:00 PM - 1:00 PM")} >12:00 PM - 1:00 PM</button>
-                <button className="timeBtn" onClick={handleHourChange("1:00 PM - 2:00 PM")} >1:00 PM - 2:00 PM</button>
+                <HourButton newValue="8:00 AM - 9:00 AM"/>
+                <HourButton newValue="9:00 AM - 10:00 AM"/>
+                <HourButton newValue="10:00 AM - 11:00 AM"/>
+                <HourButton newValue="11:00 AM - 12:00 PM"/>
+                <HourButton newValue="12:00 PM - 1:00 PM"/>
+                <HourButton newValue="1:00 PM - 2:00 PM"/>
             </div>
         )
     }

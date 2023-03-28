@@ -20,7 +20,7 @@
     transition: 300ms all;
 }
 
-.timeBtn:focus {
+.selected {
     outline: 3px solid black;
 }
 

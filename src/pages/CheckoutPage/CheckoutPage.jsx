@@ -15,6 +15,7 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
 
     const doctor =  location.state.doctor
     const choosedData = location.state.choosedData
+
     // console.log(doctor, choosedData)
     //TODO Mostrar datos del doctor
 
@@ -25,6 +26,15 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
     //   },
     //   [success]
     // );
+
+    const buildSchedule = () => {
+        const schedule = {
+          hour: location.state.choosedData.hour,
+          date: location.state.choosedData.date
+        }
+        return schedule
+    }
+
     const onApprove = (data, actions) => {
         return actions.order.capture().then(function (details) {
         //   const { payer } = details;
