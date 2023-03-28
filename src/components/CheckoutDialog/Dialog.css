@@ -20,6 +20,11 @@
     transition: 300ms all;
 }
 
+
+.taken {
+    background-color: red;
+}
+
 .selected {
     outline: 3px solid black;
 }
