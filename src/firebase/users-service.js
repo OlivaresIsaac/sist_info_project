@@ -1,5 +1,8 @@
-import {setDoc, doc, query, collection, where, getDocs} from "firebase/firestore"
-import {db} from "./config"
+import {setDoc, doc, query, collection, where, getDocs,} from "firebase/firestore"
+import {db, storage} from "./config"
+import 'firebase/storage';
+
+import { getStorage, ref, uploadBytes, getDownloadURL  } from "firebase/storage";
 
 
 // Servicio que retorna la información acerca del usuario logueado en la web.
@@ -59,4 +62,42 @@ export async function updateUserLastDoctor(user,doctorId){
     let userCopy=user
     userCopy.lastDoctor=doctorId
     return setDoc(doc(db,"users", userCopy.id), userCopy)
+}
+
+export async function updateProfilePic(user, profilePic){
+    const st = storage;
+    console.log()
+    const storageRef = ref(st, profilePic.name);
+    
+    // 'file' comes from the Blob or File API
+    await uploadBytes(storageRef, profilePic).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+       
+    });
+
+    const imageRef = ref(st, ("/"+profilePic.name))
+
+    let userCopy = user;
+   
+
+    await getDownloadURL(imageRef).then((url) => {
+        console.log(url)
+        userCopy.profilePic = url
+    })
+
+    // getDownloadURL(ref(storage, profilePic)).then((url) => {
+    //     userCopy.profilePic = url
+    // })
+
+    // st.ref(profilePic.name).getDownloadURL()
+    // .then((url) => {
+    //     userCopy.profilePic= url
+    // })
+
+
+
+    return setDoc(doc(db,"users", userCopy.id), userCopy)
+
+
+    
 }

@@ -2,6 +2,7 @@ import { useUserContext } from '../../contexts/UserContext'
 import './ProfilePage.css'
 import temp_pfp from '../../assets/temp_pfp.png'
 import  {getDoctorProfile, setDoctor}  from '../../firebase/doctors-service.js'
+import {updateProfilePic}   from '../../firebase/users-service.js'
 import { useState, useEffect } from "react"
 import { PencilIcon } from '@heroicons/react/24/solid'
 import EditText from '../../components/EditText/EditText'
@@ -9,7 +10,7 @@ import { db } from '../../firebase/config'
 import { doc, updateDoc } from 'firebase/firestore'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useLocation } from "react-router-dom";
-import { getUserProfileById } from '../../firebase/users-service'
+
 
 //Muestra la información del usuario
 
@@ -39,11 +40,14 @@ export function ProfilePage({canEditPage}) {
 
     const handleImgSave = () => {
         setShowButton(true)
+        updateProfilePic(user, newValue)
+      
         // handleUserSave(newValue, "profilePic")
     }
 
     const handleInputChange = (event) => {
-        setNewValue(event.target.value);
+        setNewValue(event.target.files[0]);
+        console.log(event.target.files)
     };
 
 
@@ -144,7 +148,9 @@ export function ProfilePage({canEditPage}) {
                             <button onClick={changeProfilePic} className="pfpBtn1">Cambiar foto de perfil</button>
                             ) : (
                             <div className='submitImg'>
-                                <input type="file" accept="image/*" className='pfpBtn1' onChange={handleInputChange}/>
+                                <input type="file" accept="image/*" className='pfpBtn1' onChange={handleInputChange}  
+                        name="input-file"
+                        label='File'/>
                                 <button onClick={handleImgSave} className='submitBtn1'>Aceptar</button>
                             </div>
                             )}

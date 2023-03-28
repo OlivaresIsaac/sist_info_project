@@ -31,6 +31,7 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
         setDoctorName(doctor.displayName)
         setSuccess(true);
         setConsult(createConsult())
+        
         });
       };
 

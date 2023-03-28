@@ -40,7 +40,7 @@ export const registerWithEmailAndPassword = async (email, password, displayName,
             const result = await createUserWithEmailAndPassword(auth, email, password)
       
            
-                    const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage, allData.userChats)
+                    const newUser = new User(result.user.uid, displayName, email, allData.isDoctor, allData.tlf, allData.preferedLanguage, [])
                     
                     await createUserProfile(result.user.uid, newUser.toObject())
                     // await createUserChats(result.user.uid)
