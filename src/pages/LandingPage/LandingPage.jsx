@@ -140,7 +140,7 @@ const resetSearchData = () => {
                 <div>
                     Estrellas:   
                     <select className="seleccionador" name="avgScore" onChange={handleOnChange}>
-                        <option value={1}>1</option>
+                            <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
                             <option value={4}>4</option>

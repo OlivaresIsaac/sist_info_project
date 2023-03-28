@@ -1,9 +1,50 @@
+.div-grid{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.datepicker{
+    align-self: center;
+}
+
+.timeBtn{
+    padding: 0.1%;
+    margin: 1%;
+    background-color: #572975;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    font-size: 1rem;
+    transition: 300ms all;
+}
+
+.timeBtn:focus {
+    outline: 3px solid black;
+}
+
+.dateBlock{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+}
+
 .counter{
     margin-top: 3%;
 }
 
+
+.date-tittle{
+    text-align: center;
+}
+
 .h1_tittle{
     display: inline;
+    text-align: center;
 }
 
 .hour-input{
@@ -41,9 +82,9 @@
     border-radius: 0.75rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
     max-width: 100%;
-    width: 24rem;
+    width: 32rem;
 }
 
 .dialog-content{
