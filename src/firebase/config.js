@@ -1,8 +1,10 @@
 
+import { useEffect, useState } from "react";
+
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider,onAuthStateChanged, updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getDownloadURL,getStorage,ref, uploadBytes } from "firebase/storage";
 
 // Servicio que inicializa las variables de Firebase
 
@@ -25,3 +27,24 @@ export const storage = getStorage(app);
 
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account"})
+// Custom Hook
+export function useAuth() {
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+    return unsub;
+  }, [])
+
+  return currentUser;
+}
+//Storage
+export async function upload(file,currentUser,setLoading){
+  const fileRef=ref(storage,'images/' + currentUser.uid + '.png');
+
+  const snapshot = await uploadBytes(fileRef,file);
+  const photoURL=await getDownloadURL(fileRef);
+  updateProfile(currentUser,{photoURL});
+  setLoading(false);
+  alert("Upload file!")
+}
