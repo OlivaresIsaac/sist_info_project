@@ -6,7 +6,7 @@ import {updateUserConsulta} from '../../firebase/consult-service'
 import { useEffect, useState } from "react";
 import { DEFAULTPROFILE } from "../../constants/url";
 import { getUserProfileById } from '../../firebase/users-service'
-
+import Swal from 'sweetalert2';
 
 // Componente que crea el molde para las cartas de los doctores, implementa el patrón Factoria Abstracta.
 
@@ -46,8 +46,18 @@ export default function Card({isDoc, Info}) {
       }, []);
     
 
+    const mostrarAlerta=()=>{
+        Swal.fire(
+            '¡Cita cancelada satisfactoriamente!',
+            'Gracias por su tiempo',
+            'success'
+          )
+    }
+    const handleReloadAndUpdateConsulta = () => {
+        mostrarAlerta();
+        updateUserConsulta(Info);
+    };
     return (
-        
         <div className={styles.cardContainer} >
             <div className={styles.cardContainerImg}>
                 <img className={styles.cardImg} src={imageUrl} alt="imagen"/>
@@ -75,7 +85,7 @@ export default function Card({isDoc, Info}) {
                     </>
                     )}
                     {!isDoc && (
-                        <button onClick={()=>updateUserConsulta(Info)} className={styles.CardButton}>Cancelar Cita</button>
+                        <button onClick={handleReloadAndUpdateConsulta} className={styles.CardButton}>Cancelar Cita</button>
                     )}
             </div>
         </div>
