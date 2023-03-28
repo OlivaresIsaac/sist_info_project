@@ -51,6 +51,6 @@ export async function getConsultsById(isDoctor, userId){
 export async function updateUserConsulta(consulta){
     let consultaCopy=consulta
     consultaCopy.status="cancelada"
-    console.log("ayudaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    
     setDoc(doc(db,"consults", consultaCopy.id), consultaCopy)
 }

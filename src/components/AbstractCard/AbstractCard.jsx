@@ -8,18 +8,7 @@ import Swal from 'sweetalert2';
 // Componente que crea el molde para las cartas de los doctores, implementa el patrón Factoria Abstracta.
 
 export default function Card({isDoc, Info}) {
-    const canceladoAdvise=()=>{
-        Swal.fire(
-            '¡Cita cancelada con éxito!',
-            'Gracias por su tiempo',
-            'success'
-          )
-    }
-    const call2Functions=()=>{
-        updateUserConsulta(Info)
-        canceladoAdvise()
 
-    }
 
 
     return (
@@ -51,7 +40,7 @@ export default function Card({isDoc, Info}) {
                     </>
                     )}
                     {!isDoc && (
-                        <button onClick={call2Functions()} className={styles.CardButton}>Cancelar Cita</button>
+                        <button onClick={()=>updateUserConsulta(Info)} className={styles.CardButton}>Cancelar Cita</button>
                     )}
             </div>
         </div>
