@@ -10,7 +10,7 @@ import { createUserChats} from "./chats-service"
 
 
 //TODO Hacer form que pase los parámetros aqui a esta función para hacer el createUser
-export const signInWithGoogle = async (tlf, preferedLanguage, isdoc, pricePerHour, speciality) => {
+export const signInWithGoogle = async (formInfo) => {
     try {
         const result = await signInWithPopup(auth, googleProvider)
         console.log(result)
@@ -18,13 +18,12 @@ export const signInWithGoogle = async (tlf, preferedLanguage, isdoc, pricePerHou
 
         //TODO pasar data con todo lo necesario, buscar la forma de pasar el boolean de isDoctor
         if(isNewUser){
-        if(isdoc === false){
-            const newUser = new User(result.user.uid, result.user.displayName, result.user.email, isdoc, tlf, preferedLanguage, [])
+            const newUser = new User(result.user.uid, result.user.displayName, result.user.email, formInfo.isDoctor, formInfo.tlf, formInfo.preferedLanguage, [])
             await createUserProfile(result.user.uid, newUser.toObject())
+        if(formInfo.isDoctor){
+            const doctor = new Doctor(result.user.uid, formInfo.pricePerHour, formInfo.speciality,formInfo.biography, formInfo.preferedLanguage, result.user.displayName,[],0,[])
+            await createDoctor(result.user.uid, doctor.toObject())
             // await createUserChats(result.user.uid)
-        }else{
-            const newUser = new Doctor(result.user.uid, pricePerHour, speciality, preferedLanguage, result.user.displayName, result.user.email, [], 0, [])
-            await createUserProfile(result.user.uid, newUser.toObject())
         }
     }
 

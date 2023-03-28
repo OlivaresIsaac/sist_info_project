@@ -41,12 +41,9 @@ export function RegisterPage() {
     }
 
     const handleRegisterWithGoogle = async () => {
-        if(formData.isDoctor === false){
-            await signInWithGoogle(formData.tlf, formData.preferedLanguage, formData.isDoctor, null, null)
-        }else{
-            await signInWithGoogle(formData.tlf, formData.preferedLanguage, formData.isDoctor, formData.pricePerHour, formData.specialty)
-        }
         
+        await signInWithGoogle(formData)
+    
      }
 
     const onSubmit = async (event) => {
