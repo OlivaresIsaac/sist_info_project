@@ -11,7 +11,6 @@ export function ConsultsPage(cita) {
     const {user} = useUserContext()
     const [info, setInfo] = useState([])
     const [isDoc, setisDoc] = useState(false)
-    const [show, setShow] = useState(false)
     const noCitas=()=>{
         Swal.fire({
             icon: 'error',
@@ -34,9 +33,6 @@ export function ConsultsPage(cita) {
                 }
             })
             setInfo(consultToShow)
-            if(setInfo != []){
-                setShow(true)
-            }
             console.log(result)
         })
            
@@ -48,28 +44,23 @@ export function ConsultsPage(cita) {
           
         };
     }, []);   
+    if(info.length>0){
         return (<div className={styles.Consulta}>
             <div className={styles.tituloConsulta}>
                 Consultas Asignadas
             </div>
             <div className={styles.abstractCardContainer}>
-                    
-                        {show && (
-                            info.map((cardInfo, key) => {
-                                return(
-                                    <div className={styles.abstractCard}> 
-                                       <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
-                                    </div>
-                                )
-                            })
-                        )}
-                        {!show && (
-                            noCitas()
-                        )}
-                        
-                    
+                    {
+                        info.map((cardInfo, key) => {
+                            return(
+                                <div className={styles.abstractCard}> 
+                                   <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
+                                </div>
+                            )
+                        })
+                    }
                 </div>
         </div>
         )
-    
+    }
 }
