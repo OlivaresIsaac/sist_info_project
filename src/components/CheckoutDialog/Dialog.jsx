@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from "moment/moment";
 import { onSnapshot, doc } from "@firebase/firestore";
 import { db} from "../../firebase/config"
+import { getDoctorProfile } from "../../firebase/doctors-service";
 
 
 // Componente que retorna un botón que muestra un dialog que pide información necesaria antes de proceder al Checkout. 
@@ -25,22 +26,32 @@ const CheckoutDialog = ({doctor}) => {
     )
     const [hourBooleans, setHourBooleans] = useState(
         [
-            true, true, true, true, true, true
+            false, false, false, false, false, false
         ]
     )
+    const [showedButtons, setShowedButtons] = useState(hoursStrings)
 
 
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     onSnapshot(doc(db, "doctors", doctor.id), (doc) => {
-    //         setNonAvaible(doc.data().scheduleTaken)
-    //     })
-    //     if(checkDate(startDate, nonAvaible)){
+    useEffect(() => {
 
-    //     }
+        const loadData = async () => {
+            await getDoctorProfile(doctor.id).then((result) => {
+                setNonAvaible(result.scheduleTaken)
+                
+                updateHoursbooleans()
+               
+            })
+        }
+        loadData()
 
-    // },[startDate])
+       
+        // if(checkDate(startDate, nonAvaible)){
+
+        // }
+
+    },[])
 
     
     const buildChoosedData = () => {
@@ -93,7 +104,15 @@ const CheckoutDialog = ({doctor}) => {
 
     const HourButton = ({newValue}) => {
         const [selected, setSelected] = useState(false)
-        const buttonClass = selected ? 'timeBtn selected' : 'timeBtn';
+        // const [isTaken, setIsTaken] = useState(false)
+        let buttonClass = selected ? 'timeBtn selected' : 'timeBtn';
+
+        console.log(hourBooleans, "booleano")
+        //     if(isTaken) {
+        //      buttonClass =  "timeBtn taken"
+        // }
+     
+         
 
         const handleHourChange = (newValue) => {
             setSelected(true);
@@ -125,24 +144,66 @@ const CheckoutDialog = ({doctor}) => {
         return true
     }
 
+    const updateHoursbooleans = () => {
+        const showedInfoAux = []
+        hoursStrings.map((hourString, index) => {
+            let dateMatches = false;
+            let hourStringMathes = false;
+
+           
+            
+            nonAvaible.forEach((scheduleObject) => {
+                
+                if (!dateMatches) {
+                    console.log(new Date(scheduleObject.date*1000), "dateFirebase")
+                    console.log(startDate, "dateLocal")
+                    dateMatches = (startDate === (new Date(scheduleObject.date*1000))) 
+                }
+                if(!hourStringMathes) {
+                   
+                    hourStringMathes = (hourString === scheduleObject.hourBlock)
+                }
+                
+            })
+
+            // dateMatches = (index%2)===0
+            // hourStringMathes = (index%2)===0
+
+           if(!(dateMatches && hourStringMathes)) {
+            showedInfoAux.push(hourString)
+           }
+            //      hourBooleans.push((dateMatches && hourStringMathes))
+            
+            // console.log(hoursStrings[index], "test")
+        })
+
+        setShowedButtons(showedInfoAux)
+        console.log(showedInfoAux, "pudri")
+    }
+
     const DateBlocks = () => {
         
         return (
             <div className="dateBlock">
-            {/* {
-                hoursStrings.map((h, key) => {
-                    return(
-                        <HourButton newValue={h}/>
-                    )
-                })
-            } */}
+            {
+                showedButtons.map((string, key) => {
+                    
+                    
+                        return(
+                            <HourButton newValue={string} />
+                        )
+                    
 
-                <HourButton newValue="8:00 AM - 9:00 AM"/>
+                    
+                })
+            }
+
+                {/* <HourButton newValue="8:00 AM - 9:00 AM"/>
                 <HourButton newValue="9:00 AM - 10:00 AM"/>
                 <HourButton newValue="10:00 AM - 11:00 AM"/>
                 <HourButton newValue="11:00 AM - 12:00 PM"/>
                 <HourButton newValue="12:00 PM - 1:00 PM"/>
-                <HourButton newValue="1:00 PM - 2:00 PM"/>
+                <HourButton newValue="1:00 PM - 2:00 PM"/> */}
             </div>
         )
     }
@@ -152,12 +213,17 @@ const CheckoutDialog = ({doctor}) => {
             <div>
                 <h1 className="date-tittle"> Fecha de la consulta: </h1>
                 <div className="div-grid">
-                    <DatePicker showIcon={true} selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()}/>
+                    <DatePicker showIcon={true} selected={startDate} onChange={(date) => changeDate(date)} minDate={moment().toDate()}/>
                     <DateBlocks/>
                 </div>
             </div>
         );
       };
+
+      const changeDate = (date) => {
+        setStartDate(date)
+        updateHoursbooleans()
+      }
       
 
     const Dialog = ({show}) => {
@@ -172,6 +238,7 @@ const CheckoutDialog = ({doctor}) => {
                         <div className="dialog-tittle-style"><h1 className="dialog-tittle"> Agendar cita con {doctor.displayName} </h1></div>
                             <div className="forms">
                                 <DatesPicker/>
+                                {/* counter should be comented */}
                                 <Counter />
                             </div>
                         <div className="dialog-footer">
