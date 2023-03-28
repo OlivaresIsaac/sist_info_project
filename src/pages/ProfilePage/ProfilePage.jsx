@@ -5,30 +5,33 @@ import  {getDoctorProfile, setDoctor}  from '../../firebase/doctors-service.js'
 import { useState, useEffect } from "react"
 import { PencilIcon } from '@heroicons/react/24/solid'
 import EditText from '../../components/EditText/EditText'
-import { db } from '../../firebase/config'
+import { db,upload } from '../../firebase/config'
 import { doc, updateDoc } from 'firebase/firestore'
-
-
 //Muestra la información del usuario
 
 
 export function ProfilePage() {    
     // Informacion del usuario
     const {user} = useUserContext();
-
+    const [photoURL,setPhotoURL]=useState("https://cdn-icons-png.flaticon.com/512/149/149071.png");
+    const [photo,setPhoto]=useState(null);
+    const [loading,setLoading]=useState(false);
     //Informacion del doctor
     const [doctor, setDoctor] = useState(null);
     
     // Constantes para manejar cambio de imagen
     const [showButton, setShowButton] = useState(true);
     const [newValue, setNewValue] = useState(null);
-
-    const changeProfilePic = () => {
-        setShowButton(false)
+    
+    function changeProfilePic(e){
+        if (e.target.files[0]){
+            setPhoto(e.target.files[0])
+        }
     }
 
     const handleImgSave = () => {
         setShowButton(true)
+        upload(photo,{user},setLoading);
         // handleUserSave(newValue, "profilePic")
     }
 
@@ -72,6 +75,11 @@ export function ProfilePage() {
 
     }, []);
 
+    useEffect(()=>{
+        if ({user}?.photoURL){
+            setPhotoURL({user}.photoURL);  
+        }
+    },[{user}])
     if (user.isDoctor === true & !doctor) {
         return <p>Loading...</p>;
       }
@@ -82,7 +90,7 @@ export function ProfilePage() {
         return (
             <div className='file'>
                 <div className='doctorFile'>
-                    <img src={temp_pfp} className='pfp-doc' alt='pysdocs'/>
+                    <img src={photoURL} className='pfp-doc' alt='pysdocs'/>
                     <div className='firstDoc-data'>
                         <h1 className='h1-tittle'>Dr.<EditText values={doctor.displayName} onSave={value => handleDocSave(value, "displayName")} type={1}/></h1>
                         <h1 className='h2-tittle'>Soy especialista en: <EditText values={doctor.specialty} onSave={value => handleDocSave(value, "specialty")} type={2}/></h1>
@@ -133,7 +141,7 @@ export function ProfilePage() {
                             ) : (
                             <div className='submitImg'>
                                 <input type="file" accept="image/*" className='pfpBtn2' onChange={handleInputChange}/>
-                                <button onClick={handleImgSave} className='submitBtn2'>Aceptar</button>
+                                <button disabled={loading||!photo} onClick={handleImgSave} className='submitBtn2'>Aceptar</button>
                             </div>
                             )}
 
