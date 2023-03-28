@@ -33,7 +33,8 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
-        if(user.userChats != []){
+        if(user.userChats.length !== 0){
+            
             const queryChats = query(collection(db, "chats"), where("id", "in", user.userChats))
             onSnapshot(queryChats, (snapshot) => {
                 let a = []

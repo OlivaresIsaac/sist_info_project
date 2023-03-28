@@ -8,6 +8,13 @@
     grid-template-columns: 1fr 1fr;
     height: 100vh;
 }
+@media screen and (max-width: 640px) {
+    .contenedorLogin{
+        display: flex;
+        flex-direction: column;
+        
+    }
+}
 .izquierdalogin{
     background: url('../../assets/Psyduck_registro.png') center; 
     background-size: cover;

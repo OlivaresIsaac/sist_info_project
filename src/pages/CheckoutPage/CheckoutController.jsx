@@ -5,6 +5,7 @@ import { createConsult } from "../../firebase/consult-service"
 import { createChat, updateUsersChats } from "../../firebase/chats-service";
 import { updateUserLastDoctor } from "../../firebase/users-service";
 import Swal from "sweetalert2";
+
 //CheckOutController, se encarga de llamar los métodos de firebase para crear consultas y chats
 export function CheckoutController() {
     const [consult, setConsult] = useState(null)

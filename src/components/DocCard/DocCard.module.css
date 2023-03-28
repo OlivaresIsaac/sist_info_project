@@ -1,6 +1,7 @@
 .DoccardContainer{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     place-items: center;
     text-align: center;
     margin-left: 1rem;
@@ -22,7 +23,18 @@
     font-size: 1.5rem;
 
 }
+
+.goProfile{
+    color: #572975;
+    font-size: 1.5rem;
+
+}
 .CardDoctorBottom{
     color: black;
     font-size: 1.5rem;
 }
+
+.goProfile:hover{
+    cursor:pointer;
+}
+

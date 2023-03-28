@@ -12,6 +12,14 @@
     height: 100vh;
     
 }
+@media screen and (max-width: 640px) {
+    .contenedorRegistro{
+        display: flex;
+        flex-direction: column;
+        
+    }
+}
+
 
 .izquierda{
     background: url('../../assets/Psyduck_registro.png') center; 

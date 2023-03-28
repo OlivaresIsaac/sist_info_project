@@ -3,12 +3,17 @@ import DocCard from "../DocCard/DocCard";
 import CitaCard from "../CitaCard/CitaCard";
 import CheckoutDialog from '../../components/CheckoutDialog/Dialog'
 
+
 // Componente que crea el molde para las cartas de los doctores, implementa el patrón Factoria Abstracta.
 
 export default function Card({isDoc, Info}) {
+
+
+
+
     return (
         
-        <div className={styles.cardContainer}>
+        <div className={styles.cardContainer} >
             <div className={styles.cardContainerImg}>
                 {/* <img className={styles.cardImg} src={Info.imagen} alt="imagen"/> */}
             </div>
