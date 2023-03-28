@@ -10,6 +10,7 @@ import { db } from '../../firebase/config'
 import { doc, updateDoc } from 'firebase/firestore'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { useLocation } from "react-router-dom";
+import { DEFAULTPROFILE } from '../../constants/url'
 
 
 //Muestra la información del usuario
@@ -22,6 +23,7 @@ export function ProfilePage({canEditPage}) {
     const location = useLocation();
     const user = location.state.user 
     const canEdit = location.state ? location.state.canEdit : canEditPage
+    const imageUrl = user.profilePic ? user.profilePic : DEFAULTPROFILE
     
  
     
@@ -118,7 +120,8 @@ export function ProfilePage({canEditPage}) {
             <> 
             <div className='file'>
                 <div className='doctorFile'>
-                    <img src={temp_pfp} className='pfp-doc' alt='pysdocs'/>
+
+                    <img src={imageUrl} className='pfp-doc' alt='pysdocs'/>
                     <div className='firstDoc-data'>
                         <h1 className='h1-tittle'>Dr.<EditText values={doctor.displayName} onSave={value => handleDocSave(value, "displayName")} type={1} canEdit={canEdit}/></h1>
                         <h1 className='h2-tittle'>Soy especialista en: <EditText values={doctor.specialty} onSave={value => handleDocSave(value, "specialty")} type={2} canEdit={canEdit}/></h1>
@@ -220,7 +223,7 @@ export function ProfilePage({canEditPage}) {
 
             <div className='file'>
                 <div className='pacientFile'>
-                        <img src={temp_pfp} className='pfp-pacient' alt='pysdocs'/>  
+                        <img src={imageUrl} className='pfp-pacient' alt='pysdocs'/>  
                         <div className='firstUser-data'>
                           
                         {canEdit && (

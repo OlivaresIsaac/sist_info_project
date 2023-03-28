@@ -19,7 +19,11 @@
 }
 
 .cardImg{
-    border-radius: 1rem;
+    border-radius: 150px;
+    width: 12rem;
+    color: white;
+    border-color: white;
+    background-color: white; 
 }
 .CardButton{
     font-size: 1.5rem;
@@ -49,7 +53,7 @@
 .cardContainerImg{
     place-items: center;
     justify-content: center;
-    background-color: #572975;
+    background-color: white;
     border-radius: 1rem;
 }
 

@@ -94,6 +94,8 @@ export async function updateProfilePic(user, profilePic){
     //     userCopy.profilePic= url
     // })
 
+    
+
 
 
     return setDoc(doc(db,"users", userCopy.id), userCopy)

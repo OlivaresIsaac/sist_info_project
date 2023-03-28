@@ -35,6 +35,7 @@
     float: left;
     height: 39%;
     width: 39%;
+    border-radius: 100px;
 }
 
 .pfp-pacient{
@@ -43,6 +44,7 @@
     margin-right: auto;
     height: auto;
     width: 45%;
+    border-radius: 100px;
 }
 
 .h1-tittle{

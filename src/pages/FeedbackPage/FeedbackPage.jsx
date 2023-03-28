@@ -4,10 +4,11 @@ import "./FeedbackPage.css";
 import {useState,useEffect} from "react";
 import { getDoctorProfile } from "../../firebase/doctors-service";
 import {AiFillStar,AiOutlineStar} from "react-icons/ai";
-import { getUserProfile } from "../../firebase/users-service";
+import { getUserProfile, getUserProfileById } from "../../firebase/users-service";
 import { useUserContext } from "../../contexts/UserContext";
 import { updateDoctorFeedback } from "../../firebase/feedback-service";
 import Swal from 'sweetalert2';
+import { DEFAULTPROFILE } from "../../constants/url";
 
 
 //FeedBackPage se encarga de mostrar el 5 rating stars y la caja de comentarios al doctor
@@ -15,6 +16,8 @@ export function FeedbackPage() {
     const {user} = useUserContext()
     const [doctor, setDoctor] = useState({displayName:"",specialty:""});
     const [feedback,setFeedback]=useState({displayName:user.displayName,hoverStar:0,comentario:""})
+    const [imageUrl, setImageUrl] = useState(DEFAULTPROFILE)
+    const [doctorUser, setDoctorUser] = useState(null)
     const handleOnChange = (event) => {
         const {name, value} = event.target
         setFeedback({
@@ -23,12 +26,26 @@ export function FeedbackPage() {
         })
     }
     useEffect(() => {
+
+        const loadDoctorProfile = async () => {
+            await getUserProfileById(doctor.id).then((result) => {
+                setDoctorUser(result)
+                console.log(result)
+                setImageUrl(result ? result.profilePic : DEFAULTPROFILE)
+            }) 
+        }
+
         const loadDoctor = async () => {
           await getDoctorProfile(user.lastDoctor).then((result) =>{
               setDoctor(result);
+             
           })
         }
+
+      
+        loadDoctorProfile()
         loadDoctor();
+       
         return () => {
 
         };
@@ -108,7 +125,7 @@ export function FeedbackPage() {
                         <div className="doctor">
                             <img className="doctorPhoto" 
                                 style={{width:200,height:200,objectFit:"cover",borderRadius:45}} 
-                                src="https://pbs.twimg.com/profile_images/1530563277/picoro_400x400.jpg" 
+                                src={imageUrl} 
                                 alt="name" 
                             />
                             <div className="caracter">
