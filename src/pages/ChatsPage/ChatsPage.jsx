@@ -7,6 +7,7 @@ import {AiFillCaretLeft} from "react-icons/ai"
 import styles from "./ChatsPage.module.css"
 
 import { useUserContext } from "../../contexts/UserContext";
+import { DEFAULTPROFILE } from "../../constants/url";
 //Función que recupera los documentos de chats y mantiene actulizado los mensajes
 export function ChatsPage() {
     const [isChatSelected, setChatSelected] = useState(false)
@@ -23,6 +24,7 @@ export function ChatsPage() {
     const [currentDoc, setCurrentDoc] = useState()
     const [userChats, setUserChats] = useState([]);
     const [userChatsDoc, setUserChatsDoc] = useState([]);
+    const [imageUrls, setImageUrl] = useState([])
 
     useEffect(() => {
         // const queryMessages = query(messagesRef, where("room", "==", "pruebas"))
@@ -44,6 +46,9 @@ export function ChatsPage() {
                         })
                         setUserChatsDoc(a)
                     })
+
+                    
+                    const queryReceptors = query(collection(db, "users"), where("id", "==") )
                 }
                 }
             })
@@ -69,6 +74,7 @@ export function ChatsPage() {
                     setCurrentChat(doc.data().id)
                     setMessages(doc.data().messages);
                     setReceptorName((user.isDoctor) ? doc.data().patient : doc.data().doctor);
+                 
                     setChatSelected(true);
                 };
             });
@@ -177,7 +183,7 @@ export function ChatsPage() {
                                     className="p-4 w-[90vw] flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
                                 >
                                     <img
-                                        src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                          src={DEFAULTPROFILE}
                                         className="w-10 h-10 object-cover rounded-full"
                                     />
                                     <div className="flex-1 flex justify-between">
@@ -199,7 +205,7 @@ export function ChatsPage() {
                                     className="p-4 flex items-center gap-4 hover:bg-[#D5D6DC] border-b border-[#222C32] transition-colors hover:cursor-pointer"
                                 >
                                     <img
-                                        src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                                        src={DEFAULTPROFILE}
                                         className="w-10 h-10 object-cover rounded-full"
                                     />
                                     <div className="flex-1 flex truncate justify-between">
@@ -227,7 +233,7 @@ export function ChatsPage() {
                             <AiFillCaretLeft />
                         </button>
                         <img
-                            src="https://img.freepik.com/foto-gratis/alegre-joven-pie-aislado-sobre-pared-naranja_171337-16567.jpg"
+                             src={DEFAULTPROFILE}
                             className="w-10 h-10 object-cover rounded-full"
                         />
                         <div>
