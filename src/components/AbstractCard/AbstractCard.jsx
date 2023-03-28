@@ -71,6 +71,7 @@ export default function Card({isDoc, Info}) {
                         <CitaCard Info={Info} />
                     )}
             </div>
+
             <div className={styles.ButtonContainer} user={user}>
                 {isDoc && (
                     <>

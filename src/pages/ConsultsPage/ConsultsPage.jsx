@@ -63,7 +63,4 @@ export function ConsultsPage(cita) {
         </div>
         )
     }
-    else{
-        return noCitas();
-    }
 }

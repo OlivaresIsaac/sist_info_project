@@ -55,10 +55,11 @@ const CheckoutDialog = ({doctor}) => {
 
     
     const buildChoosedData = () => {
+        let hora = hour.length
         return {
             date: startDate,
             hour: hour,
-            consultHours: count
+            consultHours: hora
         }
     }
 
@@ -117,7 +118,7 @@ const CheckoutDialog = ({doctor}) => {
         const handleHourChange = (newValue) => {
             setSelected(true);
             hour.push(newValue);
-            // console.log(hour)
+            console.log(hour.lenght)
         }
 
         return(

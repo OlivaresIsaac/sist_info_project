@@ -1,7 +1,7 @@
 .cardContainer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0.1rem 1rem;
     background: white;
     margin-left: 1rem;
@@ -12,12 +12,10 @@
 }
 
 .cardInfo{
-    text-align: center;
+    text-align: left;
     display: flex;
-    place-items: center;
-    justify-content: center;
+    justify-content: left;
 }
-
 .cardImg{
     border-radius: 150px;
     width: 12rem;
@@ -37,10 +35,14 @@
     transition: ease 0.3s,
 }
 @media screen and (max-width: 640px) {
-    /* .CardButton{
-    width: 10rem;
-    opacity: 100%;
-    } */
+    .cardContainer{
+        display: flex;
+        flex-direction: column;
+    } 
+    .CardButton{
+        width: 10rem;
+        opacity: 100%;
+    } 
 }
 .cardContainer:hover  .CardButton{
     width: 10rem;
