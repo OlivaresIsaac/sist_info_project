@@ -1,4 +1,5 @@
 import AbstractCard from "../../components/AbstractCard/AbstractCard";
+import styles from "./ConsultsPage.module.css";
 import { useState, useEffect } from "react"
 import { getDoctors } from "../../firebase/doctors-service";
 import { getConsultsById } from "../../firebase/consult-service";
@@ -18,8 +19,6 @@ export function ConsultsPage(cita) {
         await getConsultsById(user.isDoctor, user.id).then((result) => {
             setInfo(result)
             console.log(result)
-            // setDoctors(result)
-            // console.log(result)
         })
            
     }
@@ -31,12 +30,15 @@ export function ConsultsPage(cita) {
         };
     }, []);   
 
-    return (<div>
-        <div className='abstractCardContainer'>
+    return (<div className={styles.Consulta}>
+        <div className={styles.tituloConsulta}>
+            Consultas Asignadas
+        </div>
+        <div className={styles.abstractCardContainer}>
                 {
                     info.map((cardInfo, key) => {
                        return(
-                        <div className='abstractCard'> 
+                        <div className={styles.abstractCard}> 
                        <AbstractCard Info={cardInfo} isDoc={isDoc} key={key}/>
                        </div> 
                        )
@@ -47,6 +49,3 @@ export function ConsultsPage(cita) {
     </div>
     )
 }
-
-//Por realizar
-

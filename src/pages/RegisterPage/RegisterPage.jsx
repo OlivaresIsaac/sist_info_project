@@ -4,8 +4,10 @@ import './RegisterPage.css'
 //Registra a un usuario en la base datos, con validaciones dando la opción de registrarse por Google
 export function RegisterPage() {
 
-    const [showLog, setshowLog] = useState("false")
-    const [showLogGoogle, setshowLogGoogle] = useState("false")
+    const [showLog, setshowLog] = useState(false)
+    const [showLogGoogle, setshowLogGoogle] = useState(false)
+    const bottonClassRegistro1 = showLog ? 'canPush' : 'notPush';
+    const bottonClassRegistro2 = showLog ? 'canPush' : 'notPush';
     const [formData, setFormData] = useState({
         displayName: "",
         email: "",
@@ -13,24 +15,23 @@ export function RegisterPage() {
         tlf: "",
         isDoctor:"false",
         preferedLanguage:"",
-        pricePerHour: "",
-        userChats: []
+        pricePerHour: ""
     })
 
     const handleOnChange = (event) => {
         if(formData.isDoctor == "false" & formData.tlf != "") {
-            setshowLogGoogle("true")
+            setshowLogGoogle(true)
         }else if(formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
-            setshowLogGoogle("true")
+            setshowLogGoogle(true)
         }else {
-            setshowLogGoogle("false")
+            setshowLogGoogle(false)
         }
         if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "false" & formData.tlf != ""){
-            setshowLog("true")
-        }else if(formData.displayName !== "" & formData.email !== "" & formData.password !== "" & formData.isDoctor === "true" & formData.tlf !== "" & formData.pricePerHour !== ""){
-            setshowLog("true")
+            setshowLog(true)
+        }else if(formData.displayName != "" & formData.email != "" & formData.password != "" & formData.isDoctor == "true" & formData.tlf != "" & formData.pricePerHour != ""){
+            setshowLog(true)
         }else{
-            setshowLog("false")
+            setshowLog(false)
         }
         const {name, value} = event.target
         setFormData({
@@ -48,7 +49,6 @@ export function RegisterPage() {
         // console.log({formData})
         const {email, password, displayName} = formData
         let aux = formData
-        aux.userChats = []
         aux.isDoctor = (formData.isDoctor === "true")
         aux.preferedLanguage = (formData.preferedLanguage === "") ? 1 : parseInt(formData.preferedLanguage)
         aux.specialty = (formData.specialty === "") ? "Parejas" : formData.specialty
@@ -124,13 +124,13 @@ export function RegisterPage() {
             
             }
 
-            <div>
-                {(showLog === "true") && ( <button type="submit"> Registrarse</button>)}
+            <div className={bottonClassRegistro1}>
+                <button disabled={!showLog}  type="submit"> Registrarse</button>
             </div>
             {/* TODO SI SE REGISTRA CON GOOGLE VALIDAR QUE PONGA TODA LA INFO PARA CREAR EL PERFIL, o hacer un formulario que se haga
             despues de logearse con google */}
-            <div>
-            {(showLogGoogle === "true") && (<button onClick={handleRegisterWithGoogle}>Registrarse con Google</button>)}
+            <div className={bottonClassRegistro2}>
+                <button disabled={!showLogGoogle}  onClick={handleRegisterWithGoogle}>Registrarse con Google</button>
             </div>
         </form>
         </div>

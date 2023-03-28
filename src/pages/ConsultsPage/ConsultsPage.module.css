@@ -1,0 +1,32 @@
+.consultas{
+    align-items: center;
+    place-items: center;
+}
+
+.tituloConsulta{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 5%;
+    font-size: 3rem;
+    align-items: center;
+}
+
+.abstractCardContainer{
+    overflow-y: scroll;
+    justify-content: center;
+    align-self: center;
+    width: 90%;
+    place-items: center;
+    align-items: center;
+
+} 
+
+.abstractCardContainer::-webkit-scrollbar {
+    display: none;
+}
+.abstractCard{
+    margin-bottom: 1rem;
+    margin-left: 5rem;
+}
