@@ -81,7 +81,7 @@
     color: #572975;
     background-image: url(/src/assets/backtop.png); 
      background-repeat: no-repeat;
-    background-position: center;
+    background-position: center;  
 }
 
 .teamText{
@@ -170,7 +170,7 @@
     justify-content: space-evenly;
 }
 
-.final-button .backtop{
+.final-button{
     position: relative;
     justify-content: center;
     align-content: center;
