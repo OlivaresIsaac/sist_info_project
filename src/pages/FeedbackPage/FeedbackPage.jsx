@@ -133,7 +133,7 @@ export function FeedbackPage() {
                                 <h3>Especialidad: {doctor.specialty}</h3>
                             </div>
                         </div>
-                        <div className="patata">
+                        <div className="startContainer">
                             <form onSubmit={onSubmit}>
                                     <div className="stars">
                                         <h1>{handleText()}</h1>
