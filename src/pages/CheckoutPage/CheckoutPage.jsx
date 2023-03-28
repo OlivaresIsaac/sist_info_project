@@ -111,7 +111,13 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
                 <div className={styles.doctorInfoContainer}>
                     <h1>{doctor.displayName}</h1>
                     <h1>{choosedData.date.getDate()} de {monthNames[choosedData.date.getMonth()]} de {choosedData.date.getFullYear()}</h1>
-                    <h1>Hora 3pm*</h1>
+                    {
+                    choosedData.hour.map((hour, key) => {
+                       return(
+                        <h1>{hour}</h1>
+                       )
+                    })
+                }
                 </div>
             
             </div>
