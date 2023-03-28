@@ -99,12 +99,12 @@ const resetSearchData = () => {
                 <div className='title'>
                     <h1 className='h1-title'>PSYDOCS</h1>
                     <h2 className='h2-title'>Salud mental a tu alcance</h2>
-                    <h3 className='h3-title'>¿Quiénes Somos?</h3>
+                    <a href='#team' className='h3-title quienesSomos'>¿Quiénes Somos?</a>
                 </div>
                
             </div>
 
-            <div className='doctor-searcher'> 
+            <div className='doctor-searcher' id='buscador-doctores'> 
             <form onSubmit={onSubmit}>
 
                 <h2 className='h2-title'>Buscador de Doctores</h2> 
@@ -189,7 +189,7 @@ const resetSearchData = () => {
 
             
 
-            <div className='team'>   
+            <div className='team' id='team'>   
                 <div className='round-border'>
                 <img src={team} className='team-img' alt='pysdocs'/>
                  {/* <h4 className='h4-title'>EQUIPO DE PSYDOCS</h4> */}
@@ -207,7 +207,8 @@ const resetSearchData = () => {
              </div>
              <div className='final-button'>
                 {/* <img src={backtopimg} className='backtopimg' alt='pysdocs'/> */}
-                <button className='backtop'> BUSCA LA CONSULTA PERFECTA </button>  
+                <button className='backtop'> <a href='#buscador-doctores' className='landingButton'> BUSCA LA CONSULTA PERFECTA</a> </button>  
+                
             </div>
         </section>
         </>
