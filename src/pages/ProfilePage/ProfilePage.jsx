@@ -110,6 +110,7 @@ export function ProfilePage({canEditPage}) {
     // Estructura de la pagina
     if (user.isDoctor === true){
         return (
+            <> 
             <div className='file'>
                 <div className='doctorFile'>
                     <img src={temp_pfp} className='pfp-doc' alt='pysdocs'/>
@@ -123,14 +124,12 @@ export function ProfilePage({canEditPage}) {
                                         .map((_, index)=>
                                             doctor.avgScore >= index + 1 || hoverStar >= index + 1 ? (
                                                 <AiFillStar 
-                                                    onMouseOver={() => !doctor.avgScore && setHoverStar(index + 1)}
-                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                                   
                                                     style={{color:'orange'}} 
                                                 />
                                             ):(
                                                 <AiOutlineStar 
-                                                    onMouseOver={() => !doctor.avgScore && setHoverStar(index + 1)}
-                                                    onMouseLeave={() => setHoverStar(undefined)}
+                                            
                                                     style={{ color: "orange" }}
                                                 />
                                             )       
@@ -172,6 +171,42 @@ export function ProfilePage({canEditPage}) {
                     </div>                   
                 </div>
             </div>
+
+<h1 className='commentTitle'>Comentarios de usuarios</h1>
+        {doctor.feedbacks.map((feedback) => {
+              return (<div className='file'> 
+              <div className='doctorFile'>
+                <div className='feedbackContainer'> 
+                <div className='nameFeedbackContainer'> 
+                 <h1  className='h3-tittle'>{feedback.displayName} comentó</h1>
+                 
+                </div>
+                <h1 className='h3-tittle'>{feedback.comentario}</h1>
+                <div className='nameFeedbackContainer'> 
+                {Array(5)
+                                        .fill()
+                                        .map((_, index)=>
+                                        feedback.hoverStar >= index + 1 ? (
+                                                <AiFillStar 
+                                                   
+                                                    style={{color:'orange'}} 
+                                                />
+                                            ):(
+                                                <AiOutlineStar 
+                                                
+                                                    style={{ color: "orange" }}
+                                                />
+                                            )       
+                                        )}
+                                        </div>
+                    </div>
+                </div>
+            </div>)
+        })
+
+        }
+          
+            </>
         )
     } else {
         return (
