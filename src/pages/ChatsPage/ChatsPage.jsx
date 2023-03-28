@@ -33,17 +33,21 @@ export function ChatsPage() {
         //     });
         // setMessages(messages);
         //});
-        if(user.userChats.length !== 0){
-            
-            const queryChats = query(collection(db, "chats"), where("id", "in", user.userChats))
-            onSnapshot(queryChats, (snapshot) => {
-                let a = []
-                snapshot.forEach((doc) => {
-                    a.push(doc)
-                })
-                setUserChatsDoc(a)
+        onSnapshot(doc(db, "users", user.id), (docum) => {
+            if(docum.exists()){
+                if(docum.data().userChats !== 0){
+                    const queryChats = query(collection(db, "chats"), where("id", "in", docum.data().userChats))
+                    onSnapshot(queryChats, (snapshot) => {
+                        let a = []
+                        snapshot.forEach((doc) => {
+                            a.push(doc)
+                        })
+                        setUserChatsDoc(a)
+                    })
+                }
+                }
             })
-        }
+            
 
         if(currentChat != ""){
             onSnapshot(doc(db, "chats", currentChat), (doc) => {
