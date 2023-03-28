@@ -34,6 +34,7 @@ export function ProfilePage({canEditPage}) {
     const [newValue, setNewValue] = useState(null);
     const [hoverStar,setHoverStar]=useState(undefined);
 
+    
     const changeProfilePic = () => {
         setShowButton(false)
     }

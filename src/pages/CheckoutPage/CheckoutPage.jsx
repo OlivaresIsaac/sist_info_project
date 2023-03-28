@@ -3,6 +3,7 @@ import temp_pfp from '../../assets/temp_pfp.png'
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { setDoctorSchedules } from '../../firebase/doctors-service';
 
 //La página se encarga de mostrar la usuario la factura de la consulta y darle la interfaz de pago con PayPal
 export function CheckoutPage({setConsult, user, setDoctorName}) {
@@ -15,6 +16,7 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
 
     const doctor =  location.state.doctor
     const choosedData = location.state.choosedData
+
     // console.log(doctor, choosedData)
     //TODO Mostrar datos del doctor
 
@@ -25,13 +27,28 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
     //   },
     //   [success]
     // );
+
+
+    const buildSchedules = () => {
+        let schedules = []
+        location.state.choosedData.hour.forEach((hour) => {
+          const schedule = {
+            hourBlock: hour,
+            date: location.state.choosedData.date
+          }
+          schedules.push(schedule)
+        })
+        return schedules
+    }
+
+
     const onApprove = (data, actions) => {
         return actions.order.capture().then(function (details) {
         //   const { payer } = details;
         setDoctorName(doctor.displayName)
         setSuccess(true);
-        setConsult(createConsult())
-        
+        setConsult(createConsult());
+        setDoctorSchedules(doctor, buildSchedules())
         });
       };
 
@@ -48,7 +65,7 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
                 },
               },
             ],
-           
+
             application_context: {
               shipping_preference: "NO_SHIPPING",
             },
@@ -80,7 +97,7 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
       }
 
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-  "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"
+    "Julio", "Agosto", "Septiembre", "Octubre", "Nomviembre", "Diciembre"
 ];
 
     return (
@@ -114,8 +131,6 @@ export function CheckoutPage({setConsult, user, setDoctorName}) {
                 </PayPalScriptProvider>
          </div>
 
-       
-    
 
         </div>
         </>

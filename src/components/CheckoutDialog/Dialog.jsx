@@ -1,24 +1,27 @@
 import "./Dialog.css"
-import { useState, useRef } from "react";
-import DatePicker from 'react-datepicker';
+import { useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css'
-import moment from 'moment';
 import { useNavigate } from "react-router"
 import { CHECKOUTURL } from "../../constants/url";
+import DatePicker from 'react-datepicker';
+import moment from "moment/moment";
 
 // Componente que retorna un botón que muestra un dialog que pide información necesaria antes de proceder al Checkout. 
 
 const CheckoutDialog = ({doctor}) => {
     const [showTaskDialog, setShowTaskDialog] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
+    let hour = [];
     const [count, setCount] = useState(0);
+
+
+    const navigate = useNavigate();
+
     
-
-    const navigate = useNavigate()
-
     const buildChoosedData = () => {
         return {
             date: startDate,
+            hour: hour,
             consultHours: count
         }
     }
@@ -33,28 +36,23 @@ const CheckoutDialog = ({doctor}) => {
 
     const confirm = () => {
         setShowTaskDialog(false);
-        navigateToCheckOut()
-        
+        navigateToCheckOut();
+
     };
 
     const cancel = () => {
         setShowTaskDialog(false);
+        setStartDate();
     };
 
     const Counter = () => {
         
-        const [quantity, setQuantity] = useState(0);
-
         const handleSubtractOne = () => {
             setCount(count - 1);
         };
 
         const handleAddOne = () => {
             setCount(count + 1);
-        };
-
-        const handleOnChange = (e) => {
-            setQuantity(e.target.value);
         };
 
         return(
@@ -67,12 +65,43 @@ const CheckoutDialog = ({doctor}) => {
         )
     };
 
-    const DatesPicker = () => {
-      
+
+    const HourButton = ({newValue}) => {
+        const [selected, setSelected] = useState(false)
+        const buttonClass = selected ? 'timeBtn selected' : 'timeBtn';
+
+        const handleHourChange = (newValue) => {
+            setSelected(true);
+            hour.push(newValue);
+            console.log(hour)
+        }
+
+        return(
+            <button className={buttonClass} onClick={() => handleHourChange(newValue)} disabled={selected}>{newValue}</button>
+        )
+    }
+
+    const DateBlocks = () => {
+        return (
+            <div className="dateBlock">
+                <HourButton newValue="8:00 AM - 9:00 AM"/>
+                <HourButton newValue="9:00 AM - 10:00 AM"/>
+                <HourButton newValue="10:00 AM - 11:00 AM"/>
+                <HourButton newValue="11:00 AM - 12:00 PM"/>
+                <HourButton newValue="12:00 PM - 1:00 PM"/>
+                <HourButton newValue="1:00 PM - 2:00 PM"/>
+            </div>
+        )
+    }
+
+    const DatesPicker = () => {      
         return (
             <div>
-                <h1 className="h1_tittle"> Fecha de la consulta: </h1>
-                <DatePicker showIcon={true} selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()} />
+                <h1 className="date-tittle"> Fecha de la consulta: </h1>
+                <div className="div-grid">
+                    <DatePicker showIcon={true} selected={startDate} onChange={(date) => setStartDate(date)} minDate={moment().toDate()}/>
+                    <DateBlocks/>
+                </div>
             </div>
         );
       };

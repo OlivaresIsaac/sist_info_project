@@ -1,5 +1,5 @@
 
-import {setDoc, runTransaction, collection, query, getDocs, getDoc, where} from "firebase/firestore"
+import {setDoc, runTransaction, collection, query, getDocs, getDoc, where, doc, updateDoc} from "firebase/firestore"
 import {db} from "./config"
 
 
@@ -87,3 +87,14 @@ export async function getPacienteProfile(userId) {
     }
    
   }
+export async function setDoctorSchedules(doctor, schedules){
+    let doctorCopy=doctor
+    const doctorRef = doc(db, 'doctors', doctor.id)
+
+    schedules.forEach((schedule) => {
+        doctorCopy.scheduleTaken.push(schedule)
+    })
+    
+    return setDoc(doctorRef, doctorCopy)
+}
+
