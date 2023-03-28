@@ -1,10 +1,13 @@
 import "./Dialog.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from "react-router"
 import { CHECKOUTURL } from "../../constants/url";
 import DatePicker from 'react-datepicker';
 import moment from "moment/moment";
+import { onSnapshot, doc } from "@firebase/firestore";
+import { db} from "../../firebase/config"
+
 
 // Componente que retorna un botón que muestra un dialog que pide información necesaria antes de proceder al Checkout. 
 
@@ -13,9 +16,31 @@ const CheckoutDialog = ({doctor}) => {
     const [startDate, setStartDate] = useState(new Date());
     let hour = [];
     const [count, setCount] = useState(0);
+    const [nonAvaible, setNonAvaible] = useState([])
+    const [hoursStrings, setHoursStrings] = useState(
+        [
+            "8:00 AM - 9:00 AM", "9:00 AM - 10:00 AM", "10:00 AM - 11:00 AM",
+            "11:00 AM - 12:00 PM", "12:00 PM - 1:00 PM", "1:00 PM - 2:00 PM"
+        ]
+    )
+    const [hourBooleans, setHourBooleans] = useState(
+        [
+            true, true, true, true, true, true
+        ]
+    )
 
 
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     onSnapshot(doc(db, "doctors", doctor.id), (doc) => {
+    //         setNonAvaible(doc.data().scheduleTaken)
+    //     })
+    //     if(checkDate(startDate, nonAvaible)){
+
+    //     }
+
+    // },[startDate])
 
     
     const buildChoosedData = () => {
@@ -81,9 +106,37 @@ const CheckoutDialog = ({doctor}) => {
         )
     }
 
+    const checkDate = (date, nonAv) => {
+        for(let i = 0; i < nonAv.lenght; i++){
+            if(date == nonAv.date){
+
+                return false
+            }
+        }
+        return true
+    }
+
+    const checkHour = (hora, nonAv) => {
+        for(let i = 0; i < nonAv.lenght; i++){
+            if(hora == nonAv.hourBlock){
+                return false
+            }
+        }
+        return true
+    }
+
     const DateBlocks = () => {
+        
         return (
             <div className="dateBlock">
+            {/* {
+                hoursStrings.map((h, key) => {
+                    return(
+                        <HourButton newValue={h}/>
+                    )
+                })
+            } */}
+
                 <HourButton newValue="8:00 AM - 9:00 AM"/>
                 <HourButton newValue="9:00 AM - 10:00 AM"/>
                 <HourButton newValue="10:00 AM - 11:00 AM"/>
