@@ -240,7 +240,7 @@ const CheckoutDialog = ({doctor}) => {
                             <div className="forms">
                                 <DatesPicker/>
                                 {/* counter should be comented */}
-                                <Counter />
+                                {/* <Counter /> */}
                             </div>
                         <div className="dialog-footer">
                             <button className="dialog-cancel" onClick={() => {cancel()}}> Cancelar </button>
